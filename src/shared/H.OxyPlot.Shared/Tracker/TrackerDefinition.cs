@@ -14,8 +14,8 @@ namespace OxyPlot.Controls
     /// </summary>
     /// <remarks>The tracker definitions make it possible to show different trackers for different series.
     /// The <see cref="OxyPlot.Series.Series.TrackerKey" /> property is matched with the <see cref="TrackerDefinition.TrackerKey" />
-    /// in the TrackerDefinitions collection in the <see cref="PlotViewBase" /> control.</remarks>
-    public class TrackerDefinition : DependencyObject
+    /// in the TrackerDefinitions collection in the PlotViewBase control.</remarks>
+    public partial class TrackerDefinition : FrameworkElement
     {
         /// <summary>
         /// Identifies the <see cref="TrackerKey"/> dependency property.

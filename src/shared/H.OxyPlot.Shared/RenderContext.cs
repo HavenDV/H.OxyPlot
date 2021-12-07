@@ -137,7 +137,7 @@ namespace OxyPlot.Windows
         /// Draws the collection of ellipses, where all have the same stroke and fill.
         /// This performs better than calling DrawEllipse multiple times.
         /// </summary>
-        /// <param name="rectangles">The rectangles.</param>
+        /// <param name="extents">The rectangles.</param>
         /// <param name="fill">The fill color.</param>
         /// <param name="stroke">The stroke color.</param>
         /// <param name="thickness">The stroke thickness.</param>
@@ -180,7 +180,6 @@ namespace OxyPlot.Windows
         /// <param name="thickness">The stroke thickness.</param>
         /// <param name="dashArray">The dash array.</param>
         /// <param name="lineJoin">The line join type.</param>
-        /// <param name="aliased">if set to <c>true</c> the shape will be aliased.</param>
         public void DrawLine(
             IList<ScreenPoint> points,
             OxyColor stroke,
@@ -219,7 +218,6 @@ namespace OxyPlot.Windows
         /// <param name="thickness">The stroke thickness.</param>
         /// <param name="dashArray">The dash array.</param>
         /// <param name="lineJoin">The line join type.</param>
-        /// <param name="aliased">if set to <c>true</c> the shape will be aliased.</param>
         public void DrawLineSegments(
             IList<ScreenPoint> points,
             OxyColor stroke,
@@ -270,7 +268,6 @@ namespace OxyPlot.Windows
         /// <param name="thickness">The stroke thickness.</param>
         /// <param name="dashArray">The dash array.</param>
         /// <param name="lineJoin">The line join type.</param>
-        /// <param name="aliased">if set to <c>true</c> the shape will be aliased.</param>
         public void DrawPolygon(
             IList<ScreenPoint> points,
             OxyColor fill,
@@ -316,7 +313,6 @@ namespace OxyPlot.Windows
         /// <param name="thickness">The stroke thickness.</param>
         /// <param name="dashArray">The dash array.</param>
         /// <param name="lineJoin">The line join type.</param>
-        /// <param name="aliased">if set to <c>true</c> the shape will be aliased.</param>
         public void DrawPolygons(
             IList<IList<ScreenPoint>> polygons,
             OxyColor fill,
@@ -439,9 +435,9 @@ namespace OxyPlot.Windows
         /// <param name="fontFamily">The font family.</param>
         /// <param name="fontSize">Size of the font.</param>
         /// <param name="fontWeight">The font weight.</param>
-        /// <param name="rotate">The rotation angle.</param>
-        /// <param name="halign">The horizontal alignment.</param>
-        /// <param name="valign">The vertical alignment.</param>
+        /// <param name="rotation">The rotation angle.</param>
+        /// <param name="horizontalAlignment">The horizontal alignment.</param>
+        /// <param name="verticalAlignment">The vertical alignment.</param>
         /// <param name="maxSize">The maximum size of the text.</param>
         public void DrawText(
             ScreenPoint p,
@@ -698,7 +694,7 @@ namespace OxyPlot.Windows
         /// <returns>A <see cref="FontWeight" /></returns>
         private static FontWeight GetFontWeight(double fontWeight)
         {
-#if HAS_WINUI
+#if HAS_WINUI && !HAS_UNO
             return new FontWeight((ushort)(fontWeight > OxyPlot.FontWeights.Normal ? FontWeights.Bold : FontWeights.Normal));
 #else
             return fontWeight > OxyPlot.FontWeights.Normal ? FontWeights.Bold : FontWeights.Normal;

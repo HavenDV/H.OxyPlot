@@ -35,3 +35,8 @@ global using Windows.UI.Xaml.Media.Imaging;
 global using Windows.Devices.Input;
 global using Path = Windows.UI.Xaml.Shapes.Path;
 #endif
+
+#if HAS_UNO && HAS_WINUI
+global using Windows.UI.Input;
+global using Windows.Devices.Input;
+#endif

@@ -60,8 +60,10 @@ Global
 		src\shared\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{7b1b34e1-64db-4256-b35f-2548b61e42ae}*SharedItemsImports = 5
 		src\shared\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{8c2d2dda-890b-4f6f-938f-9cfdf82aac0f}*SharedItemsImports = 5
 		src\shared\H.OxyPlot.Uno.Shared\H.OxyPlot.Uno.Shared.projitems*{94f69fed-cbb6-4085-9798-8aaeed049bac}*SharedItemsImports = 13
+		src\shared\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{ab635967-d2ff-4a55-a319-109099de8ff4}*SharedItemsImports = 5
 		src\shared\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{b2c9a032-9670-421e-a413-7c7f504f5b55}*SharedItemsImports = 13
 		src\shared\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{f497b163-e46e-4ea6-9e41-bb0c25ca6272}*SharedItemsImports = 13
+		src\shared\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{f5eb3a73-1d93-42f7-9757-26b486d74592}*SharedItemsImports = 5
 		src\shared\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{fcfca672-7669-4aac-a76d-6a12e40f2eab}*SharedItemsImports = 5
 		src\shared\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems*{fcfca672-7669-4aac-a76d-6a12e40f2eab}*SharedItemsImports = 5
 	EndGlobalSection

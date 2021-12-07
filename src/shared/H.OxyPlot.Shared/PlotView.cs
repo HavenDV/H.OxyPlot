@@ -417,7 +417,11 @@ namespace OxyPlot.Windows
             try
             {
                 var newCursor = new CoreCursor(type, 1); // this line throws an exception on Windows Phone
-                Window.Current.CoreWindow.PointerCursor = newCursor;
+#if HAS_WINUI
+                global::Microsoft.UI.Xaml.Window.Current.CoreWindow.PointerCursor = newCursor;
+#else
+                global::Windows.UI.Xaml.Window.Current.CoreWindow.PointerCursor = newCursor;
+#endif
             }
             catch (NotImplementedException)
             {

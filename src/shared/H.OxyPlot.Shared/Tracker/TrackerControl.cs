@@ -14,7 +14,7 @@ namespace OxyPlot.Controls
     /// <summary>
     /// The tracker control.
     /// </summary>
-    public class TrackerControl : ContentControl
+    public partial class TrackerControl : ContentControl
     {
         /// <summary>
         /// Identifies the <see cref="HorizontalLineVisibility"/> dependency property.
@@ -293,7 +293,7 @@ namespace OxyPlot.Controls
         }
 
         /// <summary>
-        /// When overridden in a derived class, is invoked whenever application code or internal processes call <see cref="FrameworkElement.ApplyTemplate" />.
+        /// When overridden in a derived class, is invoked whenever application code or internal processes call ApplyTemplate />.
         /// </summary>
 #if HAS_WPF
         public override void OnApplyTemplate()
