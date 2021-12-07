@@ -102,7 +102,7 @@ namespace OxyPlot.Windows
         /// <value><c>true</c> if the context renders to screen; otherwise, <c>false</c>.</value>
         public bool RendersToScreen { get; set; }
 
-        public int ClipCount => throw new NotImplementedException();
+        public int ClipCount => 0;
 
         /// <summary>
         /// Draws an ellipse.
@@ -845,12 +845,10 @@ namespace OxyPlot.Windows
 
         public void PushClip(OxyRect clippingRectangle)
         {
-            throw new NotImplementedException();
         }
 
         public void PopClip()
         {
-            throw new NotImplementedException();
         }
     }
 }

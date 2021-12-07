@@ -6,6 +6,8 @@
     <Platforms>x86;x64;arm64</Platforms>
     <UseWinUI>true</UseWinUI>
     <WindowsPackageType>None</WindowsPackageType>
+    <DefineConstants>$(DefineConstants);HAS_WINUI</DefineConstants>
+    <NoWarn>$(NoWarn);CS8785</NoWarn>
   </PropertyGroup>
 
   <ItemGroup Label="GlobalUsings">
@@ -14,11 +16,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0" />
+    <PackageReference Include="Uno.WinUI" Version="4.1.0-dev.32" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\libs\H.OxyPlot.WinUI\H.OxyPlot.WinUI.csproj" />
   </ItemGroup>
+
+  <Import Project="..\..\shared\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems" Label="Shared" />
+  <Import Project="..\..\shared\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems" Label="Shared" />
 
 </Project>

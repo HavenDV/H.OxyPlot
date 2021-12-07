@@ -919,6 +919,9 @@ namespace OxyPlot.Windows
         /// <param name="action">The action.</param>
         private void BeginInvoke(Action action)
         {
+#if HAS_WINUI
+            action();
+#else
             if (!this.Dispatcher.HasThreadAccess)
             {
                 // TODO: Fix warning?
@@ -932,6 +935,7 @@ namespace OxyPlot.Windows
             {
                 action();
             }
+#endif
         }
     }
 }
