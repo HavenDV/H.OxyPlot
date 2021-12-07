@@ -1,26 +1,34 @@
-namespace H.OxyPlot.Apps.ViewModels;
+using OxyPlot;
+using OxyPlot.Axes;
+using OxyPlot.Series;
 
-using global::OxyPlot;
-using global::OxyPlot.Axes;
-using global::OxyPlot.Series;
+namespace H.OxyPlot.Apps.ViewModels;
 
 public class MainViewModel
 {
-    public MainViewModel()
+    public PlotModel Model { get; private set; } = new PlotModel
     {
-        var model = new PlotModel { Title = "Hello Universal Windows" };
-        model.Axes.Add(new LinearAxis { Position = AxisPosition.Bottom });
-        model.Axes.Add(new LinearAxis { Position = AxisPosition.Left });
-        var lineSeries = new LineSeries { Title = "LineSeries", MarkerType = MarkerType.Circle };
-        lineSeries.Points.Add(new DataPoint(0, 0));
-        lineSeries.Points.Add(new DataPoint(10, 18));
-        lineSeries.Points.Add(new DataPoint(20, 12));
-        lineSeries.Points.Add(new DataPoint(30, 8));
-        lineSeries.Points.Add(new DataPoint(40, 15));
-
-        model.Series.Add(lineSeries);
-        this.Model = model;
-    }
-
-    public PlotModel Model { get; private set; }
+        Title = "Hello Universal Windows",
+        Axes =
+        {
+            new LinearAxis { Position = AxisPosition.Bottom },
+            new LinearAxis { Position = AxisPosition.Left },
+        },
+        Series =
+        {
+            new LineSeries
+            {
+                Title = "LineSeries",
+                MarkerType = MarkerType.Circle,
+                Points =
+                {
+                    new DataPoint(0, 0),
+                    new DataPoint(10, 18),
+                    new DataPoint(20, 12),
+                    new DataPoint(30, 8),
+                    new DataPoint(40, 15),
+                }
+            },
+        }
+    };
 }
