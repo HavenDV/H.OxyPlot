@@ -128,7 +128,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\libs\H.OxyPlot.Uwp\H.OxyPlot.Uwp.csproj">
       <Project>{16a17957-6de3-4874-b0b6-08404c23fbbe}</Project>
-      <Name>H.OxyPlot.CommonInteractions.Uwp</Name>
+      <Name>H.OxyPlot.Uwp</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="..\..\shared\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems" Label="Shared" />

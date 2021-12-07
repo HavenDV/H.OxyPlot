@@ -1,0 +1,16 @@
+﻿<linker>
+  <assembly fullname="H.ReactiveUI.Apps.Uno.WebAssembly" />
+  <assembly fullname="H.ReactiveUI.Apps.Core" />
+  <assembly fullname="H.ReactiveUI.CommonInteractions.Uno" />
+  <assembly fullname="Uno.UI" />
+  <assembly fullname="Microsoft.Extensions.Options" />
+
+  <assembly fullname="DynamicData" />
+  <assembly fullname="ReactiveUI" />
+  <assembly fullname="ReactiveUI.Uno" />
+  
+  <!-- This is required by ReactiveUI and any expression.Compile caller. -->
+  <assembly fullname="System.Core">
+    <type fullname="System.Linq.Expressions*" />
+  </assembly>
+</linker>

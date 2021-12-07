@@ -963,7 +963,7 @@ namespace OxyPlot.Windows
         private void BeginInvoke(Action action)
 #pragma warning restore CA1822 // Mark members as static
         {
-#if HAS_WINUI
+#if HAS_WINUI || HAS_UNO
             action();
 #else
             if (!this.Dispatcher.HasThreadAccess)

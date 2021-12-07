@@ -1,0 +1,11 @@
+﻿<linker>
+  <assembly fullname="H.OxyPlot.Apps.Uno.WebAssembly" />
+  <assembly fullname="H.OxyPlot.Uno" />
+  <assembly fullname="Uno.UI" />
+  <assembly fullname="Microsoft.Extensions.Options" />
+  
+  <!-- This is required by ReactiveUI and any expression.Compile caller. -->
+  <assembly fullname="System.Core">
+    <type fullname="System.Linq.Expressions*" />
+  </assembly>
+</linker>
