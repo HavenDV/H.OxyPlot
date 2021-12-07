@@ -1,0 +1,14 @@
+﻿name: Build, test and publish
+on: [ push ]
+
+jobs:
+  build-test-publish:
+    name: Build, test and publish
+    uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
+    with:
+      os: windows-2022
+      use-msbuild: true
+      workloads: android ios maccatalyst macos
+      windows-sdk-version: 18362
+    secrets:
+      nuget-key: ${{ secrets.NUGET_KEY }}

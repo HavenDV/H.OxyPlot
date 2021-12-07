@@ -1,0 +1,15 @@
+﻿<Project Sdk="MSBuild.Sdk.Extras">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net6.0-ios;net6.0-android31.0;net6.0-macos;net6.0-maccatalyst;MonoAndroid10.0;xamarinios10;xamarinmac20</TargetFrameworks>
+    <SignAssembly>false</SignAssembly>
+    <DefineConstants>$(DefineConstants);HAS_UNO</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Uno.UI" Version="3.10.7" />
+  </ItemGroup>
+
+  <Import Project="..\..\shared\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems" Label="Shared" />
+
+</Project>

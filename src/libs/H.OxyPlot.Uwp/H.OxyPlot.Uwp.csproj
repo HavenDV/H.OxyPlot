@@ -1,0 +1,10 @@
+﻿<Project Sdk="MSBuild.Sdk.Extras">
+
+  <PropertyGroup>
+    <TargetFrameworks>uap10.0.18362</TargetFrameworks>
+    <DefineConstants>$(DefineConstants);HAS_UWP</DefineConstants>
+  </PropertyGroup>
+
+  <Import Project="..\..\shared\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems" Label="Shared" />
+
+</Project>
