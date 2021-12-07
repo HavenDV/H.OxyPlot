@@ -9,6 +9,7 @@
 
 namespace OxyPlot.Wpf
 {
+    using OxyPlot.Utilities;
     using System.IO;
     using System.Text;
     using System.Windows;

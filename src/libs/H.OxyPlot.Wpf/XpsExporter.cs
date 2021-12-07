@@ -9,6 +9,7 @@
 
 namespace OxyPlot.Wpf
 {
+    using OxyPlot.Utilities;
 #if !NET40
     using System.IO;
     using System.IO.Packaging;

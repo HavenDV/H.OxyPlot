@@ -6,6 +6,7 @@
 
 namespace OxyPlot.Wpf
 {
+    using OxyPlot.Utilities;
     using System;
     using System.Windows.Input;
 
@@ -26,7 +27,7 @@ namespace OxyPlot.Wpf
                 return;
             }
 
-            var args = new OxyKeyEventArgs { ModifierKeys = Keyboard.GetModifierKeys(), Key = e.Key.Convert() };
+            var args = new OxyKeyEventArgs { ModifierKeys = Utilities.Keyboard.GetModifierKeys(), Key = e.Key.Convert() };
             e.Handled = this.ActualController.HandleKeyDown(this, args);
         }
 

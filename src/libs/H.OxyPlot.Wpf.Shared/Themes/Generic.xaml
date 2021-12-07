@@ -1,10 +1,14 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-                    xmlns:local="clr-namespace:OxyPlot.Wpf">
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:local="clr-namespace:OxyPlot.Wpf"
+    xmlns:converters="clr-namespace:OxyPlot.Converters"
+    xmlns:controls="clr-namespace:OxyPlot.Controls"
+    >
 
-    <local:ThicknessConverter x:Key="ThicknessConverter" />
+    <converters:ThicknessConverter x:Key="ThicknessConverter" />
 
-    <Style TargetType="{x:Type local:TrackerControl}">
+    <Style TargetType="{x:Type controls:TrackerControl}">
         <Setter Property="Background" Value="#E0FFFFA0" />
         <Setter Property="BorderBrush" Value="Black" />
         <Setter Property="BorderThickness" Value="1" />
@@ -20,7 +24,7 @@
         <Setter Property="IsHitTestVisible" Value="false" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:TrackerControl}">
+                <ControlTemplate TargetType="{x:Type controls:TrackerControl}">
                     <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <Line x:Name="PART_HorizontalLine" Visibility="{TemplateBinding HorizontalLineVisibility}"
                               Stroke="{TemplateBinding LineStroke}" RenderOptions.EdgeMode="Aliased"
@@ -46,11 +50,11 @@
         <Setter Property="DefaultTrackerTemplate">
             <Setter.Value>
                 <ControlTemplate>
-                    <local:TrackerControl Position="{Binding Position}" LineExtents="{Binding PlotModel.PlotArea}">
-                        <local:TrackerControl.Content>
+                    <controls:TrackerControl Position="{Binding Position}" LineExtents="{Binding PlotModel.PlotArea}">
+                        <controls:TrackerControl.Content>
                             <TextBlock Text="{Binding}" Margin="7" />
-                        </local:TrackerControl.Content>
-                    </local:TrackerControl>
+                        </controls:TrackerControl.Content>
+                    </controls:TrackerControl>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

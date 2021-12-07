@@ -6,7 +6,7 @@
 //   Implements <see cref="IRenderContext" /> for <see cref="Canvas" />.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
+#if !HAS_WPF
 namespace OxyPlot.Windows
 {
     using System;
@@ -19,6 +19,7 @@ namespace OxyPlot.Windows
     using global::Windows.Storage.Streams;
     using global::Windows.UI.Text;
     using global::Windows.UI.Xaml;
+    using OxyPlot.Utilities;
 
     /// <summary>
     /// Implements <see cref="IRenderContext" /> for <see cref="Canvas" />.
@@ -852,3 +853,4 @@ namespace OxyPlot.Windows
         }
     }
 }
+#endif

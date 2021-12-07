@@ -10,6 +10,7 @@
 namespace OxyPlot.Wpf
 {
     using OxyPlot;
+    using OxyPlot.Utilities;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;

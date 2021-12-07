@@ -6,7 +6,7 @@
 //   Represents a control that displays a <see cref="PlotModel" />.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
+#if !HAS_WPF
 namespace OxyPlot.Windows
 {
     using System;
@@ -19,6 +19,8 @@ namespace OxyPlot.Windows
     using global::Windows.Foundation;
     using global::Windows.System;
     using global::Windows.UI.Core;
+    using OxyPlot.Controls;
+    using OxyPlot.Utilities;
 
     /// <summary>
     /// Represents a control that displays a <see cref="PlotModel" />.
@@ -939,3 +941,4 @@ namespace OxyPlot.Windows
         }
     }
 }
+#endif

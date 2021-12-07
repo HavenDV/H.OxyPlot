@@ -17,6 +17,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Tracker\TrackerControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Tracker\TrackerDefinition.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\ConverterExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\Keyboard.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\MouseButtonHelper.cs" />
   </ItemGroup>
 </Project>

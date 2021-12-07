@@ -6,8 +6,8 @@
 //   Mouse button helper
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
-namespace OxyPlot.Windows
+#if !HAS_WPF
+namespace OxyPlot.Utilities
 {
     /// <summary>
     /// Mouse button helper
@@ -86,3 +86,4 @@ namespace OxyPlot.Windows
         }
     }
 }
+#endif

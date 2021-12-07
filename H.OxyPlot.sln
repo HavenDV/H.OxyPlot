@@ -52,9 +52,12 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\shared\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{16a17957-6de3-4874-b0b6-08404c23fbbe}*SharedItemsImports = 5
 		src\shared\H.OxyPlot.Uno.Shared\H.OxyPlot.Uno.Shared.projitems*{16a17957-6de3-4874-b0b6-08404c23fbbe}*SharedItemsImports = 5
+		src\shared\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{2b65e186-b9e6-4cef-9ae6-478c6de59bc4}*SharedItemsImports = 4
+		src\shared\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems*{2b65e186-b9e6-4cef-9ae6-478c6de59bc4}*SharedItemsImports = 4
 		src\shared\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems*{418d1399-62c8-481b-a954-517b189eca70}*SharedItemsImports = 13
 		src\shared\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{682d6fb2-c18b-4522-8b33-567fcc8647fe}*SharedItemsImports = 5
 		src\shared\H.OxyPlot.Uno.Shared\H.OxyPlot.Uno.Shared.projitems*{682d6fb2-c18b-4522-8b33-567fcc8647fe}*SharedItemsImports = 5
+		src\shared\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{7b1b34e1-64db-4256-b35f-2548b61e42ae}*SharedItemsImports = 5
 		src\shared\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{8c2d2dda-890b-4f6f-938f-9cfdf82aac0f}*SharedItemsImports = 5
 		src\shared\H.OxyPlot.Uno.Shared\H.OxyPlot.Uno.Shared.projitems*{94f69fed-cbb6-4085-9798-8aaeed049bac}*SharedItemsImports = 13
 		src\shared\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{b2c9a032-9670-421e-a413-7c7f504f5b55}*SharedItemsImports = 13

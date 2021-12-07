@@ -7,6 +7,7 @@
 namespace OxyPlot.Wpf
 {
     using OxyPlot;
+    using OxyPlot.Controls;
     using System;
     using System.Collections.ObjectModel;
     using System.Linq;

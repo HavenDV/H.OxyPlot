@@ -1,16 +1,18 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="TrackerControl.cs" company="OxyPlot">
-//   Copyright (c) 2014 OxyPlot contributors
+//   Copyright (c) 2020 OxyPlot contributors
 // </copyright>
 // <summary>
-//   Provides a tracker control.
+//   The tracker control.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace OxyPlot.Windows
+using OxyPlot.Utilities;
+
+namespace OxyPlot.Controls
 {
     /// <summary>
-    /// Provides a tracker control.
+    /// The tracker control.
     /// </summary>
     public class TrackerControl : ContentControl
     {
@@ -19,7 +21,7 @@ namespace OxyPlot.Windows
         /// </summary>
         public static readonly DependencyProperty HorizontalLineVisibilityProperty =
             DependencyProperty.Register(
-                "HorizontalLineVisibility",
+                nameof(HorizontalLineVisibility),
                 typeof(Visibility),
                 typeof(TrackerControl),
                 new PropertyMetadata(Visibility.Visible));
@@ -29,7 +31,7 @@ namespace OxyPlot.Windows
         /// </summary>
         public static readonly DependencyProperty VerticalLineVisibilityProperty =
             DependencyProperty.Register(
-                "VerticalLineVisibility",
+                nameof(VerticalLineVisibility),
                 typeof(Visibility),
                 typeof(TrackerControl),
                 new PropertyMetadata(Visibility.Visible));
@@ -38,91 +40,91 @@ namespace OxyPlot.Windows
         /// Identifies the <see cref="LineStroke"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty LineStrokeProperty = DependencyProperty.Register(
-            "LineStroke", typeof(Brush), typeof(TrackerControl), new PropertyMetadata(null));
+            nameof(LineStroke), typeof(Brush), typeof(TrackerControl), new PropertyMetadata(null));
 
         /// <summary>
         /// Identifies the <see cref="LineExtents"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty LineExtentsProperty = DependencyProperty.Register(
-            "LineExtents", typeof(OxyRect), typeof(TrackerControl), new PropertyMetadata(new OxyRect()));
+            nameof(LineExtents), typeof(OxyRect), typeof(TrackerControl), new PropertyMetadata(new OxyRect()));
 
         /// <summary>
         /// Identifies the <see cref="LineDashArray"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty LineDashArrayProperty = DependencyProperty.Register(
-            "LineDashArray", typeof(DoubleCollection), typeof(TrackerControl), new PropertyMetadata(null));
+            nameof(LineDashArray), typeof(DoubleCollection), typeof(TrackerControl), new PropertyMetadata(null));
 
-#if WPF
+#if HAS_WPF
         /// <summary>
         /// Identifies the <see cref="BorderEdgeMode"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty BorderEdgeModeProperty = DependencyProperty.Register(
-            "BorderEdgeMode", typeof(EdgeMode), typeof(TrackerControl));
+            nameof(BorderEdgeMode), typeof(EdgeMode), typeof(TrackerControl));
 #endif
 
         /// <summary>
         /// Identifies the <see cref="ShowPointer"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty ShowPointerProperty = DependencyProperty.Register(
-            "ShowPointer", typeof(bool), typeof(TrackerControl), new PropertyMetadata(true));
+            nameof(ShowPointer), typeof(bool), typeof(TrackerControl), new PropertyMetadata(true));
 
         /// <summary>
         /// Identifies the <see cref="CornerRadius"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(
-            "CornerRadius", typeof(double), typeof(TrackerControl), new PropertyMetadata(0.0));
+            nameof(CornerRadius), typeof(double), typeof(TrackerControl), new PropertyMetadata(0.0));
 
         /// <summary>
         /// Identifies the <see cref="Distance"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty DistanceProperty = DependencyProperty.Register(
-            "Distance", typeof(double), typeof(TrackerControl), new PropertyMetadata(7.0));
+            nameof(Distance), typeof(double), typeof(TrackerControl), new PropertyMetadata(7.0));
 
         /// <summary>
         /// Identifies the <see cref="CanCenterHorizontally"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty CanCenterHorizontallyProperty =
             DependencyProperty.Register(
-                "CanCenterHorizontally", typeof(bool), typeof(TrackerControl), new PropertyMetadata(true));
+                nameof(CanCenterHorizontally), typeof(bool), typeof(TrackerControl), new PropertyMetadata(true));
 
         /// <summary>
         /// Identifies the <see cref="CanCenterVertically"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty CanCenterVerticallyProperty =
             DependencyProperty.Register(
-                "CanCenterVertically", typeof(bool), typeof(TrackerControl), new PropertyMetadata(true));
+                nameof(CanCenterVertically), typeof(bool), typeof(TrackerControl), new PropertyMetadata(true));
 
         /// <summary>
         /// Identifies the <see cref="Position"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty PositionProperty = DependencyProperty.Register(
-            "Position",
+            nameof(Position),
             typeof(ScreenPoint),
             typeof(TrackerControl),
             new PropertyMetadata(new ScreenPoint(), PositionChanged));
 
         /// <summary>
-        /// The path part.
+        /// The path part string.
         /// </summary>
         private const string PartPath = "PART_Path";
 
         /// <summary>
-        /// The content part.
+        /// The content part string.
         /// </summary>
         private const string PartContent = "PART_Content";
 
         /// <summary>
-        /// The content container part.
+        /// The content container part string.
         /// </summary>
         private const string PartContentcontainer = "PART_ContentContainer";
 
         /// <summary>
-        /// The horizontal line part.
+        /// The horizontal line part string.
         /// </summary>
         private const string PartHorizontalline = "PART_HorizontalLine";
 
         /// <summary>
-        /// The vertical line part.
+        /// The vertical line part string.
         /// </summary>
         private const string PartVerticalline = "PART_VerticalLine";
 
@@ -153,7 +155,7 @@ namespace OxyPlot.Windows
 
 #if WPF
         /// <summary>
-        /// Initializes static members of the <see cref="TrackerControl" /> class.
+        /// Initializes static members of the <see cref = "TrackerControl" /> class.
         /// </summary>
         static TrackerControl()
         {
@@ -173,21 +175,14 @@ namespace OxyPlot.Windows
         }
 #endif
 
-#if WPF
+#if HAS_WPF
         /// <summary>
         /// Gets or sets BorderEdgeMode.
         /// </summary>
         public EdgeMode BorderEdgeMode
         {
-            get
-            {
-                return (EdgeMode)this.GetValue(BorderEdgeModeProperty);
-            }
-
-            set
-            {
-                this.SetValue(BorderEdgeModeProperty, value);
-            }
+            get => (EdgeMode)this.GetValue(BorderEdgeModeProperty);
+            set => this.SetValue(BorderEdgeModeProperty, value);
         }
 #endif
 
@@ -196,15 +191,8 @@ namespace OxyPlot.Windows
         /// </summary>
         public Visibility HorizontalLineVisibility
         {
-            get
-            {
-                return (Visibility)this.GetValue(HorizontalLineVisibilityProperty);
-            }
-
-            set
-            {
-                this.SetValue(HorizontalLineVisibilityProperty, value);
-            }
+            get => (Visibility)this.GetValue(HorizontalLineVisibilityProperty);
+            set => this.SetValue(HorizontalLineVisibilityProperty, value);
         }
 
         /// <summary>
@@ -212,15 +200,8 @@ namespace OxyPlot.Windows
         /// </summary>
         public Visibility VerticalLineVisibility
         {
-            get
-            {
-                return (Visibility)this.GetValue(VerticalLineVisibilityProperty);
-            }
-
-            set
-            {
-                this.SetValue(VerticalLineVisibilityProperty, value);
-            }
+            get => (Visibility)this.GetValue(VerticalLineVisibilityProperty);
+            set => this.SetValue(VerticalLineVisibilityProperty, value);
         }
 
         /// <summary>
@@ -228,15 +209,8 @@ namespace OxyPlot.Windows
         /// </summary>
         public Brush LineStroke
         {
-            get
-            {
-                return (Brush)this.GetValue(LineStrokeProperty);
-            }
-
-            set
-            {
-                this.SetValue(LineStrokeProperty, value);
-            }
+            get => (Brush)this.GetValue(LineStrokeProperty);
+            set => this.SetValue(LineStrokeProperty, value);
         }
 
         /// <summary>
@@ -244,15 +218,8 @@ namespace OxyPlot.Windows
         /// </summary>
         public OxyRect LineExtents
         {
-            get
-            {
-                return (OxyRect)this.GetValue(LineExtentsProperty);
-            }
-
-            set
-            {
-                this.SetValue(LineExtentsProperty, value);
-            }
+            get => (OxyRect)this.GetValue(LineExtentsProperty);
+            set => this.SetValue(LineExtentsProperty, value);
         }
 
         /// <summary>
@@ -260,15 +227,8 @@ namespace OxyPlot.Windows
         /// </summary>
         public DoubleCollection LineDashArray
         {
-            get
-            {
-                return (DoubleCollection)this.GetValue(LineDashArrayProperty);
-            }
-
-            set
-            {
-                this.SetValue(LineDashArrayProperty, value);
-            }
+            get => (DoubleCollection)this.GetValue(LineDashArrayProperty);
+            set => this.SetValue(LineDashArrayProperty, value);
         }
 
         /// <summary>
@@ -276,15 +236,8 @@ namespace OxyPlot.Windows
         /// </summary>
         public bool ShowPointer
         {
-            get
-            {
-                return (bool)this.GetValue(ShowPointerProperty);
-            }
-
-            set
-            {
-                this.SetValue(ShowPointerProperty, value);
-            }
+            get => (bool)this.GetValue(ShowPointerProperty);
+            set => this.SetValue(ShowPointerProperty, value);
         }
 
         /// <summary>
@@ -292,15 +245,9 @@ namespace OxyPlot.Windows
         /// </summary>
         public double CornerRadius
         {
-            get
-            {
-                return (double)this.GetValue(CornerRadiusProperty);
-            }
+            get => (double)this.GetValue(CornerRadiusProperty);
 
-            set
-            {
-                this.SetValue(CornerRadiusProperty, value);
-            }
+            set => this.SetValue(CornerRadiusProperty, value);
         }
 
         /// <summary>
@@ -308,15 +255,8 @@ namespace OxyPlot.Windows
         /// </summary>
         public double Distance
         {
-            get
-            {
-                return (double)this.GetValue(DistanceProperty);
-            }
-
-            set
-            {
-                this.SetValue(DistanceProperty, value);
-            }
+            get => (double)this.GetValue(DistanceProperty);
+            set => this.SetValue(DistanceProperty, value);
         }
 
         /// <summary>
@@ -324,15 +264,8 @@ namespace OxyPlot.Windows
         /// </summary>
         public bool CanCenterHorizontally
         {
-            get
-            {
-                return (bool)this.GetValue(CanCenterHorizontallyProperty);
-            }
-
-            set
-            {
-                this.SetValue(CanCenterHorizontallyProperty, value);
-            }
+            get => (bool)this.GetValue(CanCenterHorizontallyProperty);
+            set => this.SetValue(CanCenterHorizontallyProperty, value);
         }
 
         /// <summary>
@@ -340,15 +273,8 @@ namespace OxyPlot.Windows
         /// </summary>
         public bool CanCenterVertically
         {
-            get
-            {
-                return (bool)this.GetValue(CanCenterVerticallyProperty);
-            }
-
-            set
-            {
-                this.SetValue(CanCenterVerticallyProperty, value);
-            }
+            get => (bool)this.GetValue(CanCenterVerticallyProperty);
+            set => this.SetValue(CanCenterVerticallyProperty, value);
         }
 
         /// <summary>
@@ -356,21 +282,18 @@ namespace OxyPlot.Windows
         /// </summary>
         public ScreenPoint Position
         {
-            get
-            {
-                return (ScreenPoint)this.GetValue(PositionProperty);
-            }
-
-            set
-            {
-                this.SetValue(PositionProperty, value);
-            }
+            get => (ScreenPoint)this.GetValue(PositionProperty);
+            set => this.SetValue(PositionProperty, value);
         }
 
         /// <summary>
-        /// Invoked whenever application code or internal processes (such as a rebuilding layout pass) call ApplyTemplate. In simplest terms, this means the method is called just before a UI element displays in your app. Override this method to influence the default post-template logic of a class.
+        /// When overridden in a derived class, is invoked whenever application code or internal processes call <see cref="FrameworkElement.ApplyTemplate" />.
         /// </summary>
+#if HAS_WPF
+        public override void OnApplyTemplate()
+#else
         protected override void OnApplyTemplate()
+#endif
         {
             base.OnApplyTemplate();
             this.path = this.GetTemplateChild(PartPath) as Path;
@@ -381,17 +304,17 @@ namespace OxyPlot.Windows
 
             if (this.contentContainer == null)
             {
-                throw new InvalidOperationException(string.Format("The TrackerControl template must contain a content container with name +'{0}'", PartContentcontainer));
+                throw new InvalidOperationException($"The TrackerControl template must contain a content container with name +'{PartContentcontainer}'");
             }
 
             if (this.path == null)
             {
-                throw new InvalidOperationException(string.Format("The TrackerControl template must contain a Path with name +'{0}'", PartPath));
+                throw new InvalidOperationException($"The TrackerControl template must contain a Path with name +'{PartPath}'");
             }
 
             if (this.content == null)
             {
-                throw new InvalidOperationException(string.Format("The TrackerControl template must contain a ContentPresenter with name +'{0}'", PartContent));
+                throw new InvalidOperationException($"The TrackerControl template must contain a ContentPresenter with name +'{PartContent}'");
             }
 
             this.UpdatePositionAndBorder();
@@ -410,9 +333,9 @@ namespace OxyPlot.Windows
         /// <summary>
         /// Called when the position is changed.
         /// </summary>
-        /// <param name="e">The dependency property changed event args.</param>
+        /// <param name="dependencyPropertyChangedEventArgs">The dependency property changed event args.</param>
         // ReSharper disable once UnusedParameter.Local
-        private void OnPositionChanged(DependencyPropertyChangedEventArgs e)
+        private void OnPositionChanged(DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
             this.UpdatePositionAndBorder();
         }
@@ -506,26 +429,24 @@ namespace OxyPlot.Windows
             double dx = ha == OxyPlot.HorizontalAlignment.Center ? -0.5 : ha == OxyPlot.HorizontalAlignment.Left ? 0 : -1;
             double dy = va == OxyPlot.VerticalAlignment.Middle ? -0.5 : va == OxyPlot.VerticalAlignment.Top ? 0 : -1;
 
-            Thickness margin;
             this.path.Data = this.ShowPointer
-                                 ? this.CreatePointerBorderGeometry(ha, va, contentWidth, contentHeight, out margin)
+                                 ? this.CreatePointerBorderGeometry(ha, va, contentWidth, contentHeight, out var margin)
                                  : this.CreateBorderGeometry(ha, va, contentWidth, contentHeight, out margin);
 
             this.content.Margin = margin;
 
             this.contentContainer.Measure(new Size(canvasWidth, canvasHeight));
-            Size contentSize = this.contentContainer.DesiredSize;
+            var contentSize = this.contentContainer.DesiredSize;
 
             this.contentContainer.RenderTransform = new TranslateTransform
-                {
-                    X = dx * contentSize.Width,
-                    Y = dy * contentSize.Height
-                };
+            {
+                X = dx * contentSize.Width,
+                Y = dy * contentSize.Height
+            };
 
-#if WPF
-            ScreenPoint pos = this.Position;
-#endif
-#if HAS_WINUI || SILVERLIGHT || NETFX_CORE
+#if HAS_WPF
+            var pos = this.Position;
+#else
             Point pos = this.Position.ToPoint(true);
 #endif
 
@@ -579,18 +500,23 @@ namespace OxyPlot.Windows
             double m = this.Distance;
             var rect = new Rect(
                 ha == OxyPlot.HorizontalAlignment.Left ? m : 0, va == OxyPlot.VerticalAlignment.Top ? m : 0, width, height);
-            margin = new Thickness
-                {
-                    Left = ha == OxyPlot.HorizontalAlignment.Left ? m : 0,
-                    Top = va == OxyPlot.VerticalAlignment.Top ? m : 0,
-                    Right = ha == OxyPlot.HorizontalAlignment.Right ? m : 0,
-                    Bottom = va == OxyPlot.VerticalAlignment.Bottom ? m : 0
-                };
-            return new RectangleGeometry { Rect = rect /*, RadiusX = this.CornerRadius, RadiusY = this.CornerRadius*/ };
+            margin = new Thickness(
+                ha == OxyPlot.HorizontalAlignment.Left ? m : 0,
+                va == OxyPlot.VerticalAlignment.Top ? m : 0,
+                ha == OxyPlot.HorizontalAlignment.Right ? m : 0,
+                va == OxyPlot.VerticalAlignment.Bottom ? m : 0);
+            return new RectangleGeometry
+            {
+                Rect = rect,
+#if HAS_WPF
+                RadiusX = this.CornerRadius,
+                RadiusY = this.CornerRadius,
+#endif
+            };
         }
 
         /// <summary>
-        /// Creates a border geometry with a 'pointer'.
+        /// Create a border geometry with a 'pointer'.
         /// </summary>
         /// <param name="ha">The horizontal alignment.</param>
         /// <param name="va">The vertical alignment.</param>
@@ -612,7 +538,7 @@ namespace OxyPlot.Windows
                 double x2 = (x0 + x1) / 2;
                 double y0 = 0;
                 double y1 = height;
-                margin = new Thickness { Bottom = m };
+                margin = new Thickness(0, 0, 0, m);
                 points = new[]
                     {
                         new Point(x0, y0), new Point(x1, y0), new Point(x1, y1), new Point(x2 + (m / 2), y1),
@@ -627,7 +553,7 @@ namespace OxyPlot.Windows
                 double x2 = (x0 + x1) / 2;
                 double y0 = m;
                 double y1 = m + height;
-                margin = new Thickness { Top = m };
+                margin = new Thickness(0, m, 0, 0);
                 points = new[]
                     {
                         new Point(x0, y0), new Point(x2 - (m / 2), y0), new Point(x2, 0), new Point(x2 + (m / 2), y0),
@@ -642,7 +568,7 @@ namespace OxyPlot.Windows
                 double y0 = 0;
                 double y1 = height;
                 double y2 = (y0 + y1) / 2;
-                margin = new Thickness { Left = m };
+                margin = new Thickness(m, 0, 0, 0);
                 points = new[]
                     {
                         new Point(0, y2), new Point(x0, y2 - (m / 2)), new Point(x0, y0), new Point(x1, y0),
@@ -657,7 +583,7 @@ namespace OxyPlot.Windows
                 double y0 = 0;
                 double y1 = height;
                 double y2 = (y0 + y1) / 2;
-                margin = new Thickness { Right = m };
+                margin = new Thickness(0, 0, m, 0);
                 points = new[]
                     {
                         new Point(x1 + m, y2), new Point(x1, y2 + (m / 2)), new Point(x1, y1), new Point(x0, y1),
@@ -672,7 +598,7 @@ namespace OxyPlot.Windows
                 double x1 = m + width;
                 double y0 = m;
                 double y1 = m + height;
-                margin = new Thickness { Left = m, Top = m };
+                margin = new Thickness(m, m, 0, 0);
                 points = new[]
                     {
                         new Point(0, 0), new Point(m * 2, y0), new Point(x1, y0), new Point(x1, y1), new Point(x0, y1),
@@ -687,7 +613,7 @@ namespace OxyPlot.Windows
                 double x1 = width;
                 double y0 = m;
                 double y1 = m + height;
-                margin = new Thickness { Top = m, Right = m };
+                margin = new Thickness(0, m, m, 0);
                 points = new[]
                     {
                         new Point(x1 + m, 0), new Point(x1, y0 + m), new Point(x1, y1), new Point(x0, y1),
@@ -702,7 +628,7 @@ namespace OxyPlot.Windows
                 double x1 = m + width;
                 double y0 = 0;
                 double y1 = height;
-                margin = new Thickness { Left = m, Bottom = m };
+                margin = new Thickness(m, 0, 0, m);
                 points = new[]
                     {
                         new Point(0, y1 + m), new Point(x0, y1 - m), new Point(x0, y0), new Point(x1, y0),
@@ -717,7 +643,7 @@ namespace OxyPlot.Windows
                 double x1 = width;
                 double y0 = 0;
                 double y1 = height;
-                margin = new Thickness { Right = m, Bottom = m };
+                margin = new Thickness(0, 0, m, m);
                 points = new[]
                     {
                         new Point(x1 + m, y1 + m), new Point(x1 - m, y1), new Point(x0, y1), new Point(x0, y0),
@@ -730,13 +656,17 @@ namespace OxyPlot.Windows
                 return null;
             }
 
-            var pointCollection = new PointCollection();
-            foreach (var point in points)
+#if HAS_WPF
+            var pc = new PointCollection(points.Length);
+#else
+            var pc = new PointCollection();
+#endif
+            foreach (var p in points)
             {
-                pointCollection.Add(point);
+                pc.Add(p);
             }
 
-            var segments = new PathSegmentCollection { new PolyLineSegment { Points = pointCollection } };
+            var segments = new PathSegmentCollection { new PolyLineSegment { Points = pc } };
             var pf = new PathFigure { StartPoint = points[0], Segments = segments, IsClosed = true };
             return new PathGeometry { Figures = new PathFigureCollection { pf } };
         }

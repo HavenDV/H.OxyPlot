@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace OxyPlot.Wpf
+namespace OxyPlot.Utilities
 {
     using System.Windows.Input;
 
@@ -16,6 +16,7 @@ namespace OxyPlot.Wpf
     /// </summary>
     internal static class Keyboard
     {
+#if HAS_WPF
         /// <summary>
         /// Gets the current modifier keys.
         /// </summary>
@@ -45,5 +46,37 @@ namespace OxyPlot.Wpf
 
             return modifiers;
         }
+#else
+        /// <summary>
+        /// Gets the modifier keys.
+        /// </summary>
+        /// <param name="e">The <see cref="PointerRoutedEventArgs" /> instance containing the event data.</param>
+        /// <returns>Modifier keys.</returns>
+        public static OxyModifierKeys GetModifierKeys(this PointerRoutedEventArgs e)
+        {
+            var result = OxyModifierKeys.None;
+            if ((e.KeyModifiers & VirtualKeyModifiers.Shift) == VirtualKeyModifiers.Shift)
+            {
+                result |= OxyModifierKeys.Shift;
+            }
+
+            if ((e.KeyModifiers & VirtualKeyModifiers.Control) == VirtualKeyModifiers.Control)
+            {
+                result |= OxyModifierKeys.Control;
+            }
+
+            if ((e.KeyModifiers & VirtualKeyModifiers.Menu) == VirtualKeyModifiers.Menu)
+            {
+                result |= OxyModifierKeys.Alt;
+            }
+
+            if ((e.KeyModifiers & VirtualKeyModifiers.Windows) == VirtualKeyModifiers.Windows)
+            {
+                result |= OxyModifierKeys.Windows;
+            }
+
+            return result;
+        }
+#endif
     }
 }
