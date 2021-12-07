@@ -7,6 +7,10 @@
     <NoWarn>$(NoWarn);WPF0013;WPF0042</NoWarn>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="OxyPlot.Core" Version="2.1.0" />
+  </ItemGroup>
+
   <Import Project="..\..\shared\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems" Label="Shared" />
 
   <ItemGroup>

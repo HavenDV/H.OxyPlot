@@ -20,8 +20,8 @@
   </PropertyGroup>
   
   <PropertyGroup Label="NuGet">
-    <Description>Shortest way to create rows/columns for Grid for WPF/UWP/Uno platforms</Description>
-    <PackageTags>grid, extensions, columns, rows, uwp, uno, wpf, winui, windowsappsdk, reunion</PackageTags>
+    <Description>OxyPlot is a plotting library for .NET. This is package contains the UWP/WinUI/Uno implementation.</Description>
+    <PackageTags>plotting, plot, charting, chart, uwp, uno, wpf, winui, windowsappsdk, reunion, winrt, uap, win10</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Label="Nuget">
@@ -30,9 +30,9 @@
     <PackageReleaseNotes>$(PACKAGE_RELEASE_NOTES)</PackageReleaseNotes>
     <GeneratePackageOnBuild Condition=" '$(Configuration)' == 'Release' ">true</GeneratePackageOnBuild>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
-    <Authors>havendv</Authors>
+    <Authors>havendv, OxyPlot contributors, Oystein Bjorke</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/HavenDV/H.OxyPlot</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/oxyplot/oxyplot</PackageProjectUrl>
     <RepositoryUrl>https://github.com/HavenDV/H.OxyPlot</RepositoryUrl>
     <PackageIcon>nuget_icon.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>

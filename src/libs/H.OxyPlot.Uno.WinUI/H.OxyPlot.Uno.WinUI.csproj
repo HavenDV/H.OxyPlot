@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="OxyPlot.Core" Version="2.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Uno.WinUI" Version="3.10.7" />
   </ItemGroup>
 

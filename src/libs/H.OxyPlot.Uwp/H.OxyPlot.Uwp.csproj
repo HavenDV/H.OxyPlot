@@ -5,6 +5,10 @@
     <DefineConstants>$(DefineConstants);HAS_UWP</DefineConstants>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="OxyPlot.Core" Version="2.1.0" />
+  </ItemGroup>
+
   <Import Project="..\..\shared\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems" Label="Shared" />
 
 </Project>

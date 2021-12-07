@@ -9,9 +9,20 @@
     <Import_RootNamespace>H.OxyPlot.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Extensions\Constraint.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Extensions\GridExtensions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Extensions\GridLengthConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\OxyColorConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\ThicknessConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GlobalUsings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PlotView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RenderContext.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tracker\TrackerControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tracker\TrackerDefinition.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\ConverterExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\MouseButtonHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 </Project>
