@@ -1,18 +1,21 @@
-﻿<Page
+﻿<Window
     x:Class="H.OxyPlot.Apps.Views.MainView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:viewModels="using:H.OxyPlot.Apps.ViewModels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:windows="using:OxyPlot.Windows"
-    mc:Ignorable="d">
-
-    <Page.DataContext>
+    xmlns:viewModels="clr-namespace:H.OxyPlot.Apps.ViewModels"
+    xmlns:windows="http://oxyplot.org/wpf"
+    mc:Ignorable="d"
+    Title="MainWindow"
+    Width="800"
+    Height="600"
+    >
+    <Window.DataContext>
         <viewModels:MainViewModel/>
-    </Page.DataContext>
+    </Window.DataContext>
     
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
         <windows:PlotView Model="{Binding Model}"/>
     </Grid>
-</Page>
+</Window>

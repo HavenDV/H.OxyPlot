@@ -7,11 +7,6 @@
     <NoWarn>$(NoWarn);WPF0013;WPF0042</NoWarn>
   </PropertyGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net4.5.1' ">
-    <Reference Include="ReachFramework" />
-    <Reference Include="System.Printing" />
-  </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="OxyPlot.Core" Version="2.1.0" />
   </ItemGroup>
@@ -22,9 +17,5 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>-->
-
-  <ItemGroup>
-    <ProjectReference Include="..\H.OxyPlot.Wpf.Shared\H.OxyPlot.Wpf.Shared.csproj" />
-  </ItemGroup>
 
 </Project>

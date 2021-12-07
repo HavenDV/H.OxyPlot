@@ -1,10 +1,9 @@
-﻿global using Windows.Foundation;
-global using Windows.System;
-
-#if HAS_WPF
+﻿#if HAS_WPF
 global using System.Windows;
 global using System.Windows.Controls;
 #elif HAS_WINUI
+global using Windows.Foundation;
+global using Windows.System;
 global using Windows.UI;
 global using Microsoft.UI;
 global using Microsoft.UI.Xaml;
@@ -17,6 +16,8 @@ global using Microsoft.UI.Xaml.Media.Imaging;
 global using Microsoft.UI.Input;
 global using Path = Microsoft.UI.Xaml.Shapes.Path;
 #else
+global using Windows.Foundation;
+global using Windows.System;
 global using Windows.UI;
 global using Windows.UI.Input;
 global using Windows.UI.Xaml;

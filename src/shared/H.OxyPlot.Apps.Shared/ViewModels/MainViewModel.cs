@@ -1,27 +1,26 @@
-namespace SimpleDemo
+namespace H.OxyPlot.Apps.ViewModels;
+
+using global::OxyPlot;
+using global::OxyPlot.Axes;
+using global::OxyPlot.Series;
+
+public class MainViewModel
 {
-    using OxyPlot;
-    using OxyPlot.Axes;
-    using OxyPlot.Series;
-
-    public class MainViewModel
+    public MainViewModel()
     {
-        public MainViewModel()
-        {
-            var model = new PlotModel { Title = "Hello Universal Windows" };
-            model.Axes.Add(new LinearAxis { Position = AxisPosition.Bottom });
-            model.Axes.Add(new LinearAxis { Position = AxisPosition.Left });
-            var lineSeries = new LineSeries { Title = "LineSeries", MarkerType = MarkerType.Circle };
-            lineSeries.Points.Add(new DataPoint(0, 0));
-            lineSeries.Points.Add(new DataPoint(10, 18));
-            lineSeries.Points.Add(new DataPoint(20, 12));
-            lineSeries.Points.Add(new DataPoint(30, 8));
-            lineSeries.Points.Add(new DataPoint(40, 15));
+        var model = new PlotModel { Title = "Hello Universal Windows" };
+        model.Axes.Add(new LinearAxis { Position = AxisPosition.Bottom });
+        model.Axes.Add(new LinearAxis { Position = AxisPosition.Left });
+        var lineSeries = new LineSeries { Title = "LineSeries", MarkerType = MarkerType.Circle };
+        lineSeries.Points.Add(new DataPoint(0, 0));
+        lineSeries.Points.Add(new DataPoint(10, 18));
+        lineSeries.Points.Add(new DataPoint(20, 12));
+        lineSeries.Points.Add(new DataPoint(30, 8));
+        lineSeries.Points.Add(new DataPoint(40, 15));
 
-            model.Series.Add(lineSeries);
-            this.Model = model;
-        }
-
-        public PlotModel Model { get; private set; }
+        model.Series.Add(lineSeries);
+        this.Model = model;
     }
+
+    public PlotModel Model { get; private set; }
 }

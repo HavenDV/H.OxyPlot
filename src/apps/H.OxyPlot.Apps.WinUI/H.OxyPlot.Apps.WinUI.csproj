@@ -10,11 +10,6 @@
     <NoWarn>$(NoWarn);CS8785</NoWarn>
   </PropertyGroup>
 
-  <ItemGroup Label="GlobalUsings">
-    <Using Include="Microsoft.UI.Xaml" />
-    <Using Include="Microsoft.UI.Xaml.Controls" />
-  </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0" />
