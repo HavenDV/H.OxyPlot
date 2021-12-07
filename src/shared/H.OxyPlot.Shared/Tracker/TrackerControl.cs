@@ -68,11 +68,13 @@ namespace OxyPlot.Controls
         public static readonly DependencyProperty ShowPointerProperty = DependencyProperty.Register(
             nameof(ShowPointer), typeof(bool), typeof(TrackerControl), new PropertyMetadata(true));
 
+#if HAS_WPF
         /// <summary>
         /// Identifies the <see cref="CornerRadius"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(
             nameof(CornerRadius), typeof(double), typeof(TrackerControl), new PropertyMetadata(0.0));
+#endif
 
         /// <summary>
         /// Identifies the <see cref="Distance"/> dependency property.
@@ -131,27 +133,27 @@ namespace OxyPlot.Controls
         /// <summary>
         /// The content.
         /// </summary>
-        private ContentPresenter content;
+        private ContentPresenter? content;
 
         /// <summary>
         /// The horizontal line.
         /// </summary>
-        private Line horizontalLine;
+        private Line? horizontalLine;
 
         /// <summary>
         /// The path.
         /// </summary>
-        private Path path;
+        private Path? path;
 
         /// <summary>
         /// The content container.
         /// </summary>
-        private Grid contentContainer;
+        private Grid? contentContainer;
 
         /// <summary>
         /// The vertical line.
         /// </summary>
-        private Line verticalLine;
+        private Line? verticalLine;
 
 #if WPF
         /// <summary>
@@ -225,7 +227,9 @@ namespace OxyPlot.Controls
         /// <summary>
         /// Gets or sets LineDashArray.
         /// </summary>
+#pragma warning disable CA2227 // Collection properties should be read only
         public DoubleCollection LineDashArray
+#pragma warning restore CA2227 // Collection properties should be read only
         {
             get => (DoubleCollection)this.GetValue(LineDashArrayProperty);
             set => this.SetValue(LineDashArrayProperty, value);
@@ -240,6 +244,7 @@ namespace OxyPlot.Controls
             set => this.SetValue(ShowPointerProperty, value);
         }
 
+#if HAS_WPF
         /// <summary>
         /// Gets or sets the corner radius (only used when ShowPoint=<c>false</c>).
         /// </summary>
@@ -249,6 +254,7 @@ namespace OxyPlot.Controls
 
             set => this.SetValue(CornerRadiusProperty, value);
         }
+#endif
 
         /// <summary>
         /// Gets or sets the distance of the content container from the trackers Position.
@@ -352,7 +358,7 @@ namespace OxyPlot.Controls
 
             Canvas.SetLeft(this.contentContainer, this.Position.X);
             Canvas.SetTop(this.contentContainer, this.Position.Y);
-            FrameworkElement parent = this;
+            FrameworkElement? parent = this;
             while (!(parent is Canvas) && parent != null)
             {
                 parent = VisualTreeHelper.GetParent(parent) as FrameworkElement;
@@ -367,6 +373,10 @@ namespace OxyPlot.Controls
             double canvasWidth = parent.ActualWidth;
             double canvasHeight = parent.ActualHeight;
 
+            if (content == null)
+            {
+                throw new InvalidOperationException("content is null");
+            }
             this.content.Measure(new Size(canvasWidth, canvasHeight));
             this.content.Arrange(new Rect(0, 0, this.content.DesiredSize.Width, this.content.DesiredSize.Height));
 
@@ -429,6 +439,10 @@ namespace OxyPlot.Controls
             double dx = ha == OxyPlot.HorizontalAlignment.Center ? -0.5 : ha == OxyPlot.HorizontalAlignment.Left ? 0 : -1;
             double dy = va == OxyPlot.VerticalAlignment.Middle ? -0.5 : va == OxyPlot.VerticalAlignment.Top ? 0 : -1;
 
+            if (path == null)
+            {
+                throw new InvalidOperationException("path is null");
+            }
             this.path.Data = this.ShowPointer
                                  ? this.CreatePointerBorderGeometry(ha, va, contentWidth, contentHeight, out var margin)
                                  : this.CreateBorderGeometry(ha, va, contentWidth, contentHeight, out margin);
@@ -524,10 +538,10 @@ namespace OxyPlot.Controls
         /// <param name="height">The height.</param>
         /// <param name="margin">The margin.</param>
         /// <returns>The border geometry.</returns>
-        private Geometry CreatePointerBorderGeometry(
+        private Geometry? CreatePointerBorderGeometry(
             HorizontalAlignment ha, VerticalAlignment va, double width, double height, out Thickness margin)
         {
-            Point[] points = null;
+            Point[]? points = null;
             double m = this.Distance;
             margin = new Thickness();
 

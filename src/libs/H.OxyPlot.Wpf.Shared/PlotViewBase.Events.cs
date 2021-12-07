@@ -16,11 +16,13 @@ namespace OxyPlot.Wpf
     public abstract partial class PlotViewBase
     {
         /// <summary>
-        /// Called before the <see cref="E:System.Windows.UIElement.KeyDown" /> event occurs.
+        /// Called before the <see cref="KeyDown" /> event occurs.
         /// </summary>
         /// <param name="e">The data for the event.</param>
         protected override void OnKeyDown(KeyEventArgs e)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+
             base.OnKeyDown(e);
             if (e.Handled)
             {
@@ -32,11 +34,13 @@ namespace OxyPlot.Wpf
         }
 
         /// <summary>
-        /// Called when the <see cref="E:System.Windows.UIElement.ManipulationStarted" /> event occurs.
+        /// Called when the <see cref="ManipulationStarted" /> event occurs.
         /// </summary>
         /// <param name="e">The data for the event.</param>
         protected override void OnManipulationStarted(ManipulationStartedEventArgs e)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+
             base.OnManipulationStarted(e);
             if (e.Handled)
             {
@@ -47,11 +51,13 @@ namespace OxyPlot.Wpf
         }
 
         /// <summary>
-        /// Called when the <see cref="E:System.Windows.UIElement.ManipulationDelta" /> event occurs.
+        /// Called when the <see cref="ManipulationDelta" /> event occurs.
         /// </summary>
         /// <param name="e">The data for the event.</param>
         protected override void OnManipulationDelta(ManipulationDeltaEventArgs e)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+
             base.OnManipulationDelta(e);
             if (e.Handled)
             {
@@ -62,11 +68,13 @@ namespace OxyPlot.Wpf
         }
 
         /// <summary>
-        /// Called when the <see cref="E:System.Windows.UIElement.ManipulationCompleted" /> event occurs.
+        /// Called when the <see cref="ManipulationCompleted" /> event occurs.
         /// </summary>
         /// <param name="e">The data for the event.</param>
         protected override void OnManipulationCompleted(ManipulationCompletedEventArgs e)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+
             base.OnManipulationCompleted(e);
             if (e.Handled)
             {
@@ -77,11 +85,13 @@ namespace OxyPlot.Wpf
         }
 
         /// <summary>
-        /// Called before the <see cref="E:System.Windows.UIElement.MouseWheel" /> event occurs to provide handling for the event in a derived class without attaching a delegate.
+        /// Called before the <see cref="MouseWheel" /> event occurs to provide handling for the event in a derived class without attaching a delegate.
         /// </summary>
-        /// <param name="e">A <see cref="T:System.Windows.Input.MouseWheelEventArgs" /> that contains the event data.</param>
+        /// <param name="e">A <see cref="MouseWheelEventArgs" /> that contains the event data.</param>
         protected override void OnMouseWheel(MouseWheelEventArgs e)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+
             base.OnMouseWheel(e);
             if (e.Handled || !this.IsMouseWheelEnabled)
             {
@@ -94,9 +104,11 @@ namespace OxyPlot.Wpf
         /// <summary>
         /// Invoked when an unhandled MouseDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
         /// </summary>
-        /// <param name="e">The <see cref="T:System.Windows.Input.MouseButtonEventArgs" /> that contains the event data. This event data reports details about the mouse button that was pressed and the handled state.</param>
+        /// <param name="e">The <see cref="MouseButtonEventArgs" /> that contains the event data. This event data reports details about the mouse button that was pressed and the handled state.</param>
         protected override void OnMouseDown(MouseButtonEventArgs e)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+
             base.OnMouseDown(e);
             if (e.Handled)
             {
@@ -115,9 +127,11 @@ namespace OxyPlot.Wpf
         /// <summary>
         /// Invoked when an unhandled MouseMove attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
         /// </summary>
-        /// <param name="e">The <see cref="T:System.Windows.Input.MouseEventArgs" /> that contains the event data.</param>
+        /// <param name="e">The <see cref="MouseEventArgs" /> that contains the event data.</param>
         protected override void OnMouseMove(MouseEventArgs e)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+
             base.OnMouseMove(e);
             if (e.Handled)
             {
@@ -130,9 +144,11 @@ namespace OxyPlot.Wpf
         /// <summary>
         /// Invoked when an unhandled MouseUp routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
         /// </summary>
-        /// <param name="e">The <see cref="T:System.Windows.Input.MouseButtonEventArgs" /> that contains the event data. The event data reports that the mouse button was released.</param>
+        /// <param name="e">The <see cref="MouseButtonEventArgs" /> that contains the event data. The event data reports that the mouse button was released.</param>
         protected override void OnMouseUp(MouseButtonEventArgs e)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+
             base.OnMouseUp(e);
             if (e.Handled)
             {
@@ -166,11 +182,13 @@ namespace OxyPlot.Wpf
         }
 
         /// <summary>
-        /// Invoked when an unhandled <see cref="E:System.Windows.Input.Mouse.MouseEnter" /> attached event is raised on this element. Implement this method to add class handling for this event.
+        /// Invoked when an unhandled <see cref="Mouse.MouseEnter" /> attached event is raised on this element. Implement this method to add class handling for this event.
         /// </summary>
-        /// <param name="e">The <see cref="T:System.Windows.Input.MouseEventArgs" /> that contains the event data.</param>
+        /// <param name="e">The <see cref="MouseEventArgs" /> that contains the event data.</param>
         protected override void OnMouseEnter(MouseEventArgs e)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+
             base.OnMouseEnter(e);
             if (e.Handled)
             {
@@ -181,11 +199,13 @@ namespace OxyPlot.Wpf
         }
 
         /// <summary>
-        /// Invoked when an unhandled <see cref="E:System.Windows.Input.Mouse.MouseLeave" /> attached event is raised on this element. Implement this method to add class handling for this event.
+        /// Invoked when an unhandled <see cref="Mouse.MouseLeave" /> attached event is raised on this element. Implement this method to add class handling for this event.
         /// </summary>
-        /// <param name="e">The <see cref="T:System.Windows.Input.MouseEventArgs" /> that contains the event data.</param>
+        /// <param name="e">The <see cref="MouseEventArgs" /> that contains the event data.</param>
         protected override void OnMouseLeave(MouseEventArgs e)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+
             base.OnMouseEnter(e);
             if (e.Handled)
             {

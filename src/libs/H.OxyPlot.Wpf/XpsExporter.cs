@@ -98,6 +98,8 @@ namespace OxyPlot.Wpf
         /// <param name="stream">The stream.</param>
         public void Export(IPlotModel model, Stream stream)
         {
+            model = model ?? throw new ArgumentNullException(nameof(model));
+            
             using (var xpsPackage = Package.Open(stream, FileMode.Create, FileAccess.ReadWrite))
             {
                 using (var doc = new XpsDocument(xpsPackage))
@@ -114,7 +116,9 @@ namespace OxyPlot.Wpf
         /// <param name="model">The model.</param>
         public void Print(IPlotModel model)
         {
-            PrintDocumentImageableArea area = null;
+            model = model ?? throw new ArgumentNullException(nameof(model));
+
+            PrintDocumentImageableArea? area = null;
             var xpsDocumentWriter = PrintQueue.CreateXpsDocumentWriter(ref area);
             if (xpsDocumentWriter != null)
             {

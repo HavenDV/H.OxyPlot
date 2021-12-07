@@ -54,6 +54,8 @@ namespace OxyPlot.Wpf
         ///<inheritdoc/>
         public override void DrawEllipses(IList<OxyRect> rectangles, OxyColor fill, OxyColor stroke, double thickness, EdgeRenderingMode edgeRenderingMode)
         {
+            rectangles = rectangles ?? throw new ArgumentNullException(nameof(rectangles));
+
             if (rectangles.Count == 0)
             {
                 return;
@@ -84,6 +86,7 @@ namespace OxyPlot.Wpf
             double[] dashArray,
             LineJoin lineJoin)
         {
+            points = points ?? throw new ArgumentNullException(nameof(points));
             if (points.Count < 2)
             {
                 return;
@@ -109,13 +112,15 @@ namespace OxyPlot.Wpf
             double[] dashArray,
             LineJoin lineJoin)
         {
+            points = points ?? throw new ArgumentNullException(nameof(points));
+
             if (points.Count < 2)
             {
                 return;
             }
 
-            Path path = null;
-            PathGeometry pathGeometry = null;
+            Path? path = null;
+            PathGeometry? pathGeometry = null;
 
             var count = 0;
 
@@ -132,7 +137,10 @@ namespace OxyPlot.Wpf
 
                 var figure = new PathFigure { StartPoint = actualPoints[0], IsClosed = false };
                 figure.Segments.Add(new LineSegment(actualPoints[1], true) { IsSmoothJoin = false });
-                pathGeometry.Figures.Add(figure);
+                if (pathGeometry != null)
+                {
+                    pathGeometry.Figures.Add(figure);
+                }
 
                 count++;
 
@@ -161,13 +169,15 @@ namespace OxyPlot.Wpf
             double[] dashArray,
             LineJoin lineJoin)
         {
+            polygons = polygons ?? throw new ArgumentNullException(nameof(polygons));
+
             if (polygons.Count == 0)
             {
                 return;
             }
 
-            Path path = null;
-            PathGeometry pathGeometry = null;
+            Path? path = null;
+            PathGeometry? pathGeometry = null;
             var count = 0;
 
             foreach (var polygon in polygons)
@@ -184,7 +194,7 @@ namespace OxyPlot.Wpf
                     pathGeometry = new PathGeometry { FillRule = FillRule.Nonzero };
                 }
 
-                PathFigure figure = null;
+                PathFigure? figure = null;
                 var first = true;
                 foreach (var point in this.GetActualPoints(polygon, path.StrokeThickness, edgeRenderingMode))
                 {
@@ -197,12 +207,18 @@ namespace OxyPlot.Wpf
                             IsClosed = true
                         };
 
-                        pathGeometry.Figures.Add(figure);
+                        if (pathGeometry != null)
+                        {
+                            pathGeometry.Figures.Add(figure);
+                        }
                         first = false;
                     }
                     else
                     {
-                        figure.Segments.Add(new LineSegment(point, !stroke.IsUndefined()));
+                        if (figure != null)
+                        {
+                            figure.Segments.Add(new LineSegment(point, !stroke.IsUndefined()));
+                        }
                     }
                 }
 
@@ -226,6 +242,8 @@ namespace OxyPlot.Wpf
         ///<inheritdoc/>
         public override void DrawRectangles(IList<OxyRect> rectangles, OxyColor fill, OxyColor stroke, double thickness, EdgeRenderingMode edgeRenderingMode)
         {
+            rectangles = rectangles ?? throw new ArgumentNullException(nameof(rectangles));
+
             if (rectangles.Count == 0)
             {
                 return;

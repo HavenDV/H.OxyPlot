@@ -89,27 +89,27 @@ namespace OxyPlot.Windows
         /// <summary>
         /// The canvas.
         /// </summary>
-        private Canvas canvas;
+        private Canvas? canvas;
 
         /// <summary>
         /// The current model.
         /// </summary>
-        private PlotModel currentModel;
+        private PlotModel? currentModel;
 
         /// <summary>
         /// The current tracker.
         /// </summary>
-        private FrameworkElement currentTracker;
+        private FrameworkElement? currentTracker;
 
         /// <summary>
         /// The grid.
         /// </summary>
-        private Grid grid;
+        private Grid? grid;
 
         /// <summary>
         /// The default controller.
         /// </summary>
-        private IPlotController defaultController;
+        private IPlotController? defaultController;
 
         /// <summary>
         /// The state of the Alt key.
@@ -139,17 +139,17 @@ namespace OxyPlot.Windows
         /// <summary>
         /// The overlays.
         /// </summary>
-        private Canvas overlays;
+        private Canvas? overlays;
 
         /// <summary>
         /// The render context
         /// </summary>
-        private RenderContext renderContext;
+        private RenderContext? renderContext;
 
         /// <summary>
         /// The zoom control.
         /// </summary>
-        private ContentControl zoomRectangle;
+        private ContentControl? zoomRectangle;
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "PlotView" /> class.
@@ -287,7 +287,7 @@ namespace OxyPlot.Windows
         /// Gets the actual model.
         /// </summary>
         /// <value>The actual model.</value>
-        public PlotModel ActualModel
+        public PlotModel? ActualModel
         {
             get
             {
@@ -328,7 +328,7 @@ namespace OxyPlot.Windows
         {
             get
             {
-                return this.Controller ?? (this.defaultController ?? (this.defaultController = new PlotController()));
+                return this.Controller ?? this.defaultController ?? (this.defaultController = new PlotController());
             }
         }
 
@@ -339,7 +339,10 @@ namespace OxyPlot.Windows
         {
             if (this.currentTracker != null)
             {
-                this.overlays.Children.Remove(this.currentTracker);
+                if (overlays != null)
+                {
+                    this.overlays.Children.Remove(this.currentTracker);
+                }
                 this.currentTracker = null;
             }
         }
@@ -349,16 +352,19 @@ namespace OxyPlot.Windows
         /// </summary>
         public void HideZoomRectangle()
         {
-            this.zoomRectangle.Visibility = Visibility.Collapsed;
+            if (zoomRectangle != null)
+            {
+                this.zoomRectangle.Visibility = Visibility.Collapsed;
+            }
         }
 
         /// <summary>
         /// Invalidate the PlotView (not blocking the UI thread)
         /// </summary>
-        /// <param name="update">if set to <c>true</c>, the data collections will be updated.</param>
-        public void InvalidatePlot(bool update = true)
+        /// <param name="updateData">if set to <c>true</c>, the data collections will be updated.</param>
+        public void InvalidatePlot(bool updateData = true)
         {
-            this.UpdateModel(update);
+            this.UpdateModel(updateData);
 
             if (DesignMode.DesignModeEnabled)
             {
@@ -378,8 +384,8 @@ namespace OxyPlot.Windows
         /// <summary>
         /// Sets the cursor.
         /// </summary>
-        /// <param name="cursor">The cursor.</param>
-        public void SetCursorType(CursorType cursor)
+        /// <param name="cursorType">The cursor.</param>
+        public void SetCursorType(CursorType cursorType)
         {
             if (cursorNotImplemented)
             {
@@ -388,7 +394,7 @@ namespace OxyPlot.Windows
             }
 
             var type = CoreCursorType.Arrow;
-            switch (cursor)
+            switch (cursorType)
             {
                 case CursorType.Default:
                     type = CoreCursorType.Arrow;
@@ -452,11 +458,14 @@ namespace OxyPlot.Windows
             if (tracker != this.currentTracker)
             {
                 this.HideTracker();
-                this.overlays.Children.Add(tracker);
+                if (overlays != null)
+                {
+                    this.overlays.Children.Add(tracker);
+                }
                 this.currentTracker = tracker;
             }
 
-            if (this.currentTracker != null)
+            //if (this.currentTracker != null)
             {
                 this.currentTracker.DataContext = trackerHitResult;
             }
@@ -465,13 +474,18 @@ namespace OxyPlot.Windows
         /// <summary>
         /// Shows the zoom rectangle.
         /// </summary>
-        /// <param name="r">The rectangle.</param>
-        public void ShowZoomRectangle(OxyRect r)
+        /// <param name="rectangle">The rectangle.</param>
+        public void ShowZoomRectangle(OxyRect rectangle)
         {
-            this.zoomRectangle.Width = r.Width;
-            this.zoomRectangle.Height = r.Height;
-            Canvas.SetLeft(this.zoomRectangle, r.Left);
-            Canvas.SetTop(this.zoomRectangle, r.Top);
+            if (zoomRectangle == null)
+            {
+                return;
+            }
+
+            this.zoomRectangle.Width = rectangle.Width;
+            this.zoomRectangle.Height = rectangle.Height;
+            Canvas.SetLeft(this.zoomRectangle, rectangle.Left);
+            Canvas.SetTop(this.zoomRectangle, rectangle.Top);
             this.zoomRectangle.Template = this.ZoomRectangleTemplate;
             this.zoomRectangle.Visibility = Visibility.Visible;
         }
@@ -494,7 +508,7 @@ namespace OxyPlot.Windows
         /// Stores text on the clipboard.
         /// </summary>
         /// <param name="text">The text.</param>
-        void IPlotView.SetClipboardText(string text)
+        public void SetClipboardText(string text)
         {
             var pkg = new DataPackage();
             pkg.SetText(text);
@@ -534,6 +548,8 @@ namespace OxyPlot.Windows
         /// <param name="e">The data for the event.</param>
         protected override void OnKeyDown(KeyRoutedEventArgs e)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+
             switch (e.Key)
             {
                 case VirtualKey.Control:
@@ -592,6 +608,8 @@ namespace OxyPlot.Windows
         /// <param name="e">The data for the event.</param>
         protected override void OnKeyUp(KeyRoutedEventArgs e)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+
             base.OnKeyUp(e);
             switch (e.Key)
             {
@@ -617,6 +635,8 @@ namespace OxyPlot.Windows
         /// <param name="e">Event data for the event.</param>
         protected override void OnManipulationStarted(ManipulationStartedRoutedEventArgs e)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+
             base.OnManipulationStarted(e);
 
             if (e.Handled)
@@ -637,6 +657,8 @@ namespace OxyPlot.Windows
         /// <param name="e">Event data for the event.</param>
         protected override void OnManipulationDelta(ManipulationDeltaRoutedEventArgs e)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+
             base.OnManipulationDelta(e);
 
             if (e.Handled)
@@ -656,6 +678,8 @@ namespace OxyPlot.Windows
         /// <param name="e">Event data for the event.</param>
         protected override void OnManipulationCompleted(ManipulationCompletedRoutedEventArgs e)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+
             base.OnManipulationCompleted(e);
 
             if (e.Handled)
@@ -675,6 +699,8 @@ namespace OxyPlot.Windows
         /// <param name="e">Event data for the event.</param>
         protected override void OnPointerPressed(PointerRoutedEventArgs e)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+
             base.OnPointerPressed(e);
 
             if (e.Handled)
@@ -703,6 +729,8 @@ namespace OxyPlot.Windows
         /// <param name="e">Event data for the event.</param>
         protected override void OnPointerMoved(PointerRoutedEventArgs e)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+
             base.OnPointerMoved(e);
 
             if (e.Handled)
@@ -724,6 +752,8 @@ namespace OxyPlot.Windows
         /// <param name="e">Event data for the event.</param>
         protected override void OnPointerReleased(PointerRoutedEventArgs e)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+
             base.OnPointerReleased(e);
 
             if (e.Handled)
@@ -748,6 +778,8 @@ namespace OxyPlot.Windows
         /// <param name="e">Event data for the event.</param>
         protected override void OnPointerWheelChanged(PointerRoutedEventArgs e)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+
             base.OnPointerWheelChanged(e);
 
             if (e.Handled || !this.IsMouseWheelEnabled)
@@ -764,6 +796,8 @@ namespace OxyPlot.Windows
         /// <param name="e">Event data for the event.</param>
         protected override void OnPointerEntered(PointerRoutedEventArgs e)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+
             base.OnPointerEntered(e);
             if (e.Handled)
             {
@@ -779,6 +813,8 @@ namespace OxyPlot.Windows
         /// <param name="e">Event data for the event.</param>
         protected override void OnPointerExited(PointerRoutedEventArgs e)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+
             base.OnPointerExited(e);
             if (e.Handled)
             {
@@ -792,7 +828,7 @@ namespace OxyPlot.Windows
 		/// A one time condition for update visuals so it is called no matter the state of the control
 		/// Currently with out this, the plotview on Xamarin Forms UWP does not render until the app's window resizes
 		/// </summary>
-		private bool isUpdateVisualsCalledOnce = false;
+		private bool isUpdateVisualsCalledOnce;
 
 		/// <summary>
 		/// Provides the behavior for the Arrange pass of layout. Classes can override this method to define their own Arrange pass behavior.
@@ -919,7 +955,9 @@ namespace OxyPlot.Windows
         /// Invokes the specified action on the UI Thread (without blocking the calling thread).
         /// </summary>
         /// <param name="action">The action.</param>
+#pragma warning disable CA1822 // Mark members as static
         private void BeginInvoke(Action action)
+#pragma warning restore CA1822 // Mark members as static
         {
 #if HAS_WINUI
             action();

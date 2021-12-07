@@ -24,6 +24,8 @@ namespace OxyPlot.Wpf
         /// <param name="path">The path to the file.</param>
         public static void ExportToFile(this IExporter exporter, IPlotModel model, string path)
         {
+            exporter = exporter ?? throw new ArgumentNullException(nameof(exporter));
+
             using var stream = File.OpenWrite(path);
             exporter.Export(model, stream);
         }

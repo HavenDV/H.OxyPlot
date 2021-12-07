@@ -37,7 +37,7 @@ namespace OxyPlot.Utilities
         /// <summary>
         /// The last sender.
         /// </summary>
-        private static WeakReference lastSender;
+        private static WeakReference? lastSender;
 
         /// <summary>
         /// Determines whether the last click is a double click.

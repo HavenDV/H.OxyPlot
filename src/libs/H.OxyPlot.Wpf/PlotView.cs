@@ -56,16 +56,21 @@ namespace OxyPlot.Wpf
         /// <summary>
         /// Gets the Canvas.
         /// </summary>
-        protected Canvas Canvas => (Canvas)this.plotPresenter;
+        protected Canvas? Canvas => this.plotPresenter as Canvas;
 
         /// <summary>
         /// Gets the CanvasRenderContext.
         /// </summary>
-        private CanvasRenderContext RenderContext => (CanvasRenderContext)this.renderContext;
+        private CanvasRenderContext? RenderContext => this.renderContext as CanvasRenderContext;
 
         /// <inheritdoc/>
         protected override void ClearBackground()
         {
+            if (Canvas == null)
+            {
+                return;
+            }
+
             this.Canvas.Children.Clear();
 
             if (this.ActualModel != null && this.ActualModel.Background.IsVisible())
@@ -87,6 +92,11 @@ namespace OxyPlot.Wpf
         /// <inheritdoc/>
         protected override IRenderContext CreateRenderContext()
         {
+            if (Canvas == null)
+            {
+                throw new InvalidOperationException("Canvas is null");
+            }
+
             return new CanvasRenderContext(this.Canvas);
         }
 
@@ -100,8 +110,14 @@ namespace OxyPlot.Wpf
         /// <inheritdoc/>
         protected override void RenderOverride()
         {
+            if (RenderContext == null)
+            {
+                base.RenderOverride();
+                return;
+            }
+
             this.RenderContext.TextMeasurementMethod = this.TextMeasurementMethod;
-            if (this.DisconnectCanvasWhileUpdating)
+            if (this.DisconnectCanvasWhileUpdating && grid != null)
             {
                 // TODO: profile... not sure if this makes any difference
                 var idx = this.grid.Children.IndexOf(this.plotPresenter);
@@ -127,6 +143,11 @@ namespace OxyPlot.Wpf
         /// <inheritdoc/>
         protected override double UpdateDpi()
         {
+            if (RenderContext == null)
+            {
+                throw new InvalidOperationException("RenderContext is null");
+            }
+
             var scale = base.UpdateDpi();
             this.RenderContext.DpiScale = scale;
             this.RenderContext.VisualOffset = this.TransformToAncestor(this.GetAncestorVisualFromVisualTree(this)).Transform(default);
@@ -140,6 +161,11 @@ namespace OxyPlot.Wpf
         /// <param name="e">The <see cref="System.Windows.Input.ExecutedRoutedEventArgs" /> instance containing the event data.</param>
         private void DoCopy(object sender, ExecutedRoutedEventArgs e)
         {
+            if (ActualModel == null)
+            {
+                throw new InvalidOperationException("ActualModel is null");
+            }
+
             var exporter = new PngExporter() { Width = (int)this.ActualWidth, Height = (int)this.ActualHeight };
             var bitmap = exporter.ExportToBitmap(this.ActualModel);
             Clipboard.SetImage(bitmap);

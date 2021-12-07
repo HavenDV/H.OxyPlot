@@ -32,10 +32,12 @@ namespace OxyPlot.Wpf
         /// <returns>A xaml string.</returns>
         public static string ExportToString(IPlotModel model, double width, double height)
         {
+            model = model ?? throw new ArgumentNullException(nameof(model));
+
             var sb = new StringBuilder();
             using (var sw = new StringWriter(sb))
             {
-                var xw = XmlWriter.Create(sw, new XmlWriterSettings { Indent = true });
+                using var xw = XmlWriter.Create(sw, new XmlWriterSettings { Indent = true });
                 Export(model, xw, width, height);
             }
 
@@ -51,9 +53,11 @@ namespace OxyPlot.Wpf
         /// <param name="height">The height.</param>
         public static void Export(PlotModel model, string fileName, double width, double height)
         {
+            model = model ?? throw new ArgumentNullException(nameof(model));
+
             using (var sw = new StreamWriter(fileName))
             {
-                var xw = XmlWriter.Create(sw, new XmlWriterSettings { Indent = true });
+                using var xw = XmlWriter.Create(sw, new XmlWriterSettings { Indent = true });
                 Export(model, xw, width, height);
             }
         }

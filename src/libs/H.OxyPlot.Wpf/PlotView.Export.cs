@@ -43,6 +43,11 @@ namespace OxyPlot.Wpf
                 height = (int)this.ActualHeight;
             }
 
+            if (ActualModel == null)
+            {
+                throw new InvalidOperationException("ActualModel is null");
+            }
+
             PngExporter.Export(this.ActualModel, fileName, width, height);
         }
 
@@ -52,6 +57,11 @@ namespace OxyPlot.Wpf
         /// <param name="fileName">Name of the file.</param>
         public void SaveXaml(string fileName)
         {
+            if (ActualModel == null)
+            {
+                throw new InvalidOperationException("ActualModel is null");
+            }
+
             XamlExporter.Export(this.ActualModel, fileName, this.ActualWidth, this.ActualHeight);
         }
 
@@ -61,6 +71,11 @@ namespace OxyPlot.Wpf
         /// <returns>The xaml.</returns>
         public string ToXaml()
         {
+            if (ActualModel == null)
+            {
+                throw new InvalidOperationException("ActualModel is null");
+            }
+
             return XamlExporter.ExportToString(this.ActualModel, this.ActualWidth, this.ActualHeight);
         }
 
@@ -70,6 +85,11 @@ namespace OxyPlot.Wpf
         /// <returns>A bitmap.</returns>
         public BitmapSource ToBitmap()
         {
+            if (ActualModel == null)
+            {
+                throw new InvalidOperationException("ActualModel is null");
+            }
+
             var exporter = new PngExporter() { Width = (int)this.ActualWidth, Height = (int)this.ActualHeight };
             return exporter.ExportToBitmap(this.ActualModel);
         }

@@ -63,7 +63,7 @@ namespace OxyPlot.Wpf
         /// <summary>
         /// The current tool tip
         /// </summary>
-        private string currentToolTip;
+        private string currentToolTip = string.Empty;
 
         /// <summary>
         /// The dpi scale.
@@ -108,6 +108,8 @@ namespace OxyPlot.Wpf
         ///<inheritdoc/>
         public override void DrawEllipses(IList<OxyRect> rectangles, OxyColor fill, OxyColor stroke, double thickness, EdgeRenderingMode edgeRenderingMode)
         {
+            rectangles = rectangles ?? throw new ArgumentNullException(nameof(rectangles));
+
             if (rectangles.Count == 0)
             {
                 return;
@@ -149,6 +151,8 @@ namespace OxyPlot.Wpf
             double[] dashArray,
             LineJoin lineJoin)
         {
+            points = points ?? throw new ArgumentNullException(nameof(points));
+
             if (points.Count < 2)
             {
                 return;
@@ -182,6 +186,8 @@ namespace OxyPlot.Wpf
             double[] dashArray,
             LineJoin lineJoin)
         {
+            points = points ?? throw new ArgumentNullException(nameof(points));
+
             if (points.Count < 2)
             {
                 return;
@@ -231,6 +237,8 @@ namespace OxyPlot.Wpf
             double[] dashArray,
             LineJoin lineJoin)
         {
+            polygons = polygons ?? throw new ArgumentNullException(nameof(polygons));
+
             if (polygons.Count == 0)
             {
                 return;
@@ -272,6 +280,8 @@ namespace OxyPlot.Wpf
         ///<inheritdoc/>
         public override void DrawRectangles(IList<OxyRect> rectangles, OxyColor fill, OxyColor stroke, double thickness, EdgeRenderingMode edgeRenderingMode)
         {
+            rectangles = rectangles ?? throw new ArgumentNullException(nameof(rectangles));
+
             if (rectangles.Count == 0)
             {
                 return;
@@ -484,9 +494,9 @@ namespace OxyPlot.Wpf
         }
 
         /// <inheritdoc/>
-        protected override void SetClip(OxyRect clippingRect)
+        protected override void SetClip(OxyRect clippingRectangle)
         {
-            this.clip = ToRect(clippingRect);
+            this.clip = ToRect(clippingRectangle);
         }
 
         /// <inheritdoc/>
@@ -634,7 +644,7 @@ namespace OxyPlot.Wpf
         /// </summary>
         /// <param name="color">The color.</param>
         /// <returns>The brush.</returns>
-        protected Brush GetCachedBrush(OxyColor color)
+        protected Brush? GetCachedBrush(OxyColor color)
         {
             if (color.A == 0)
             {
@@ -658,10 +668,7 @@ namespace OxyPlot.Wpf
         /// <returns>The FontFamily.</returns>
         private FontFamily GetCachedFontFamily(string familyName)
         {
-            if (familyName == null)
-            {
-                return null;
-            }
+            familyName = familyName ?? throw new ArgumentNullException(nameof(familyName));
 
             if (!this.fontFamilyCache.TryGetValue(familyName, out var ff))
             {
@@ -688,9 +695,11 @@ namespace OxyPlot.Wpf
             double thickness,
             EdgeRenderingMode edgeRenderingMode,
             LineJoin lineJoin = LineJoin.Miter,
-            IEnumerable<double> dashArray = null,
+            IEnumerable<double>? dashArray = null,
             double dashOffset = 0)
         {
+            shape = shape ?? throw new ArgumentNullException(nameof(shape));
+
             if (!stroke.IsUndefined() && thickness > 0)
             {
                 shape.Stroke = this.GetCachedBrush(stroke);
@@ -734,10 +743,7 @@ namespace OxyPlot.Wpf
         /// <returns>The bitmap source.</returns>
         private BitmapSource GetImageSource(OxyImage image)
         {
-            if (image == null)
-            {
-                return null;
-            }
+            image = image ?? throw new ArgumentNullException(nameof(image));
 
             if (!this.imagesInUse.Contains(image))
             {
@@ -826,12 +832,16 @@ namespace OxyPlot.Wpf
             }
         }
 
-        private static T GetFirstAndRest<T>(IEnumerable<T> items, out IList<T> rest)
+        private static T? GetFirstAndRest<T>(IEnumerable<T> items, out IList<T> rest)
         {
             using var e = items.GetEnumerator();
             if (!e.MoveNext())
             {
+#if NET451
                 rest = new T[0];
+#else
+                rest = Array.Empty<T>();
+#endif
                 return default;
             }
 

@@ -215,6 +215,8 @@ namespace OxyPlot.Utilities
         /// <returns>A <see cref="OxyMouseWheelEventArgs" /> containing the converted event arguments.</returns>
         public static OxyMouseWheelEventArgs ToMouseWheelEventArgs(this MouseWheelEventArgs e, IInputElement relativeTo)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+
             return new OxyMouseWheelEventArgs
             {
                 Position = e.GetPosition(relativeTo).ToScreenPoint(),
@@ -231,6 +233,8 @@ namespace OxyPlot.Utilities
         /// <returns>A <see cref="OxyMouseEventArgs" /> containing the converted event arguments.</returns>
         public static OxyMouseDownEventArgs ToMouseDownEventArgs(this MouseButtonEventArgs e, IInputElement relativeTo)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+
             return new OxyMouseDownEventArgs
             {
                 ChangedButton = e.ChangedButton.Convert(),
@@ -248,6 +252,8 @@ namespace OxyPlot.Utilities
         /// <returns>A <see cref="OxyMouseEventArgs" /> containing the converted event arguments.</returns>
         public static OxyMouseEventArgs ToMouseReleasedEventArgs(this MouseButtonEventArgs e, IInputElement relativeTo)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+
             return new OxyMouseEventArgs
             {
                 Position = e.GetPosition(relativeTo).ToScreenPoint(),
@@ -263,6 +269,8 @@ namespace OxyPlot.Utilities
         /// <returns>A <see cref="OxyMouseEventArgs" /> containing the converted event arguments.</returns>
         public static OxyMouseEventArgs ToMouseEventArgs(this MouseEventArgs e, IInputElement relativeTo)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+
             return new OxyMouseEventArgs
             {
                 Position = e.GetPosition(relativeTo).ToScreenPoint(),
@@ -278,6 +286,8 @@ namespace OxyPlot.Utilities
         /// <returns>A <see cref="OxyMouseEventArgs" /> containing the converted event arguments.</returns>
         public static OxyTouchEventArgs ToTouchEventArgs(this ManipulationStartedEventArgs e, UIElement relativeTo)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+
             return new OxyTouchEventArgs
             {
                 Position = e.ManipulationOrigin.ToScreenPoint(),
@@ -292,6 +302,8 @@ namespace OxyPlot.Utilities
         /// <returns>A <see cref="OxyMouseEventArgs" /> containing the converted event arguments.</returns>
         public static OxyTouchEventArgs ToTouchEventArgs(this ManipulationDeltaEventArgs e, UIElement relativeTo)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+
             return new OxyTouchEventArgs
             {
                 Position = e.ManipulationOrigin.ToScreenPoint(),
@@ -308,6 +320,8 @@ namespace OxyPlot.Utilities
         /// <returns>A <see cref="OxyMouseEventArgs" /> containing the converted event arguments.</returns>
         public static OxyTouchEventArgs ToTouchEventArgs(this ManipulationCompletedEventArgs e, UIElement relativeTo)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+
             return new OxyTouchEventArgs
             {
                 Position = e.ManipulationOrigin.ToScreenPoint()
@@ -315,7 +329,7 @@ namespace OxyPlot.Utilities
         }
 #else
         /// <summary>
-        /// Converts a <see cref="ScreenPoint" /> to a <see cref="T:Point" />.
+        /// Converts a <see cref="ScreenPoint" /> to a <see cref="Point" />.
         /// </summary>
         /// <param name="pt">The point to convert.</param>
         /// <param name="aliased">Use pixel alignment conversion if set to <c>true</c>.</param>
@@ -334,7 +348,7 @@ namespace OxyPlot.Utilities
         }
 
         /// <summary>
-        /// Converts an <see cref="OxyRect" /> to a <see cref="T:Rect" />.
+        /// Converts an <see cref="OxyRect" /> to a <see cref="Rect" />.
         /// </summary>
         /// <param name="r">The rectangle to convert.</param>
         /// <param name="aliased">Use pixel alignment if set to <c>true</c>.</param>
@@ -360,6 +374,8 @@ namespace OxyPlot.Utilities
         /// <returns>The pressed mouse button.</returns>
         public static OxyMouseButton GetPressedMouseButton(this PointerPointProperties properties)
         {
+            properties = properties ?? throw new ArgumentNullException(nameof(properties));
+
             if (properties.IsLeftButtonPressed)
             {
                 return OxyMouseButton.Left;
@@ -396,6 +412,9 @@ namespace OxyPlot.Utilities
         /// <returns>A <see cref="OxyMouseDownEventArgs" /> containing the converted event arguments.</returns>
         public static OxyMouseDownEventArgs ToMouseDownEventArgs(this PointerRoutedEventArgs e, UIElement relativeTo)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+            relativeTo = relativeTo ?? throw new ArgumentNullException(nameof(relativeTo));
+
             var point = e.GetCurrentPoint(relativeTo);
 
             int clickCount = 1;
@@ -421,6 +440,8 @@ namespace OxyPlot.Utilities
         /// <returns>A <see cref="OxyMouseEventArgs" /> containing the converted event arguments.</returns>
         public static OxyMouseEventArgs ToMouseEventArgs(this PointerRoutedEventArgs e, UIElement relativeTo)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+
             var point = e.GetCurrentPoint(relativeTo);
             return new OxyMouseEventArgs
             {
@@ -437,6 +458,8 @@ namespace OxyPlot.Utilities
         /// <returns>A <see cref="OxyMouseWheelEventArgs" /> containing the converted event arguments.</returns>
         public static OxyMouseWheelEventArgs ToMouseWheelEventArgs(this PointerRoutedEventArgs e, UIElement relativeTo)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+
             var point = e.GetCurrentPoint(relativeTo);
             return new OxyMouseWheelEventArgs
             {
@@ -454,6 +477,8 @@ namespace OxyPlot.Utilities
         /// <returns>A <see cref="OxyMouseEventArgs" /> containing the converted event arguments.</returns>
         public static OxyTouchEventArgs ToTouchEventArgs(this ManipulationStartedRoutedEventArgs e, UIElement relativeTo)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+
             return new OxyTouchEventArgs
             {
                 Position = e.Position.ToScreenPoint(),
@@ -468,6 +493,8 @@ namespace OxyPlot.Utilities
         /// <returns>A <see cref="OxyMouseEventArgs" /> containing the converted event arguments.</returns>
         public static OxyTouchEventArgs ToTouchEventArgs(this ManipulationDeltaRoutedEventArgs e, UIElement relativeTo)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+
             return new OxyTouchEventArgs
             {
                 Position = e.Position.ToScreenPoint(),
@@ -484,6 +511,8 @@ namespace OxyPlot.Utilities
         /// <returns>A <see cref="OxyMouseEventArgs" /> containing the converted event arguments.</returns>
         public static OxyTouchEventArgs ToTouchEventArgs(this ManipulationCompletedRoutedEventArgs e, UIElement relativeTo)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+
             return new OxyTouchEventArgs
             {
                 Position = e.Position.ToScreenPoint(),
@@ -498,6 +527,8 @@ namespace OxyPlot.Utilities
         /// <returns>A <see cref="OxyMouseEventArgs" /> containing the converted event arguments.</returns>
         public static OxyTouchEventArgs ToTouchEventArgs(this PointerRoutedEventArgs e, UIElement relativeTo)
         {
+            e = e ?? throw new ArgumentNullException(nameof(e));
+
             var point = e.GetCurrentPoint(relativeTo);
 
             var eventArgs = new OxyTouchEventArgs
@@ -766,10 +797,7 @@ namespace OxyPlot.Utilities
         /// <returns>A ScreenPoint array.</returns>
         public static ScreenPoint[] ToScreenPointArray(this Point[] points)
         {
-            if (points == null)
-            {
-                return null;
-            }
+            points = points ?? throw new ArgumentNullException(nameof(points));
 
             var pts = new ScreenPoint[points.Length];
             for (int i = 0; i < points.Length; i++)

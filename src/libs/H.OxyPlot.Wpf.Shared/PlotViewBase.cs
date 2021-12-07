@@ -33,17 +33,17 @@ namespace OxyPlot.Wpf
         /// <summary>
         /// The grid.
         /// </summary>
-        protected Grid grid;
+        protected Grid? grid { get; set; }
 
         /// <summary>
         /// The plot presenter.
         /// </summary>
-        protected FrameworkElement plotPresenter;
+        protected FrameworkElement? plotPresenter { get; set; }
 
         /// <summary>
         /// The render context
         /// </summary>
-        protected IRenderContext renderContext;
+        protected IRenderContext? renderContext { get; set; }
 
         /// <summary>
         /// The model lock.
@@ -53,17 +53,17 @@ namespace OxyPlot.Wpf
         /// <summary>
         /// The current tracker.
         /// </summary>
-        private FrameworkElement currentTracker;
+        private FrameworkElement? currentTracker;
 
         /// <summary>
         /// The current tracker template.
         /// </summary>
-        private ControlTemplate currentTrackerTemplate;
+        private ControlTemplate? currentTrackerTemplate;
 
         /// <summary>
         /// The default plot controller.
         /// </summary>
-        private IPlotController defaultController;
+        private IPlotController? defaultController;
 
         /// <summary>
         /// Indicates whether the <see cref="PlotViewBase"/> was in the visual tree the last time <see cref="Render"/> was called.
@@ -78,12 +78,12 @@ namespace OxyPlot.Wpf
         /// <summary>
         /// The overlays.
         /// </summary>
-        private Canvas overlays;
+        private Canvas? overlays;
 
         /// <summary>
         /// The zoom control.
         /// </summary>
-        private ContentControl zoomControl;
+        private ContentControl? zoomControl;
 
         /// <summary>
         /// Initializes static members of the <see cref="PlotViewBase" /> class.
@@ -118,10 +118,10 @@ namespace OxyPlot.Wpf
         /// Gets the actual model.
         /// </summary>
         /// <value>The actual model.</value>
-        public PlotModel ActualModel { get; private set; }
+        public PlotModel? ActualModel { get; private set; }
 
         /// <inheritdoc/>
-        Model IView.ActualModel => this.ActualModel;
+        Model? IView.ActualModel => this.ActualModel;
 
         /// <summary>
         /// Gets the coordinates of the client area of the view.
@@ -141,7 +141,10 @@ namespace OxyPlot.Wpf
         {
             if (this.currentTracker != null)
             {
-                this.overlays.Children.Remove(this.currentTracker);
+                if (overlays != null)
+                {
+                    this.overlays.Children.Remove(this.currentTracker);
+                }
                 this.currentTracker = null;
                 this.currentTrackerTemplate = null;
             }
@@ -152,7 +155,10 @@ namespace OxyPlot.Wpf
         /// </summary>
         public void HideZoomRectangle()
         {
-            this.zoomControl.Visibility = Visibility.Collapsed;
+            if (zoomControl != null)
+            {
+                this.zoomControl.Visibility = Visibility.Collapsed;
+            }
         }
 
         /// <summary>
@@ -290,7 +296,10 @@ namespace OxyPlot.Wpf
                 this.HideTracker();
 
                 var tracker = new ContentControl { Template = trackerTemplate };
-                this.overlays.Children.Add(tracker);
+                if (overlays != null)
+                {
+                    this.overlays.Children.Add(tracker);
+                } 
                 this.currentTracker = tracker;
                 this.currentTrackerTemplate = trackerTemplate;
             }
@@ -305,12 +314,17 @@ namespace OxyPlot.Wpf
         /// Shows the zoom rectangle.
         /// </summary>
         /// <param name="r">The rectangle.</param>
-        public void ShowZoomRectangle(OxyRect r)
+        public void ShowZoomRectangle(OxyRect rectangle)
         {
-            this.zoomControl.Width = r.Width;
-            this.zoomControl.Height = r.Height;
-            Canvas.SetLeft(this.zoomControl, r.Left);
-            Canvas.SetTop(this.zoomControl, r.Top);
+            if (zoomControl == null)
+            {
+                return;
+            }
+
+            this.zoomControl.Width = rectangle.Width;
+            this.zoomControl.Height = rectangle.Height;
+            Canvas.SetLeft(this.zoomControl, rectangle.Left);
+            Canvas.SetTop(this.zoomControl, rectangle.Top);
             this.zoomControl.Template = this.ZoomRectangleTemplate;
             this.zoomControl.Visibility = Visibility.Visible;
         }
@@ -390,7 +404,7 @@ namespace OxyPlot.Wpf
             var dpiScale = this.UpdateDpi();
             this.ClearBackground();
 
-            if (this.ActualModel != null)
+            if (this.ActualModel != null && plotPresenter != null)
             {
                 // round width and height to full device pixels
                 var width = ((int)(this.plotPresenter.ActualWidth * dpiScale)) / dpiScale;
@@ -470,7 +484,7 @@ namespace OxyPlot.Wpf
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="e">The event args.</param>
-        private void OnLayoutUpdated(object sender, EventArgs e)
+        private void OnLayoutUpdated(object? sender, EventArgs e)
         {
             // if we were not in the visual tree the last time we tried to render but are now, we have to render
             if (!this.isInVisualTree && this.IsInVisualTree())

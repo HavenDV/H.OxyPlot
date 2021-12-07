@@ -49,7 +49,7 @@ namespace OxyPlot.Windows
         /// <summary>
         /// The current tool tip
         /// </summary>
-        private string currentToolTip;
+        private string currentToolTip = string.Empty;
 
         /// <summary>
         /// The clip rectangle.
@@ -67,6 +67,8 @@ namespace OxyPlot.Windows
         /// <param name="canvas">The canvas.</param>
         public RenderContext(Canvas canvas)
         {
+            canvas = canvas ?? throw new ArgumentNullException(nameof(canvas));
+
             this.canvas = canvas;
             this.Width = canvas.ActualWidth;
             this.Height = canvas.ActualHeight;
@@ -83,13 +85,7 @@ namespace OxyPlot.Windows
         /// Gets a value indicating whether to paint the background.
         /// </summary>
         /// <value><c>true</c> if the background should be painted; otherwise, <c>false</c>.</value>
-        public bool PaintBackground
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public bool PaintBackground { get; }
 
         /// <summary>
         /// Gets the width.
@@ -108,11 +104,11 @@ namespace OxyPlot.Windows
         /// <summary>
         /// Draws an ellipse.
         /// </summary>
-        /// <param name="rect">The rectangle.</param>
+        /// <param name="extents">The rectangle.</param>
         /// <param name="fill">The fill color.</param>
         /// <param name="stroke">The stroke color.</param>
         /// <param name="thickness">The thickness.</param>
-        public void DrawEllipse(OxyRect rect, OxyColor fill, OxyColor stroke, double thickness, EdgeRenderingMode edgeRenderingMode)
+        public void DrawEllipse(OxyRect extents, OxyColor fill, OxyColor stroke, double thickness, EdgeRenderingMode edgeRenderingMode)
         {
             var el = new Ellipse
             {
@@ -130,11 +126,11 @@ namespace OxyPlot.Windows
                 el.Fill = new SolidColorBrush(fill.ToColor());
             }
 
-            el.Width = rect.Width;
-            el.Height = rect.Height;
-            Canvas.SetLeft(el, rect.Left);
-            Canvas.SetTop(el, rect.Top);
-            this.Add(el, rect.Left, rect.Top);
+            el.Width = extents.Width;
+            el.Height = extents.Height;
+            Canvas.SetLeft(el, extents.Left);
+            Canvas.SetTop(el, extents.Top);
+            this.Add(el, extents.Left, extents.Top);
         }
 
         /// <summary>
@@ -145,8 +141,10 @@ namespace OxyPlot.Windows
         /// <param name="fill">The fill color.</param>
         /// <param name="stroke">The stroke color.</param>
         /// <param name="thickness">The stroke thickness.</param>
-        public void DrawEllipses(IList<OxyRect> rectangles, OxyColor fill, OxyColor stroke, double thickness, EdgeRenderingMode edgeRenderingMode)
+        public void DrawEllipses(IList<OxyRect> extents, OxyColor fill, OxyColor stroke, double thickness, EdgeRenderingMode edgeRenderingMode)
         {
+            extents = extents ?? throw new ArgumentNullException(nameof(extents));
+
             var path = new Path
             {
                 CompositeMode = ElementCompositeMode.SourceOver
@@ -159,7 +157,7 @@ namespace OxyPlot.Windows
             }
 
             var gg = new GeometryGroup { FillRule = FillRule.Nonzero };
-            foreach (var rect in rectangles)
+            foreach (var rect in extents)
             {
                 gg.Children.Add(
                     new EllipseGeometry
@@ -188,9 +186,11 @@ namespace OxyPlot.Windows
             OxyColor stroke,
             double thickness,
             EdgeRenderingMode edgeRenderingMode,
-            double[] dashArray = null,
+            double[]? dashArray = null,
             LineJoin lineJoin = LineJoin.Miter)
         {
+            points = points ?? throw new ArgumentNullException(nameof(points));
+
             var aliased = false;
             var e = new Polyline
             {
@@ -225,9 +225,11 @@ namespace OxyPlot.Windows
             OxyColor stroke,
             double thickness,
             EdgeRenderingMode edgeRenderingMode,
-            double[] dashArray = null,
+            double[]? dashArray = null,
             LineJoin lineJoin = LineJoin.Miter)
         {
+            points = points ?? throw new ArgumentNullException(nameof(points));
+
             var aliased = false;
             var path = new Path
             {
@@ -275,9 +277,11 @@ namespace OxyPlot.Windows
             OxyColor stroke,
             double thickness,
             EdgeRenderingMode edgeRenderingMode,
-            double[] dashArray = null,
+            double[]? dashArray = null,
             LineJoin lineJoin = LineJoin.Miter)
         {
+            points = points ?? throw new ArgumentNullException(nameof(points));
+
             var aliased = false;
             var po = new Polygon
             {
@@ -319,9 +323,11 @@ namespace OxyPlot.Windows
             OxyColor stroke,
             double thickness,
             EdgeRenderingMode edgeRenderingMode,
-            double[] dashArray = null,
+            double[]? dashArray = null,
             LineJoin lineJoin = LineJoin.Miter)
         {
+            polygons = polygons ?? throw new ArgumentNullException(nameof(polygons));
+
             var aliased = false;
             var path = new Path
             {
@@ -362,11 +368,11 @@ namespace OxyPlot.Windows
         /// <summary>
         /// Draws the rectangle.
         /// </summary>
-        /// <param name="rect">The rectangle.</param>
+        /// <param name="rectangle">The rectangle.</param>
         /// <param name="fill">The fill color.</param>
         /// <param name="stroke">The stroke color.</param>
         /// <param name="thickness">The stroke thickness.</param>
-        public void DrawRectangle(OxyRect rect, OxyColor fill, OxyColor stroke, double thickness, EdgeRenderingMode edgeRenderingMode)
+        public void DrawRectangle(OxyRect rectangle, OxyColor fill, OxyColor stroke, double thickness, EdgeRenderingMode edgeRenderingMode)
         {
             var el = new Rectangle
             {
@@ -384,11 +390,11 @@ namespace OxyPlot.Windows
                 el.Fill = new SolidColorBrush(fill.ToColor());
             }
 
-            el.Width = rect.Width;
-            el.Height = rect.Height;
-            Canvas.SetLeft(el, rect.Left);
-            Canvas.SetTop(el, rect.Top);
-            this.Add(el, rect.Left, rect.Top);
+            el.Width = rectangle.Width;
+            el.Height = rectangle.Height;
+            Canvas.SetLeft(el, rectangle.Left);
+            Canvas.SetTop(el, rectangle.Top);
+            this.Add(el, rectangle.Left, rectangle.Top);
         }
 
         /// <summary>
@@ -401,6 +407,8 @@ namespace OxyPlot.Windows
         /// <param name="thickness">The stroke thickness.</param>
         public void DrawRectangles(IList<OxyRect> rectangles, OxyColor fill, OxyColor stroke, double thickness, EdgeRenderingMode edgeRenderingMode)
         {
+            rectangles = rectangles ?? throw new ArgumentNullException(nameof(rectangles));
+
             var path = new Path
             {
                 CompositeMode = ElementCompositeMode.SourceOver
@@ -439,7 +447,7 @@ namespace OxyPlot.Windows
             ScreenPoint p,
             string text,
             OxyColor fill,
-            string fontFamily = null,
+            string? fontFamily = null,
             double fontSize = 10,
             double fontWeight = 400,
             double rotation = 0,
@@ -582,7 +590,7 @@ namespace OxyPlot.Windows
         /// <param name="destHeight">The height of the drawn image.</param>
         /// <param name="opacity">The opacity.</param>
         /// <param name="interpolate">interpolate if set to <c>true</c>.</param>
-        public void DrawImage(
+        public async void DrawImage(
             OxyImage source,
             double srcX,
             double srcY,
@@ -601,7 +609,7 @@ namespace OxyPlot.Windows
             }
 
             var image = new Image();
-            var bmp = this.GetImageSource(source);
+            var bmp = await GetImageSource(source).ConfigureAwait(true);
 
             if (srcX.Equals(0) && srcY.Equals(0) && srcWidth.Equals(bmp.PixelWidth) && srcHeight.Equals(bmp.PixelHeight))
             {
@@ -732,8 +740,7 @@ namespace OxyPlot.Windows
         /// <returns>The brush.</returns>
         private Brush GetCachedBrush(OxyColor stroke)
         {
-            Brush brush;
-            if (!this.brushCache.TryGetValue(stroke, out brush))
+            if (!this.brushCache.TryGetValue(stroke, out var brush))
             {
                 brush = new SolidColorBrush(stroke.ToColor());
                 this.brushCache.Add(stroke, brush);
@@ -756,7 +763,7 @@ namespace OxyPlot.Windows
             OxyColor stroke,
             double thickness,
             LineJoin lineJoin = LineJoin.Miter,
-            IEnumerable<double> dashArray = null,
+            IEnumerable<double>? dashArray = null,
             bool aliased = false)
         {
             if (stroke.IsVisible() && thickness > 0)
@@ -805,26 +812,22 @@ namespace OxyPlot.Windows
         /// </summary>
         /// <param name="image">The image.</param>
         /// <returns>The bitmap source.</returns>
-        private BitmapSource GetImageSource(OxyImage image)
+        private async Task<BitmapSource> GetImageSource(OxyImage image)
         {
-            if (image == null)
-            {
-                return null;
-            }
+            image = image ?? throw new ArgumentNullException(nameof(image));
 
             if (!this.imagesInUse.Contains(image))
             {
                 this.imagesInUse.Add(image);
             }
 
-            BitmapSource src;
-            if (this.imageCache.TryGetValue(image, out src))
+            if (this.imageCache.TryGetValue(image, out var src))
             {
                 return src;
             }
 
             var bitmapImage = new BitmapImage();
-            var imageStream = ConvertToRandomAccessStream(image.GetData()).GetAwaiter().GetResult();
+            using var imageStream = await ConvertToRandomAccessStream(image.GetData()).ConfigureAwait(true);
             bitmapImage.SetSource(imageStream);
             this.imageCache.Add(image, bitmapImage);
             return bitmapImage;
