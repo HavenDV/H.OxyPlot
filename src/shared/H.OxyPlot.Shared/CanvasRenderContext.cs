@@ -989,7 +989,6 @@ namespace OxyPlot
         {
             shape = shape ?? throw new ArgumentNullException(nameof(shape));
 
-#if HAS_WPF
             if (!stroke.IsUndefined() && thickness > 0)
             {
                 shape.Stroke = this.GetCachedBrush(stroke);
@@ -1010,8 +1009,21 @@ namespace OxyPlot
 
                 if (dashArray != null)
                 {
+#if HAS_WPF
                     shape.StrokeDashArray = new DoubleCollection(dashArray);
+#else
+                    shape.StrokeDashArray = new DoubleCollection();
+                    foreach (double value in dashArray)
+                    {
+                        shape.StrokeDashArray.Add(value);
+                    }
+#endif
                     shape.StrokeDashOffset = dashOffset;
+                }
+
+                if (aliased)
+                {
+                    //shape.UseLayoutRounding = aliased;
                 }
             }
             else
@@ -1019,60 +1031,14 @@ namespace OxyPlot
                 shape.StrokeThickness = 0;
             }
 
+#if HAS_WPF
             if (edgeRenderingMode == EdgeRenderingMode.PreferSpeed)
             {
                 shape.SetValue(RenderOptions.EdgeModeProperty, EdgeMode.Aliased);
                 shape.SnapsToDevicePixels = true;
             }
-#else
-            if (stroke.IsVisible() && thickness > 0)
-            {
-                shape.Stroke = this.GetCachedBrush(stroke);
-
-                switch (lineJoin)
-                {
-                    case LineJoin.Round:
-                        shape.StrokeLineJoin = PenLineJoin.Round;
-                        break;
-                    case LineJoin.Bevel:
-                        shape.StrokeLineJoin = PenLineJoin.Bevel;
-                        break;
-
-                        // The default StrokeLineJoin is Miter
-                }
-
-                shape.StrokeThickness = thickness;
-
-                if (dashArray != null)
-                {
-                    shape.StrokeDashArray = CreateDashArrayCollection(dashArray);
-                }
-
-                if (aliased)
-                {
-                    // shape.UseLayoutRounding = aliased;
-                }
-            }
 #endif
         }
-
-#if !HAS_WPF
-        /// <summary>
-        /// Creates the dash array collection.
-        /// </summary>
-        /// <param name="dashArray">The dash array.</param>
-        /// <returns>A DoubleCollection.</returns>
-        private static DoubleCollection CreateDashArrayCollection(IEnumerable<double> dashArray)
-        {
-            var dac = new DoubleCollection();
-            foreach (double v in dashArray)
-            {
-                dac.Add(v);
-            }
-
-            return dac;
-        }
-#endif
 
         /// <summary>
         /// Gets the bitmap source.
