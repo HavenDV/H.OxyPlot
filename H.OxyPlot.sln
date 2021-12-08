@@ -81,6 +81,7 @@ Global
 		src\shared\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{e1d3d9c7-de26-4ff5-ac1f-136a2820e59b}*SharedItemsImports = 5
 		src\shared\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems*{e1d3d9c7-de26-4ff5-ac1f-136a2820e59b}*SharedItemsImports = 5
 		src\shared\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{f497b163-e46e-4ea6-9e41-bb0c25ca6272}*SharedItemsImports = 13
+		src\shared\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{f5eb3a73-1d93-42f7-9757-26b486d74592}*SharedItemsImports = 5
 		src\shared\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{fcfca672-7669-4aac-a76d-6a12e40f2eab}*SharedItemsImports = 5
 		src\shared\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems*{fcfca672-7669-4aac-a76d-6a12e40f2eab}*SharedItemsImports = 5
 	EndGlobalSection

@@ -10,7 +10,7 @@
 namespace OxyPlot;
 
 /// <summary>
-/// Defines additional <see cref="Colors" />.
+/// Defines additional Colors.
 /// </summary>
 public static class MoreColors
 {
