@@ -9,6 +9,7 @@
     <Import_RootNamespace>H.OxyPlot.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)CanvasRenderContext.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\OxyColorConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\ThicknessConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ExporterExtensions.cs" />
@@ -16,14 +17,21 @@
     <Compile Include="$(MSBuildThisFileDirectory)MoreColors.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlotCommands.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlotView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PlotView.Export.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlotViewBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlotViewBase.Events.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlotViewBase.Properties.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)RenderContext.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PngExporter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SvgExporter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TextMeasurementMethod.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Tracker\TrackerControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Tracker\TrackerDefinition.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\ConverterExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Keyboard.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\MouseButtonHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\PixelLayout.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)XamlExporter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)XamlRenderContext.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)XpsExporter.cs" />
   </ItemGroup>
 </Project>

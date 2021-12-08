@@ -9,12 +9,12 @@
 
 using System.Windows.Input;
 
-namespace OxyPlot.Wpf;
+namespace OxyPlot;
 
 /// <summary>
 /// Provides a standard set of commands for the <see cref="PlotViewBase" /> control.
 /// </summary>
-public static class PlotCommands
+public static class PlotUICommands
 {
 #if HAS_WPF
     /// <summary>

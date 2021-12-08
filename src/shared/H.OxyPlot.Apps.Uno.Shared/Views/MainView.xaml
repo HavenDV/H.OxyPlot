@@ -5,7 +5,7 @@
     xmlns:viewModels="using:H.OxyPlot.Apps.ViewModels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:windows="using:OxyPlot.Windows"
+    xmlns:oxy="using:OxyPlot"
     mc:Ignorable="d"
     >
     <Page.DataContext>
@@ -13,6 +13,6 @@
     </Page.DataContext>
     
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <windows:PlotView Model="{Binding Model}"/>
+        <oxy:PlotView Model="{Binding Model}"/>
     </Grid>
 </Page>

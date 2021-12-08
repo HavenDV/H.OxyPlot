@@ -6,7 +6,7 @@
 
 using OxyPlot.Utilities;
 
-namespace OxyPlot.Wpf
+namespace OxyPlot
 {
 
     /// <summary>

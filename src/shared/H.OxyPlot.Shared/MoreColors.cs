@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace OxyPlot.Wpf;
+namespace OxyPlot;
 
 /// <summary>
 /// Defines additional <see cref="Colors" />.

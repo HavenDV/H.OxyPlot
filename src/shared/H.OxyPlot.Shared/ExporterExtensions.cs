@@ -9,7 +9,7 @@
 
 using System.IO;
 
-namespace OxyPlot.Wpf;
+namespace OxyPlot;
 
 /// <summary>
 /// Provides extension methods for exporters.

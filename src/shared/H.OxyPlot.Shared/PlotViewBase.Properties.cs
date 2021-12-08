@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace OxyPlot.Wpf
+namespace OxyPlot
 {
     /// <summary>
     /// Base class for WPF PlotView implementations.
