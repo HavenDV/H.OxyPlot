@@ -234,10 +234,10 @@ namespace OxyPlot
             streamGeometry.Freeze();
             path.Data = streamGeometry;
 #else
-            var aliased = false;
+            var aliased = edgeRenderingMode == EdgeRenderingMode.PreferSpeed;
             var e = this.CreateAndAdd<Polyline>();
 
-            this.SetStroke(e, stroke, thickness, edgeRenderingMode, lineJoin, dashArray, 0, aliased);
+            this.SetStroke(e, stroke, thickness, edgeRenderingMode, lineJoin, dashArray, 0);
 
             var pc = new PointCollection();
             foreach (var p in points)
@@ -285,7 +285,7 @@ namespace OxyPlot
             streamGeometry.Freeze();
             path.Data = streamGeometry;
 #else
-            var aliased = false;
+            var aliased = edgeRenderingMode == EdgeRenderingMode.PreferSpeed;
             var pg = new PathGeometry();
             for (int i = 0; i + 1 < points.Count; i += 2)
             {
@@ -326,9 +326,9 @@ namespace OxyPlot
             this.DrawPolygons(new[] { points }, fill, stroke, thickness, edgeRenderingMode, dashArray, lineJoin);
 #else
             var po = this.CreateAndAdd<Polygon>();
-            var aliased = false;
+            var aliased = edgeRenderingMode == EdgeRenderingMode.PreferSpeed;
 
-            this.SetStroke(po, stroke, thickness, edgeRenderingMode, lineJoin, dashArray, 0, aliased);
+            this.SetStroke(po, stroke, thickness, edgeRenderingMode, lineJoin, dashArray);
 
             if (fill.IsVisible())
             {
@@ -389,7 +389,7 @@ namespace OxyPlot
             streamGeometry.Freeze();
             path.Data = streamGeometry;
 #else
-            var aliased = false;
+            var aliased = edgeRenderingMode == EdgeRenderingMode.PreferSpeed;
             if (fill.IsVisible())
             {
                 path.Fill = this.GetCachedBrush(fill);
@@ -954,7 +954,6 @@ namespace OxyPlot
         /// <param name="lineJoin">The line join.</param>
         /// <param name="dashArray">The dash array. Use <c>null</c> to get a solid line.</param>
         /// <param name="dashOffset">The dash offset.</param>
-        /// <param name="aliased">aliased if set to <c>true</c>.</param>
         protected void SetStroke(
             Shape shape,
             OxyColor stroke,
@@ -962,8 +961,7 @@ namespace OxyPlot
             EdgeRenderingMode edgeRenderingMode,
             LineJoin lineJoin = LineJoin.Miter,
             IEnumerable<double>? dashArray = null,
-            double dashOffset = 0,
-            bool aliased = false)
+            double dashOffset = 0)
         {
             shape = shape ?? throw new ArgumentNullException(nameof(shape));
 
@@ -998,24 +996,21 @@ namespace OxyPlot
 #endif
                     shape.StrokeDashOffset = dashOffset;
                 }
-
-                if (aliased)
-                {
-                    //shape.UseLayoutRounding = aliased;
-                }
             }
             else
             {
                 shape.StrokeThickness = 0;
             }
 
-#if HAS_WPF
             if (edgeRenderingMode == EdgeRenderingMode.PreferSpeed)
             {
+#if HAS_WPF
                 shape.SetValue(RenderOptions.EdgeModeProperty, EdgeMode.Aliased);
                 shape.SnapsToDevicePixels = true;
-            }
+#else
+                shape.UseLayoutRounding = true;
 #endif
+            }
         }
 
         /// <summary>
