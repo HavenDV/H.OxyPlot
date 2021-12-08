@@ -65,12 +65,12 @@ namespace OxyPlot
         /// </summary>
         private IPlotController? defaultController;
 
-#if HAS_WPF
         /// <summary>
         /// Indicates whether the <see cref="PlotViewBase"/> was in the visual tree the last time <see cref="Render"/> was called.
         /// </summary>
         private bool isInVisualTree;
 
+#if HAS_WPF
         /// <summary>
         /// The mouse down point.
         /// </summary>
@@ -483,11 +483,9 @@ namespace OxyPlot
         /// </summary>
         protected void Render()
         {
-            if (this.plotPresenter == null || this.renderContext == null
-#if HAS_WPF
-                || !(this.isInVisualTree = this.IsInVisualTree())
-#endif
-                )
+            if (this.plotPresenter == null || 
+                this.renderContext == null || 
+                !(this.isInVisualTree = this.IsInVisualTree()))
             {
                 return;
             }
@@ -572,7 +570,6 @@ namespace OxyPlot
             }
         }
 
-#if HAS_WPF
         /// <summary>
         /// Gets a value indicating whether the <see cref="PlotViewBase"/> is connected to the visual tree.
         /// </summary>
@@ -582,6 +579,7 @@ namespace OxyPlot
             DependencyObject dpObject = this;
             while ((dpObject = VisualTreeHelper.GetParent(dpObject)) != null)
             {
+#if HAS_WPF
                 if (dpObject is Window)
                 {
                     return true;
@@ -593,11 +591,17 @@ namespace OxyPlot
                 {
                     return true;
                 }
+#else
+                if (dpObject is Page ||
+                    dpObject is Popup)
+                {
+                    return true;
+                }
+#endif
             }
 
             return false;
         }
-#endif
 
         /// <summary>
         /// This event fires every time Layout updates the layout of the trees associated with current Dispatcher.
@@ -606,16 +610,12 @@ namespace OxyPlot
         /// <param name="e">The event args.</param>
         private void OnLayoutUpdated(object? sender, EventArgs e)
         {
-#if HAS_WPF
             // if we were not in the visual tree the last time we tried to render but are now, we have to render
             if (!this.isInVisualTree && 
                 this.IsInVisualTree())
             {
                 this.Render();
             }
-#else
-            this.Render();
-#endif
         }
     }
 }
