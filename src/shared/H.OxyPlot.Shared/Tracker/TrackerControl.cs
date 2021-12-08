@@ -155,7 +155,7 @@ namespace OxyPlot.Controls
         /// </summary>
         private Line? verticalLine;
 
-#if WPF
+#if HAS_WPF
         /// <summary>
         /// Initializes static members of the <see cref = "TrackerControl" /> class.
         /// </summary>
@@ -165,9 +165,7 @@ namespace OxyPlot.Controls
                 typeof(TrackerControl), new FrameworkPropertyMetadata(typeof(TrackerControl)));
         }
 
-#endif
-
-#if SILVERLIGHT || NETFX_CORE
+#else
         /// <summary>
         /// Initializes a new instance of the <see cref="TrackerControl" /> class.
         /// </summary>
