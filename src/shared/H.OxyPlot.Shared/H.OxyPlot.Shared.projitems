@@ -18,8 +18,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)PlotCommands.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlotView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlotView.Export.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PlotViewBase.ManipulationEvents.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PlotViewBase.PointerEvents.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlotViewBase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)PlotViewBase.Events.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PlotViewBase.KeyboardEvents.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlotViewBase.Properties.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PngExporter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SvgExporter.cs" />
