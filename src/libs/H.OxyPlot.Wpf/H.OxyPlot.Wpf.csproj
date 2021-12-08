@@ -7,6 +7,23 @@
     <NoWarn>$(NoWarn);WPF0013;WPF0042</NoWarn>
   </PropertyGroup>
 
+  <ItemGroup Label="AssemblyInfo">
+    <AssemblyAttribute Include="System.Windows.ThemeInfo">
+      <_Parameter1>System.Windows.ResourceDictionaryLocation.None</_Parameter1>
+      <_Parameter1_IsLiteral>true</_Parameter1_IsLiteral>
+      <_Parameter2>System.Windows.ResourceDictionaryLocation.SourceAssembly</_Parameter2>
+      <_Parameter2_IsLiteral>true</_Parameter2_IsLiteral>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Windows.Markup.XmlnsPrefix">
+      <_Parameter1>http://oxyplot.org/</_Parameter1>
+      <_Parameter2>oxy</_Parameter2>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Windows.Markup.XmlnsDefinition">
+      <_Parameter1>http://oxyplot.org/</_Parameter1>
+      <_Parameter2>OxyPlot</_Parameter2>
+    </AssemblyAttribute>
+  </ItemGroup>
+
   <ItemGroup Condition=" '$(TargetFramework)' == 'net4.5.1' ">
     <Reference Include="ReachFramework" />
     <Reference Include="System.Printing" />
@@ -23,8 +40,7 @@
     </PackageReference>
   </ItemGroup>-->
 
-  <ItemGroup>
-    <ProjectReference Include="..\H.OxyPlot.Wpf.Shared\H.OxyPlot.Wpf.Shared.csproj" />
-  </ItemGroup>
+  <Import Project="..\..\shared\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems" Label="Shared" />
+  <Import Project="..\..\shared\H.OxyPlot.Wpf.Shared\H.OxyPlot.Wpf.Shared.projitems" Label="Shared" />
 
 </Project>

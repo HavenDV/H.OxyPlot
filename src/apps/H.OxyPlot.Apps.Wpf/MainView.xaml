@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:H.OxyPlot.Apps.ViewModels"
-    xmlns:windows="http://oxyplot.org/wpf"
+    xmlns:oxy="http://oxyplot.org/"
     mc:Ignorable="d"
     Title="MainWindow"
     Width="800"
@@ -16,6 +16,6 @@
     </Window.DataContext>
     
     <Grid>
-        <windows:PlotView Model="{Binding Model}"/>
+        <oxy:PlotView Model="{Binding Model}"/>
     </Grid>
 </Window>
