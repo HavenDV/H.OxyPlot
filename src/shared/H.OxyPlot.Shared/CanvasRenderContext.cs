@@ -154,8 +154,8 @@ namespace OxyPlot
             }
 
             var path = this.CreateAndAdd<Path>();
+            SetStroke(path, stroke, thickness, edgeRenderingMode);
 #if HAS_WPF
-            this.SetStroke(path, stroke, thickness, edgeRenderingMode);
             if (!fill.IsUndefined())
             {
                 path.Fill = this.GetCachedBrush(fill);
@@ -179,7 +179,6 @@ namespace OxyPlot
 
             geometry.Freeze();
 #else
-            this.SetStroke(path, stroke, thickness);
             if (fill.IsVisible())
             {
                 path.Fill = this.GetCachedBrush(fill);
@@ -238,7 +237,7 @@ namespace OxyPlot
             var aliased = false;
             var e = this.CreateAndAdd<Polyline>();
 
-            this.SetStroke(e, stroke, thickness, lineJoin, dashArray, aliased);
+            this.SetStroke(e, stroke, thickness, edgeRenderingMode, lineJoin, dashArray, 0, aliased);
 
             var pc = new PointCollection();
             foreach (var p in points)
@@ -266,10 +265,9 @@ namespace OxyPlot
                 return;
             }
 
-#if HAS_WPF
             var path = this.CreateAndAdd<Path>();
             this.SetStroke(path, stroke, thickness, edgeRenderingMode, lineJoin, dashArray, 0);
-
+#if HAS_WPF
             var actualStrokeThickness = this.GetActualStrokeThickness(thickness, edgeRenderingMode);
             var actualPoints = this.GetActualPoints(points, actualStrokeThickness, edgeRenderingMode);
             var firstPoint = GetFirstAndRest(actualPoints, out var otherPoints);
@@ -288,9 +286,6 @@ namespace OxyPlot
             path.Data = streamGeometry;
 #else
             var aliased = false;
-            var path = this.CreateAndAdd<Path>();
-
-            this.SetStroke(path, stroke, thickness, lineJoin, dashArray, aliased);
             var pg = new PathGeometry();
             for (int i = 0; i + 1 < points.Count; i += 2)
             {
@@ -333,7 +328,7 @@ namespace OxyPlot
             var po = this.CreateAndAdd<Polygon>();
             var aliased = false;
 
-            this.SetStroke(po, stroke, thickness, lineJoin, dashArray, aliased);
+            this.SetStroke(po, stroke, thickness, edgeRenderingMode, lineJoin, dashArray, 0, aliased);
 
             if (fill.IsVisible())
             {
@@ -367,9 +362,9 @@ namespace OxyPlot
                 return;
             }
 
-#if HAS_WPF
             var path = this.CreateAndAdd<Path>();
             this.SetStroke(path, stroke, thickness, edgeRenderingMode, lineJoin, dashArray, 0);
+#if HAS_WPF
             if (!fill.IsUndefined())
             {
                 path.Fill = this.GetCachedBrush(fill);
@@ -395,9 +390,6 @@ namespace OxyPlot
             path.Data = streamGeometry;
 #else
             var aliased = false;
-            var path = this.CreateAndAdd<Path>();
-
-            this.SetStroke(path, stroke, thickness, lineJoin, dashArray, aliased);
             if (fill.IsVisible())
             {
                 path.Fill = this.GetCachedBrush(fill);
@@ -464,9 +456,9 @@ namespace OxyPlot
                 return;
             }
 
-#if HAS_WPF
             var path = this.CreateAndAdd<Path>();
-            this.SetStroke(path, stroke, thickness, edgeRenderingMode);
+            SetStroke(path, stroke, thickness, edgeRenderingMode);
+#if HAS_WPF
             if (!fill.IsUndefined())
             {
                 path.Fill = this.GetCachedBrush(fill);
@@ -486,9 +478,6 @@ namespace OxyPlot
             streamGeometry.Freeze();
             path.Data = streamGeometry;
 #else
-            var path = this.CreateAndAdd<Path>();
-
-            this.SetStroke(path, stroke, thickness);
             if (fill.IsVisible())
             {
                 path.Fill = this.GetCachedBrush(fill);
@@ -537,8 +526,6 @@ namespace OxyPlot
                 tb.FontWeight = GetFontWeight(fontWeight);
             }
 #if HAS_WPF
-
-
             TextOptions.SetTextFormattingMode(tb, this.TextFormattingMode);
 
             double dx = 0;
@@ -979,7 +966,6 @@ namespace OxyPlot
             return ff;
         }
 
-#if HAS_WPF
         /// <summary>
         /// Sets the stroke properties of the specified shape object.
         /// </summary>
@@ -990,6 +976,7 @@ namespace OxyPlot
         /// <param name="lineJoin">The line join.</param>
         /// <param name="dashArray">The dash array. Use <c>null</c> to get a solid line.</param>
         /// <param name="dashOffset">The dash offset.</param>
+        /// <param name="aliased">aliased if set to <c>true</c>.</param>
         protected void SetStroke(
             Shape shape,
             OxyColor stroke,
@@ -997,10 +984,12 @@ namespace OxyPlot
             EdgeRenderingMode edgeRenderingMode,
             LineJoin lineJoin = LineJoin.Miter,
             IEnumerable<double>? dashArray = null,
-            double dashOffset = 0)
+            double dashOffset = 0,
+            bool aliased = false)
         {
             shape = shape ?? throw new ArgumentNullException(nameof(shape));
 
+#if HAS_WPF
             if (!stroke.IsUndefined() && thickness > 0)
             {
                 shape.Stroke = this.GetCachedBrush(stroke);
@@ -1035,25 +1024,7 @@ namespace OxyPlot
                 shape.SetValue(RenderOptions.EdgeModeProperty, EdgeMode.Aliased);
                 shape.SnapsToDevicePixels = true;
             }
-        }
 #else
-        /// <summary>
-        /// Sets the stroke of the specified shape.
-        /// </summary>
-        /// <param name="shape">The shape.</param>
-        /// <param name="stroke">The stroke.</param>
-        /// <param name="thickness">The thickness.</param>
-        /// <param name="lineJoin">The line join.</param>
-        /// <param name="dashArray">The dash array.</param>
-        /// <param name="aliased">aliased if set to <c>true</c>.</param>
-        private void SetStroke(
-            Shape shape,
-            OxyColor stroke,
-            double thickness,
-            LineJoin lineJoin = LineJoin.Miter,
-            IEnumerable<double>? dashArray = null,
-            bool aliased = false)
-        {
             if (stroke.IsVisible() && thickness > 0)
             {
                 shape.Stroke = this.GetCachedBrush(stroke);
@@ -1082,8 +1053,10 @@ namespace OxyPlot
                     // shape.UseLayoutRounding = aliased;
                 }
             }
+#endif
         }
 
+#if !HAS_WPF
         /// <summary>
         /// Creates the dash array collection.
         /// </summary>
