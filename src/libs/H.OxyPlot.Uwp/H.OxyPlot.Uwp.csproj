@@ -3,9 +3,11 @@
   <PropertyGroup>
     <TargetFrameworks>uap10.0.18362</TargetFrameworks>
     <DefineConstants>$(DefineConstants);HAS_UWP</DefineConstants>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI" Version="7.1.2" />
     <PackageReference Include="OxyPlot.Core" Version="2.1.0" />
   </ItemGroup>
 

@@ -11,8 +11,14 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Converters\OxyColorConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\ThicknessConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ExporterExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GlobalUsings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MoreColors.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PlotCommands.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlotView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PlotViewBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PlotViewBase.Events.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PlotViewBase.Properties.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RenderContext.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Tracker\TrackerControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Tracker\TrackerDefinition.cs" />

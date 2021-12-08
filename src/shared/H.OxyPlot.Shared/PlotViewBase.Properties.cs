@@ -6,10 +6,6 @@
 
 namespace OxyPlot.Wpf
 {
-    using System.Windows;
-    using System.Windows.Controls;
-    using System.Windows.Input;
-
     /// <summary>
     /// Base class for WPF PlotView implementations.
     /// </summary>
@@ -19,7 +15,7 @@ namespace OxyPlot.Wpf
         /// Identifies the <see cref="Controller"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty ControllerProperty =
-            DependencyProperty.Register(nameof(Controller), typeof(IPlotController), typeof(PlotViewBase));
+            DependencyProperty.Register(nameof(Controller), typeof(IPlotController), typeof(PlotViewBase), new PropertyMetadata(null));
 
         /// <summary>
         /// Identifies the <see cref="DefaultTrackerTemplate"/> dependency property.
@@ -51,14 +47,31 @@ namespace OxyPlot.Wpf
         /// </summary>
         public static readonly DependencyProperty ZoomHorizontalCursorProperty =
             DependencyProperty.Register(
-                nameof(ZoomHorizontalCursor), typeof(Cursor), typeof(PlotViewBase), new PropertyMetadata(Cursors.SizeWE));
+                nameof(ZoomHorizontalCursor),
+                typeof(Cursor),
+                typeof(PlotViewBase),
+#if HAS_WPF
+                new PropertyMetadata(Cursors.SizeWE)
+#else
+                new PropertyMetadata(Cursors.SizeWestEast)
+#endif
+                );
 
         /// <summary>
         /// Identifies the <see cref="ZoomRectangleCursor"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty ZoomRectangleCursorProperty =
             DependencyProperty.Register(
-                nameof(ZoomRectangleCursor), typeof(Cursor), typeof(PlotViewBase), new PropertyMetadata(Cursors.SizeNWSE));
+                nameof(ZoomRectangleCursor),
+                typeof(Cursor),
+                typeof(PlotViewBase),
+
+#if HAS_WPF
+                new PropertyMetadata(Cursors.SizeNWSE)
+#else
+                new PropertyMetadata(Cursors.SizeNorthwestSoutheast)
+#endif
+                );
 
         /// <summary>
         /// Identifies the <see cref="ZoomRectangleTemplate"/> dependency property.
@@ -72,7 +85,15 @@ namespace OxyPlot.Wpf
         /// </summary>
         public static readonly DependencyProperty ZoomVerticalCursorProperty =
             DependencyProperty.Register(
-                nameof(ZoomVerticalCursor), typeof(Cursor), typeof(PlotViewBase), new PropertyMetadata(Cursors.SizeNS));
+                nameof(ZoomVerticalCursor),
+                typeof(Cursor),
+                typeof(PlotViewBase),
+#if HAS_WPF
+                new PropertyMetadata(Cursors.SizeNS)
+#else
+                new PropertyMetadata(Cursors.SizeNorthSouth)
+#endif
+                );
 
         /// <summary>
         /// Gets or sets the Plot controller.

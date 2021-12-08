@@ -4,20 +4,11 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using OxyPlot.Controls;
+using System.Collections.ObjectModel;
+
 namespace OxyPlot.Wpf
 {
-    using OxyPlot;
-    using OxyPlot.Controls;
-    using System;
-    using System.Collections.ObjectModel;
-    using System.Linq;
-    using System.Windows;
-    using System.Windows.Controls;
-    using System.Windows.Controls.Primitives;
-    using System.Windows.Input;
-    using System.Windows.Media;
-    using System.Windows.Threading;
-    using CursorType = OxyPlot.CursorType;
 
     /// <summary>
     /// Base class for WPF PlotView implementations.
@@ -70,10 +61,12 @@ namespace OxyPlot.Wpf
         /// </summary>
         private bool isInVisualTree;
 
+#if HAS_WPF
         /// <summary>
         /// The mouse down point.
         /// </summary>
         private ScreenPoint mouseDownPoint;
+#endif
 
         /// <summary>
         /// The overlays.
@@ -85,6 +78,7 @@ namespace OxyPlot.Wpf
         /// </summary>
         private ContentControl? zoomControl;
 
+#if HAS_WPF
         /// <summary>
         /// Initializes static members of the <see cref="PlotViewBase" /> class.
         /// </summary>
@@ -93,16 +87,25 @@ namespace OxyPlot.Wpf
             DefaultStyleKeyProperty.OverrideMetadata(typeof(PlotViewBase), new FrameworkPropertyMetadata(typeof(PlotViewBase)));
             PaddingProperty.OverrideMetadata(typeof(PlotViewBase), new FrameworkPropertyMetadata(new Thickness(8)));
         }
+#endif
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PlotViewBase" /> class.
         /// </summary>
         protected PlotViewBase()
         {
+#if !HAS_WPF
+            DefaultStyleKey = typeof(PlotViewBase);
+            Padding = new Thickness(8);
+#endif
+
             this.TrackerDefinitions = new ObservableCollection<TrackerDefinition>();
+
+#if HAS_WPF
             this.CommandBindings.Add(new CommandBinding(PlotCommands.ResetAxes, (s, e) => this.ResetAllAxes()));
             this.IsManipulationEnabled = true;
             this.LayoutUpdated += this.OnLayoutUpdated;
+#endif
         }
 
         /// <summary>
@@ -181,7 +184,11 @@ namespace OxyPlot.Wpf
         }
 
         /// <inheritdoc/>
+#if HAS_WPF
         public override void OnApplyTemplate()
+#else
+        protected override void OnApplyTemplate()
+#endif
         {
             base.OnApplyTemplate();
             this.grid = this.GetTemplateChild(PartGrid) as Grid;
@@ -199,18 +206,21 @@ namespace OxyPlot.Wpf
             this.grid.Children.Add(this.overlays);
 
             this.zoomControl = new ContentControl();
+#if HAS_WPF
             this.zoomControl.Focusable = false;
+#endif
             this.overlays.Children.Add(this.zoomControl);
 
             // add additional grid on top of everthing else to fix issue of mouse events getting lost
             // it must be added last so it covers all other controls
             var mouseGrid = new Grid
             {
-                Background = Brushes.Transparent // background must be set for hit test to work
+                Background = new SolidColorBrush(Colors.Transparent), // background must be set for hit test to work
             };
             this.grid.Children.Add(mouseGrid);
         }
 
+#if HAS_WPF
         /// <summary>
         /// Pans all axes.
         /// </summary>
@@ -224,6 +234,7 @@ namespace OxyPlot.Wpf
 
             this.InvalidatePlot(false);
         }
+#endif
 
         /// <summary>
         /// Resets all axes.
@@ -244,7 +255,9 @@ namespace OxyPlot.Wpf
         /// <param name="text">The text.</param>
         public void SetClipboardText(string text)
         {
+#if HAS_WPF
             Clipboard.SetText(text);
+#endif
         }
 
         /// <summary>
@@ -253,14 +266,19 @@ namespace OxyPlot.Wpf
         /// <param name="cursorType">The cursor type.</param>
         public void SetCursorType(CursorType cursorType)
         {
-            this.Cursor = cursorType switch
+            var cursor = cursorType switch
             {
-                CursorType.Pan => this.PanCursor,
-                CursorType.ZoomRectangle => this.ZoomRectangleCursor,
-                CursorType.ZoomHorizontal => this.ZoomHorizontalCursor,
-                CursorType.ZoomVertical => this.ZoomVerticalCursor,
+                CursorType.Pan => PanCursor,
+                CursorType.ZoomRectangle => ZoomRectangleCursor,
+                CursorType.ZoomHorizontal => ZoomHorizontalCursor,
+                CursorType.ZoomVertical => ZoomVerticalCursor,
                 _ => Cursors.Arrow,
             };
+#if HAS_WPF
+            this.Cursor = cursor;
+#else
+            FrameworkElementExtensions.SetCursor(this, cursor);
+#endif
         }
 
         /// <summary>
@@ -423,9 +441,13 @@ namespace OxyPlot.Wpf
         /// <returns>The DPI scale.</returns>
         protected virtual double UpdateDpi()
         {
+#if HAS_WPF
             var transformMatrix = PresentationSource.FromVisual(this)?.CompositionTarget?.TransformToDevice;
             var scale = transformMatrix == null ? 1 : (transformMatrix.Value.M11 + transformMatrix.Value.M22) / 2;
             return scale;
+#else
+            return 1.0;
+#endif
         }
 
         /// <summary>
@@ -442,13 +464,28 @@ namespace OxyPlot.Wpf
         /// Invokes the specified action on the dispatcher, if necessary.
         /// </summary>
         /// <param name="action">The action.</param>
+#pragma warning disable CA1822 // Mark members as static
         private void BeginInvoke(Action action)
+#pragma warning restore CA1822 // Mark members as static
         {
+#if HAS_WPF
             if (!this.Dispatcher.CheckAccess())
             {
                 this.Dispatcher.BeginInvoke(DispatcherPriority.Loaded, action);
             }
             else
+#elif !HAS_WINUI && !HAS_UNO
+            if (!this.Dispatcher.HasThreadAccess)
+            {
+                // TODO: Fix warning?
+                // Because this call is not awaited, execution of the current method continues before the call is completed.
+                // Consider applying the 'await' operator to the result of the call.
+#pragma warning disable 4014
+                this.Dispatcher.RunAsync(CoreDispatcherPriority.Low, () => action());
+#pragma warning restore 4014
+            }
+            else
+#endif
             {
                 action();
             }
@@ -463,6 +500,7 @@ namespace OxyPlot.Wpf
             DependencyObject dpObject = this;
             while ((dpObject = VisualTreeHelper.GetParent(dpObject)) != null)
             {
+#if HAS_WPF
                 if (dpObject is Window)
                 {
                     return true;
@@ -474,6 +512,7 @@ namespace OxyPlot.Wpf
                 {
                     return true;
                 }
+#endif
             }
 
             return false;

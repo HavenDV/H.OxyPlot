@@ -4,17 +4,17 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using OxyPlot.Utilities;
+
 namespace OxyPlot.Wpf
 {
-    using OxyPlot.Utilities;
-    using System;
-    using System.Windows.Input;
 
     /// <summary>
     /// Base class for WPF PlotView implementations.
     /// </summary>
     public abstract partial class PlotViewBase
     {
+#if HAS_WPF
         /// <summary>
         /// Called before the <see cref="KeyDown" /> event occurs.
         /// </summary>
@@ -214,5 +214,6 @@ namespace OxyPlot.Wpf
 
             e.Handled = this.ActualController.HandleMouseLeave(this, e.ToMouseEventArgs(this));
         }
+#endif
     }
 }

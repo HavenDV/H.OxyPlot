@@ -7,23 +7,20 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace OxyPlot.Wpf
+namespace OxyPlot.Wpf;
+
+/// <summary>
+/// Defines additional <see cref="Colors" />.
+/// </summary>
+public static class MoreColors
 {
-    using System.Windows.Media;
+    /// <summary>
+    /// The undefined color.
+    /// </summary>
+    public static readonly Color Undefined = Color.FromArgb(0, 0, 0, 0);
 
     /// <summary>
-    /// Defines additional <see cref="Colors" />.
+    /// The automatic color.
     /// </summary>
-    public static class MoreColors
-    {
-        /// <summary>
-        /// The undefined color.
-        /// </summary>
-        public static readonly Color Undefined = Color.FromArgb(0, 0, 0, 0);
-
-        /// <summary>
-        /// The automatic color.
-        /// </summary>
-        public static readonly Color Automatic = Color.FromArgb(0, 0, 0, 1);
-    }
+    public static readonly Color Automatic = Color.FromArgb(0, 0, 0, 1);
 }
