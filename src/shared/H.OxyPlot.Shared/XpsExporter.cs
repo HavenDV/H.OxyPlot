@@ -6,20 +6,16 @@
 //   Provides functionality to export plots to xps.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+#if HAS_WPF
+using OxyPlot.Utilities;
+using System.Windows.Xps;
+using System.Windows.Xps.Packaging;
+using System.IO.Packaging;
+using System.IO;
+using System.Printing;
 
-namespace OxyPlot.Wpf
+namespace OxyPlot
 {
-    using OxyPlot.Utilities;
-#if !NET40
-    using System.IO;
-    using System.IO.Packaging;
-    using System.Printing;
-    using System.Windows;
-    using System.Windows.Controls;
-    using System.Windows.Media;
-    using System.Windows.Xps;
-    using System.Windows.Xps.Packaging;
-
     /// <summary>
     /// Provides functionality to export plots to xps.
     /// </summary>
@@ -158,5 +154,5 @@ namespace OxyPlot.Wpf
             writer.Write(canvas);
         }
     }
-#endif
 }
+#endif

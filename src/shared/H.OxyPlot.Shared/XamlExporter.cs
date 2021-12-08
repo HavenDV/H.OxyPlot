@@ -6,18 +6,15 @@
 //   Provides functionality to export plots to XAML.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+#if HAS_WPF
+using OxyPlot.Utilities;
+using System.IO;
+using System.Text;
+using System.Windows.Markup;
+using System.Xml;
 
-namespace OxyPlot.Wpf
+namespace OxyPlot
 {
-    using OxyPlot.Utilities;
-    using System.IO;
-    using System.Text;
-    using System.Windows;
-    using System.Windows.Controls;
-    using System.Windows.Markup;
-    using System.Windows.Media;
-    using System.Xml;
-
     /// <summary>
     /// Provides functionality to export plots to XAML.
     /// </summary>
@@ -94,3 +91,4 @@ namespace OxyPlot.Wpf
         }
     }
 }
+#endif

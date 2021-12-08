@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace OxyPlot.Wpf
+namespace OxyPlot
 {
     /// <summary>
     /// The text measurement methods.

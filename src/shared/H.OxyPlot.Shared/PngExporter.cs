@@ -7,15 +7,12 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace OxyPlot.Wpf
-{
-    using OxyPlot.Utilities;
-    using System.IO;
-    using System.Windows;
-    using System.Windows.Controls;
-    using System.Windows.Media;
-    using System.Windows.Media.Imaging;
+#if HAS_WPF
+using OxyPlot.Utilities;
+using System.IO;
 
+namespace OxyPlot
+{
     /// <summary>
     /// Provides functionality to export plots to png.
     /// </summary>
@@ -117,3 +114,4 @@ namespace OxyPlot.Wpf
         }
     }
 }
+#endif

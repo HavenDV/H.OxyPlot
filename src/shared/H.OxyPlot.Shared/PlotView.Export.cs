@@ -7,15 +7,14 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace OxyPlot.Wpf
+namespace OxyPlot
 {
-    using System.Windows.Media.Imaging;
-
     /// <summary>
     /// Represents a control that displays a <see cref="PlotModel" />.
     /// </summary>
     public partial class PlotView
     {
+#if HAS_WPF
         /// <summary>
         /// Saves the PlotView as a bitmap.
         /// </summary>
@@ -93,5 +92,20 @@ namespace OxyPlot.Wpf
             var exporter = new PngExporter() { Width = (int)this.ActualWidth, Height = (int)this.ActualHeight };
             return exporter.ExportToBitmap(this.ActualModel);
         }
+#else
+        /// <summary>
+        /// Renders the PlotView to a bitmap.
+        /// </summary>
+        /// <returns>A bitmap.</returns>
+        public WriteableBitmap ToBitmap()
+        {
+            throw new NotImplementedException();
+
+            // var bmp = new RenderTargetBitmap(
+            // (int)this.ActualWidth, (int)this.ActualHeight, 96, 96, PixelFormats.Pbgra32);
+            // bmp.Render(this);
+            // return bmp;
+        }
+#endif
     }
 }

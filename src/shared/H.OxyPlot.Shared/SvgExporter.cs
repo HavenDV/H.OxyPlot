@@ -7,19 +7,17 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace OxyPlot.Wpf
+namespace OxyPlot
 {
-    using System.Windows.Controls;
-
     /// <summary>
     /// Provides functionality to export plots to scalable vector graphics using text measuring in WPF.
     /// </summary>
-    public class SvgExporter : OxyPlot.SvgExporter
+    public class CanvasSvgExporter : OxyPlot.SvgExporter
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SvgExporter" /> class.
         /// </summary>
-        public SvgExporter()
+        public CanvasSvgExporter()
         {
             this.TextMeasurer = new CanvasRenderContext(new Canvas());
         }

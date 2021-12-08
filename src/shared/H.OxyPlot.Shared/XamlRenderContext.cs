@@ -3,19 +3,9 @@
 //   Copyright (c) 2020 OxyPlot contributors
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-
-namespace OxyPlot.Wpf
+#if HAS_WPF
+namespace OxyPlot
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Windows;
-    using System.Windows.Controls;
-    using System.Windows.Media;
-    using System.Windows.Shapes;
-
-    using Path = System.Windows.Shapes.Path;
-
     /// <summary>
     /// Implements <see cref="IRenderContext" /> for <see cref="Canvas" />. This does not use <see cref="StreamGeometry"/> and therefore the output can be serialized to XAML.
     /// </summary>
@@ -341,3 +331,4 @@ namespace OxyPlot.Wpf
         }
     }
 }
+#endif
