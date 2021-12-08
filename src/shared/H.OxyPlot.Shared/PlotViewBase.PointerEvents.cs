@@ -13,7 +13,7 @@ public abstract partial class PlotViewBase
     /// <summary>
     /// Called before the Wheel event occurs to provide handling for the event in a derived class without attaching a delegate.
     /// </summary>
-    /// <param name="e">A <see cref="MouseWheelEventArgs" /> that contains the event data.</param>
+    /// <param name="e">A Wheel EventArgs that contains the event data.</param>
 #if HAS_WPF
     protected override void OnMouseWheel(MouseWheelEventArgs e)
 #else

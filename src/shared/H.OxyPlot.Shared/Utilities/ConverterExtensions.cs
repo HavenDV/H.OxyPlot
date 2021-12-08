@@ -54,7 +54,7 @@ namespace OxyPlot.Utilities
         }
 
         /// <summary>
-        /// Converts an <see cref="OxyColor" /> to a <see cref="Color" />.
+        /// Converts an <see cref="OxyColor" /> to a Color.
         /// </summary>
         /// <param name="c">The color.</param>
         /// <returns>A Color.</returns>
@@ -67,7 +67,7 @@ namespace OxyPlot.Utilities
         /// Converts an OxyThickness to a Thickness.
         /// </summary>
         /// <param name="c">The thickness.</param>
-        /// <returns>A <see cref="Thickness" /> instance.</returns>
+        /// <returns>A Thickness instance.</returns>
         public static Thickness ToThickness(this OxyThickness c)
         {
             return new Thickness(c.Left, c.Top, c.Right, c.Bottom);
@@ -329,7 +329,7 @@ namespace OxyPlot.Utilities
         }
 #else
         /// <summary>
-        /// Converts a <see cref="ScreenPoint" /> to a <see cref="Point" />.
+        /// Converts a <see cref="ScreenPoint" /> to a Point.
         /// </summary>
         /// <param name="pt">The point to convert.</param>
         /// <param name="aliased">Use pixel alignment conversion if set to <c>true</c>.</param>
@@ -348,7 +348,7 @@ namespace OxyPlot.Utilities
         }
 
         /// <summary>
-        /// Converts an <see cref="OxyRect" /> to a <see cref="Rect" />.
+        /// Converts an <see cref="OxyRect" /> to a Rect.
         /// </summary>
         /// <param name="r">The rectangle to convert.</param>
         /// <param name="aliased">Use pixel alignment if set to <c>true</c>.</param>
@@ -759,7 +759,7 @@ namespace OxyPlot.Utilities
         }
 
         /// <summary>
-        /// Converts a <see cref="Point" /> to a <see cref="ScreenPoint" />.
+        /// Converts a Point to a <see cref="ScreenPoint" />.
         /// </summary>
         /// <param name="pt">The point.</param>
         /// <returns>A <see cref="ScreenPoint" />.</returns>
@@ -780,7 +780,7 @@ namespace OxyPlot.Utilities
         }
 #else
         /// <summary>
-        /// Converts a <see cref="Point" /> to a <see cref="ScreenVector" />.
+        /// Converts a Point to a <see cref="ScreenVector" />.
         /// </summary>
         /// <param name="pt">The vector to convert.</param>
         /// <returns>A <see cref="ScreenVector" />.</returns>

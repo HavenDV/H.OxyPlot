@@ -1151,10 +1151,10 @@ namespace OxyPlot
         }
 
         /// <summary>
-        /// Converts an <see cref="OxyRect" /> to a <see cref="Rect" />.
+        /// Converts an <see cref="OxyRect" /> to a Rect.
         /// </summary>
         /// <param name="r">The rectangle.</param>
-        /// <returns>A <see cref="Rect" />.</returns>
+        /// <returns>A Rect.</returns>
         protected static Rect ToRect(OxyRect r)
         {
             return new Rect(r.Left, r.Top, r.Width, r.Height);

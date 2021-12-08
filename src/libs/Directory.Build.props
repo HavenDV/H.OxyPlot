@@ -31,7 +31,7 @@
     <Version>0.9.$(BUILD_NUMBER)</Version>
     <PackageReleaseNotes>$(PACKAGE_RELEASE_NOTES)</PackageReleaseNotes>
     <GeneratePackageOnBuild Condition=" '$(Configuration)' == 'Release' ">true</GeneratePackageOnBuild>
-    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Authors>havendv, OxyPlot contributors, Oystein Bjorke</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/oxyplot/oxyplot</PackageProjectUrl>
