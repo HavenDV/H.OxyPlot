@@ -652,10 +652,13 @@ namespace OxyPlot
             {
                 return MeasureTextByGlyphTypeface(text, fontFamily, fontSize, fontWeight);
             }
+#endif
 
             var tb = new TextBlock { Text = text };
 
+#if HAS_WPF
             TextOptions.SetTextFormattingMode(tb, this.TextFormattingMode);
+#endif
 
             if (fontFamily != null)
             {
@@ -675,25 +678,6 @@ namespace OxyPlot
             tb.Measure(new Size(1000, 1000));
 
             return new OxySize(tb.DesiredSize.Width, tb.DesiredSize.Height);
-#else
-            var tb = new TextBlock { Text = text };
-
-            if (fontFamily != null)
-            {
-                tb.FontFamily = new FontFamily(fontFamily);
-            }
-
-            if (fontSize > 0)
-            {
-                tb.FontSize = fontSize;
-            }
-
-            tb.FontWeight = GetFontWeight(fontWeight);
-
-            tb.Measure(new Size(1000, 1000));
-
-            return new OxySize(tb.ActualWidth, tb.ActualHeight);
-#endif
         }
 
         ///<inheritdoc/>
