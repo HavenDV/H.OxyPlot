@@ -18,9 +18,8 @@ Install-Package H.OxyPlot.Uno
 Install-Package H.OxyPlot.Uwp
 ```
 
-## Usage
+### Usage
 
-### GridExtensions
 ```
 xmlns:oxy="using:OxyPlot"
 ```
