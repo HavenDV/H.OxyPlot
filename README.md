@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/github/license/HavenDV/H.OxyPlot.svg?label=License&maxAge=86400)](LICENSE.md) 
 [![Build Status](https://github.com/HavenDV/H.OxyPlot/actions/workflows/dotnet.yml/badge.svg)](https://github.com/HavenDV/H.OxyPlot/actions/workflows/dotnet.yml)
 
-Shortest way to create rows/columns for Grid for WPF/UWP/Uno platforms
+UWP/WinUI/Uno support for OxyPlot.
 
 ### NuGet
 
@@ -22,20 +22,10 @@ Install-Package H.OxyPlot.Uwp
 
 ### GridExtensions
 ```
-// WPF
-xmlns:e="clr-namespace:H.OxyPlot;assembly=H.OxyPlot.Wpf" 
-// UWP/Uno
-xmlns:e="using:H.OxyPlot"
+xmlns:oxy="using:OxyPlot"
 ```
 ```xml
-<!-- Auto,Auto,*,Auto,Auto -->
-<Grid e:GridExtensions.ColumnsAndRows="A,A,*,A,A;A,A,*,A,A"/>
-<!-- Auto[MinWidth: 300, MaxWidth: 400],* -->
-<Grid e:GridExtensions.Rows="A[300-400],*"/>
-<!-- Auto[MinWidth: 300],* -->
-<Grid e:GridExtensions.Rows="A[300],*"/>
-<!-- Auto[MaxWidth: 300],* -->
-<Grid e:GridExtensions.Rows="A[0-300],*"/>
+<oxy:PlotView Model="{Binding Model}"/>
 ```
 
 ## Contacts
