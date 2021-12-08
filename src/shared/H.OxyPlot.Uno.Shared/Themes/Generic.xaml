@@ -12,6 +12,7 @@
         <Setter Property="Foreground" Value="Black" />
         <Setter Property="BorderBrush" Value="Black" />
         <Setter Property="BorderThickness" Value="1" />
+        <!--<Setter Property="BorderEdgeMode" Value="Aliased" />-->
         <Setter Property="LineStroke" Value="#80000000" />
         <Setter Property="HorizontalLineVisibility" Value="Visible" />
         <Setter Property="VerticalLineVisibility" Value="Visible" />
@@ -20,6 +21,7 @@
         <Setter Property="ShowPointer" Value="true" />
         <Setter Property="CanCenterHorizontally" Value="true" />
         <Setter Property="CanCenterVertically" Value="true" />
+        <Setter Property="IsHitTestVisible" Value="false" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:TrackerControl">
@@ -60,6 +62,7 @@
 
     <Style TargetType="local:PlotView">
         <Setter Property="Background" Value="White" />
+        <!--<Setter Property="FocusVisualStyle" Value="{x:Null}" />-->
         <Setter Property="DefaultTrackerTemplate">
             <Setter.Value>
                 <ControlTemplate>
