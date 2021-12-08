@@ -13,7 +13,7 @@ using System.IO;
 namespace OxyPlot
 {
     /// <summary>
-    /// Implements <see cref="IRenderContext" /> for <see cref="System.Windows.Controls.Canvas" />.
+    /// Implements <see cref="IRenderContext" /> for <see cref="Canvas" />.
     /// </summary>
     public class CanvasRenderContext : ClippingRenderContext
     {
@@ -844,7 +844,7 @@ namespace OxyPlot
         {
 #if HAS_WPF
             return fontWeight > FontWeights.Normal ? System.Windows.FontWeights.Bold : System.Windows.FontWeights.Normal;
-#elif HAS_WINUI && !HAS_UNO
+#elif HAS_WINUI
             return fontWeight > OxyPlot.FontWeights.Normal ? Microsoft.UI.Text.FontWeights.Bold : Microsoft.UI.Text.FontWeights.Normal;
 #else
             return fontWeight > OxyPlot.FontWeights.Normal ? Windows.UI.Text.FontWeights.Bold : Windows.UI.Text.FontWeights.Normal;

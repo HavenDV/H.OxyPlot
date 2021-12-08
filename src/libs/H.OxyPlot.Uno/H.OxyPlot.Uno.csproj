@@ -1,18 +1,19 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net6.0-ios;net6.0-android31.0;net6.0-macos;net6.0-maccatalyst;MonoAndroid10.0;xamarinios10;xamarinmac20</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net6.0-ios;net6.0-android;net6.0-macos;net6.0-maccatalyst;MonoAndroid10.0;MonoAndroid11.0;xamarinios10;xamarinmac20</TargetFrameworks>
     <SignAssembly>false</SignAssembly>
     <DefineConstants>$(DefineConstants);HAS_UNO</DefineConstants>
-    <NoWarn>$(NoWarn);Uno0001;CA1010;CA1725;CA2000</NoWarn>
+    <NoWarn>$(NoWarn);Uno0001;CA1010;CA1725;CA2000;NU1703</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="OxyPlot.Core" Version="2.1.0" />
+    <PackageReference Include="Uno.Microsoft.Toolkit.Uwp.UI" Version="7.1.10" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Uno.UI" Version="3.10.7" />
+    <PackageReference Include="Uno.UI" Version="4.0.9" />
   </ItemGroup>
 
   <Import Project="..\..\shared\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems" Label="Shared" />

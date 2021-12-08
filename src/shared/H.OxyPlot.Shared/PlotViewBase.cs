@@ -351,7 +351,7 @@ namespace OxyPlot
             };
 #if HAS_WPF
             this.Cursor = cursor;
-#else
+#elif !HAS_UNO || !HAS_WINUI
             FrameworkElementExtensions.SetCursor(this, cursor);
 #endif
         }
@@ -406,7 +406,7 @@ namespace OxyPlot
         /// <summary>
         /// Shows the zoom rectangle.
         /// </summary>
-        /// <param name="r">The rectangle.</param>
+        /// <param name="rectangle">The rectangle.</param>
         public void ShowZoomRectangle(OxyRect rectangle)
         {
             if (zoomControl == null)
@@ -533,7 +533,7 @@ namespace OxyPlot
         /// Called when the model is changed.
         /// </summary>
         /// <param name="d">The sender.</param>
-        /// <param name="e">The <see cref="System.Windows.DependencyPropertyChangedEventArgs" /> instance containing the event data.</param>
+        /// <param name="e">The <see cref="DependencyPropertyChangedEventArgs" /> instance containing the event data.</param>
         private static void ModelChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             ((PlotViewBase)d).OnModelChanged();

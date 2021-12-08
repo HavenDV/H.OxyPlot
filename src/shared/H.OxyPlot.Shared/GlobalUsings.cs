@@ -55,8 +55,3 @@ global using Cursor = Windows.UI.Core.CoreCursorType;
 global using Cursors = Windows.UI.Core.CoreCursorType;
 global using Microsoft.Toolkit.Uwp.UI;
 #endif
-
-#if HAS_UNO && HAS_WINUI
-global using Windows.UI.Input;
-global using Windows.Devices.Input;
-#endif
