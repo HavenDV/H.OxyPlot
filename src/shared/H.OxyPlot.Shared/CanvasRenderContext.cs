@@ -458,14 +458,14 @@ namespace OxyPlot
 
             var path = this.CreateAndAdd<Path>();
             SetStroke(path, stroke, thickness, edgeRenderingMode);
-#if HAS_WPF
             if (!fill.IsUndefined())
             {
                 path.Fill = this.GetCachedBrush(fill);
             }
 
-            var streamGeometry = new StreamGeometry { FillRule = FillRule.Nonzero };
-            using (var context = streamGeometry.Open())
+#if HAS_WPF
+            var geometry = new StreamGeometry { FillRule = FillRule.Nonzero };
+            using (var context = geometry.Open())
             {
                 foreach (var rect in rectangles)
                 {
@@ -475,22 +475,16 @@ namespace OxyPlot
                 }
             }
 
-            streamGeometry.Freeze();
-            path.Data = streamGeometry;
+            geometry.Freeze();
 #else
-            if (fill.IsVisible())
-            {
-                path.Fill = this.GetCachedBrush(fill);
-            }
-
-            var gg = new GeometryGroup { FillRule = FillRule.Nonzero };
+            var geometry = new GeometryGroup { FillRule = FillRule.Nonzero };
             foreach (var rect in rectangles)
             {
-                gg.Children.Add(new RectangleGeometry { Rect = rect.ToRect(true) });
+                geometry.Children.Add(new RectangleGeometry { Rect = rect.ToRect(true) });
             }
-
-            path.Data = gg;
 #endif
+
+            path.Data = geometry;
         }
 
         ///<inheritdoc/>
