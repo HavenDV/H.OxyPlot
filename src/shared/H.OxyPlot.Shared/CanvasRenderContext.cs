@@ -62,28 +62,6 @@ namespace OxyPlot
         /// </summary>
         public Point VisualOffset { get; set; }
 
-#if !HAS_WPF
-
-        /// <summary>
-        /// Gets the height.
-        /// </summary>
-        /// <value>The height.</value>
-        public double Height { get; private set; }
-
-        /// <summary>
-        /// Gets a value indicating whether to paint the background.
-        /// </summary>
-        /// <value><c>true</c> if the background should be painted; otherwise, <c>false</c>.</value>
-        public bool PaintBackground { get; }
-
-        /// <summary>
-        /// Gets the width.
-        /// </summary>
-        /// <value>The width.</value>
-        public double Width { get; private set; }
-
-#endif
-
         /// <summary>
         /// Initializes a new instance of the <see cref="CanvasRenderContext" /> class.
         /// </summary>
@@ -95,9 +73,6 @@ namespace OxyPlot
             this.canvas = canvas;
 #if HAS_WPF
             this.TextFormattingMode = TextFormattingMode.Display;
-#else
-            this.Width = canvas.ActualWidth;
-            this.Height = canvas.ActualHeight;
 #endif
             this.TextMeasurementMethod = TextMeasurementMethod.TextBlock;
             this.RendersToScreen = true;
