@@ -124,7 +124,6 @@ namespace OxyPlot
             this.DrawEllipses(new[] { rect }, fill, stroke, thickness, edgeRenderingMode);
 #else
             var el = this.CreateAndAdd<Ellipse>(rect.Left, rect.Top);
-            el.CompositeMode = ElementCompositeMode.SourceOver;
 
             if (stroke.IsVisible())
             {
@@ -180,8 +179,6 @@ namespace OxyPlot
 
             geometry.Freeze();
 #else
-            path.CompositeMode = ElementCompositeMode.SourceOver;
-
             this.SetStroke(path, stroke, thickness);
             if (fill.IsVisible())
             {
@@ -240,7 +237,6 @@ namespace OxyPlot
 #else
             var aliased = false;
             var e = this.CreateAndAdd<Polyline>();
-            e.CompositeMode = ElementCompositeMode.SourceOver;
 
             this.SetStroke(e, stroke, thickness, lineJoin, dashArray, aliased);
 
@@ -293,7 +289,6 @@ namespace OxyPlot
 #else
             var aliased = false;
             var path = this.CreateAndAdd<Path>();
-            path.CompositeMode = ElementCompositeMode.SourceOver;
 
             this.SetStroke(path, stroke, thickness, lineJoin, dashArray, aliased);
             var pg = new PathGeometry();
@@ -336,7 +331,6 @@ namespace OxyPlot
             this.DrawPolygons(new[] { points }, fill, stroke, thickness, edgeRenderingMode, dashArray, lineJoin);
 #else
             var po = this.CreateAndAdd<Polygon>();
-            po.CompositeMode = ElementCompositeMode.SourceOver;
             var aliased = false;
 
             this.SetStroke(po, stroke, thickness, lineJoin, dashArray, aliased);
@@ -402,7 +396,6 @@ namespace OxyPlot
 #else
             var aliased = false;
             var path = this.CreateAndAdd<Path>();
-            path.CompositeMode = ElementCompositeMode.SourceOver;
 
             this.SetStroke(path, stroke, thickness, lineJoin, dashArray, aliased);
             if (fill.IsVisible())
@@ -442,7 +435,6 @@ namespace OxyPlot
             this.DrawRectangles(new[] { rect }, fill, stroke, thickness, edgeRenderingMode);
 #else
             var el = this.CreateAndAdd<Rectangle>(rect.Left, rect.Top);
-            el.CompositeMode = ElementCompositeMode.SourceOver;
 
             if (stroke.IsVisible())
             {
@@ -495,7 +487,6 @@ namespace OxyPlot
             path.Data = streamGeometry;
 #else
             var path = this.CreateAndAdd<Path>();
-            path.CompositeMode = ElementCompositeMode.SourceOver;
 
             this.SetStroke(path, stroke, thickness);
             if (fill.IsVisible())
@@ -907,6 +898,9 @@ namespace OxyPlot
         {
             // TODO: here we can reuse existing elements in the canvas.Children collection
             var element = new T();
+#if !HAS_WPF
+            element.CompositeMode = ElementCompositeMode.SourceOver;
+#endif
 
             if (this.clip != null)
             {
