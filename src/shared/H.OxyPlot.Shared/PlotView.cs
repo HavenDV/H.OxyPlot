@@ -6,111 +6,20 @@
 //   Represents a control that displays a <see cref="PlotModel" />.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-#if !HAS_WPF
-namespace OxyPlot.Windows
+
+using OxyPlot.Utilities;
+
+namespace OxyPlot
 {
-    using System;
-    using System.Collections.ObjectModel;
-    using System.Linq;
-    using System.Threading;
-
-    using global::Windows.ApplicationModel;
-    using global::Windows.ApplicationModel.DataTransfer;
-    using global::Windows.Foundation;
-    using global::Windows.System;
-    using global::Windows.UI.Core;
-    using OxyPlot.Controls;
-    using OxyPlot.Utilities;
-
-    /// <summary>
-    /// Represents a control that displays a <see cref="PlotModel" />.
-    /// </summary>
-    [TemplatePart(Name = PartGrid, Type = typeof(Grid))]
-    public partial class PlotView : Control, IPlotView
+    public partial class PlotView : PlotViewBase
     {
-        /// <summary>
-        /// Identifies the <see cref="Controller"/> dependency property.
-        /// </summary>
-        public static readonly DependencyProperty ControllerProperty =
-            DependencyProperty.Register("Controller", typeof(IPlotController), typeof(PlotView), new PropertyMetadata(null));
-
-        /// <summary>
-        /// Identifies the <see cref="DefaultTrackerTemplate"/> dependency property.
-        /// </summary>
-        public static readonly DependencyProperty DefaultTrackerTemplateProperty =
-            DependencyProperty.Register(
-                "DefaultTrackerTemplate", typeof(ControlTemplate), typeof(PlotView), new PropertyMetadata(null));
-
         /// <summary>
         /// Identifies the <see cref="HandleRightClicks"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty HandleRightClicksProperty =
             DependencyProperty.Register("HandleRightClicks", typeof(bool), typeof(PlotView), new PropertyMetadata(true));
 
-        /// <summary>
-        /// Identifies the <see cref="IsMouseWheelEnabled"/> dependency property.
-        /// </summary>
-        public static readonly DependencyProperty IsMouseWheelEnabledProperty =
-            DependencyProperty.Register("IsMouseWheelEnabled", typeof(bool), typeof(PlotView), new PropertyMetadata(true));
-
-        /// <summary>
-        /// Identifies the <see cref="Model"/> dependency property.
-        /// </summary>
-        public static readonly DependencyProperty ModelProperty = DependencyProperty.Register(
-            "Model", typeof(PlotModel), typeof(PlotView), new PropertyMetadata(null, ModelChanged));
-
-        /// <summary>
-        /// Identifies the <see cref="ZoomRectangleTemplate"/> dependency property.
-        /// </summary>
-        public static readonly DependencyProperty ZoomRectangleTemplateProperty =
-            DependencyProperty.Register(
-                "ZoomRectangleTemplate", typeof(ControlTemplate), typeof(PlotView), new PropertyMetadata(null));
-
-        /// <summary>
-        /// Flags if the cursor is not implemented (Windows Phone).
-        /// </summary>
-        private static bool cursorNotImplemented;
-
-        /// <summary>
-        /// The Grid PART constant.
-        /// </summary>
-        private const string PartGrid = "PART_Grid";
-
-        /// <summary>
-        /// The model lock.
-        /// </summary>
-        private readonly object modelLock = new object();
-
-        /// <summary>
-        /// The tracker definitions.
-        /// </summary>
-        private readonly ObservableCollection<TrackerDefinition> trackerDefinitions;
-
-        /// <summary>
-        /// The canvas.
-        /// </summary>
-        private Canvas? canvas;
-
-        /// <summary>
-        /// The current model.
-        /// </summary>
-        private PlotModel? currentModel;
-
-        /// <summary>
-        /// The current tracker.
-        /// </summary>
-        private FrameworkElement? currentTracker;
-
-        /// <summary>
-        /// The grid.
-        /// </summary>
-        private Grid? grid;
-
-        /// <summary>
-        /// The default controller.
-        /// </summary>
-        private IPlotController? defaultController;
-
+#if !HAS_WPF
         /// <summary>
         /// The state of the Alt key.
         /// </summary>
@@ -127,68 +36,27 @@ namespace OxyPlot.Windows
         private bool isControlPressed;
 
         /// <summary>
-        /// The is PlotView invalidated.
-        /// </summary>
-        private int isPlotInvalidated;
-
-        /// <summary>
         /// The is shift pressed.
         /// </summary>
         private bool isShiftPressed;
+#endif
 
         /// <summary>
-        /// The overlays.
-        /// </summary>
-        private Canvas? overlays;
-
-        /// <summary>
-        /// The render context
-        /// </summary>
-        private RenderContext? renderContext;
-
-        /// <summary>
-        /// The zoom control.
-        /// </summary>
-        private ContentControl? zoomRectangle;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref = "PlotView" /> class.
+        /// Initializes a new instance of the <see cref="PlotView" /> class.
         /// </summary>
         public PlotView()
         {
+#if HAS_WPF
+            this.DisconnectCanvasWhileUpdating = true;
+            this.CommandBindings.Add(new CommandBinding(ApplicationCommands.Copy, this.DoCopy));
+#else
             this.DefaultStyleKey = typeof(PlotView);
 
-            this.trackerDefinitions = new ObservableCollection<TrackerDefinition>();
             this.Loaded += this.OnLoaded;
             this.SizeChanged += this.OnSizeChanged;
             this.ManipulationMode = ManipulationModes.Scale | ManipulationModes.TranslateX
                                     | ManipulationModes.TranslateY;
-        }
-
-        /// <summary>
-        /// Gets or sets the PlotView controller.
-        /// </summary>
-        /// <value>The PlotView controller.</value>
-        public IPlotController Controller
-        {
-            get { return (IPlotController)this.GetValue(ControllerProperty); }
-            set { this.SetValue(ControllerProperty, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets the default tracker template.
-        /// </summary>
-        public ControlTemplate DefaultTrackerTemplate
-        {
-            get
-            {
-                return (ControlTemplate)this.GetValue(DefaultTrackerTemplateProperty);
-            }
-
-            set
-            {
-                this.SetValue(DefaultTrackerTemplateProperty, value);
-            }
+#endif
         }
 
         /// <summary>
@@ -207,345 +75,7 @@ namespace OxyPlot.Windows
             }
         }
 
-        /// <summary>
-        /// Gets or sets a value indicating whether IsMouseWheelEnabled.
-        /// </summary>
-        public bool IsMouseWheelEnabled
-        {
-            get
-            {
-                return (bool)this.GetValue(IsMouseWheelEnabledProperty);
-            }
-
-            set
-            {
-                this.SetValue(IsMouseWheelEnabledProperty, value);
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the <see cref="PlotModel" /> to show.
-        /// </summary>
-        /// <value>The <see cref="PlotModel" />.</value>
-        public PlotModel Model
-        {
-            get
-            {
-                return (PlotModel)this.GetValue(ModelProperty);
-            }
-
-            set
-            {
-                this.SetValue(ModelProperty, value);
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the zoom rectangle template.
-        /// </summary>
-        /// <value>The zoom rectangle template.</value>
-        public ControlTemplate ZoomRectangleTemplate
-        {
-            get
-            {
-                return (ControlTemplate)this.GetValue(ZoomRectangleTemplateProperty);
-            }
-
-            set
-            {
-                this.SetValue(ZoomRectangleTemplateProperty, value);
-            }
-        }
-
-        /// <summary>
-        /// Gets the tracker definitions.
-        /// </summary>
-        /// <value>The tracker definitions.</value>
-        public ObservableCollection<TrackerDefinition> TrackerDefinitions
-        {
-            get
-            {
-                return this.trackerDefinitions;
-            }
-        }
-
-        /// <summary>
-        /// Gets the actual model in the view.
-        /// </summary>
-        /// <value>
-        /// The actual model.
-        /// </value>
-        Model IView.ActualModel
-        {
-            get
-            {
-                return this.Model;
-            }
-        }
-
-        /// <summary>
-        /// Gets the actual model.
-        /// </summary>
-        /// <value>The actual model.</value>
-        public PlotModel? ActualModel
-        {
-            get
-            {
-                return this.currentModel;
-            }
-        }
-
-        /// <summary>
-        /// Gets the actual controller.
-        /// </summary>
-        /// <value>
-        /// The actual <see cref="IController" />.
-        /// </value>
-        IController IView.ActualController
-        {
-            get
-            {
-                return this.ActualController;
-            }
-        }
-
-        /// <summary>
-        /// Gets the coordinates of the client area of the view.
-        /// </summary>
-        public OxyRect ClientArea
-        {
-            get
-            {
-                return new OxyRect(0, 0, this.ActualWidth, this.ActualHeight);
-            }
-        }
-
-        /// <summary>
-        /// Gets the actual PlotView controller.
-        /// </summary>
-        /// <value>The actual PlotView controller.</value>
-        public IPlotController ActualController
-        {
-            get
-            {
-                return this.Controller ?? this.defaultController ?? (this.defaultController = new PlotController());
-            }
-        }
-
-        /// <summary>
-        /// Hides the tracker.
-        /// </summary>
-        public void HideTracker()
-        {
-            if (this.currentTracker != null)
-            {
-                if (overlays != null)
-                {
-                    this.overlays.Children.Remove(this.currentTracker);
-                }
-                this.currentTracker = null;
-            }
-        }
-
-        /// <summary>
-        /// Hides the zoom rectangle.
-        /// </summary>
-        public void HideZoomRectangle()
-        {
-            if (zoomRectangle != null)
-            {
-                this.zoomRectangle.Visibility = Visibility.Collapsed;
-            }
-        }
-
-        /// <summary>
-        /// Invalidate the PlotView (not blocking the UI thread)
-        /// </summary>
-        /// <param name="updateData">if set to <c>true</c>, the data collections will be updated.</param>
-        public void InvalidatePlot(bool updateData = true)
-        {
-            this.UpdateModel(updateData);
-
-            if (DesignMode.DesignModeEnabled)
-            {
-                this.InvalidateArrange();
-                return;
-            }
-
-            if (Interlocked.CompareExchange(ref this.isPlotInvalidated, 1, 0) == 0)
-            {
-                // Invalidate the arrange state for the element.
-                // After the invalidation, the element will have its layout updated,
-                // which will occur asynchronously unless subsequently forced by UpdateLayout.
-                this.BeginInvoke(this.InvalidateArrange);
-            }
-        }
-
-        /// <summary>
-        /// Sets the cursor.
-        /// </summary>
-        /// <param name="cursorType">The cursor.</param>
-        public void SetCursorType(CursorType cursorType)
-        {
-            if (cursorNotImplemented)
-            {
-                // setting the cursor has failed in a previous attempt, see code below
-                return;
-            }
-
-            var type = CoreCursorType.Arrow;
-            switch (cursorType)
-            {
-                case CursorType.Default:
-                    type = CoreCursorType.Arrow;
-                    break;
-                case CursorType.Pan:
-                    type = CoreCursorType.Hand;
-                    break;
-                case CursorType.ZoomHorizontal:
-                    type = CoreCursorType.SizeWestEast;
-                    break;
-                case CursorType.ZoomVertical:
-                    type = CoreCursorType.SizeNorthSouth;
-                    break;
-                case CursorType.ZoomRectangle:
-                    type = CoreCursorType.SizeNorthwestSoutheast;
-                    break;
-            }
-
-            // TODO: determine if creating a CoreCursor is possible, do not use exception
-            try
-            {
-                var newCursor = new CoreCursor(type, 1); // this line throws an exception on Windows Phone
-#if HAS_WINUI
-                global::Microsoft.UI.Xaml.Window.Current.CoreWindow.PointerCursor = newCursor;
-#else
-                global::Windows.UI.Xaml.Window.Current.CoreWindow.PointerCursor = newCursor;
-#endif
-            }
-            catch (NotImplementedException)
-            {
-                cursorNotImplemented = true;
-            }
-        }
-
-        /// <summary>
-        /// Shows the tracker.
-        /// </summary>
-        /// <param name="trackerHitResult">The tracker data.</param>
-        public void ShowTracker(TrackerHitResult trackerHitResult)
-        {
-            if (trackerHitResult == null)
-            {
-                this.HideTracker();
-                return;
-            }
-
-            var trackerTemplate = this.DefaultTrackerTemplate;
-            if (trackerHitResult.Series != null && !string.IsNullOrEmpty(trackerHitResult.Series.TrackerKey))
-            {
-                var match = this.TrackerDefinitions.FirstOrDefault(t => t.TrackerKey == trackerHitResult.Series.TrackerKey);
-                if (match != null)
-                {
-                    trackerTemplate = match.TrackerTemplate;
-                }
-            }
-
-            if (trackerTemplate == null)
-            {
-                this.HideTracker();
-                return;
-            }
-
-            var tracker = new ContentControl { Template = trackerTemplate };
-
-            if (tracker != this.currentTracker)
-            {
-                this.HideTracker();
-                if (overlays != null)
-                {
-                    this.overlays.Children.Add(tracker);
-                }
-                this.currentTracker = tracker;
-            }
-
-            //if (this.currentTracker != null)
-            {
-                this.currentTracker.DataContext = trackerHitResult;
-            }
-        }
-
-        /// <summary>
-        /// Shows the zoom rectangle.
-        /// </summary>
-        /// <param name="rectangle">The rectangle.</param>
-        public void ShowZoomRectangle(OxyRect rectangle)
-        {
-            if (zoomRectangle == null)
-            {
-                return;
-            }
-
-            this.zoomRectangle.Width = rectangle.Width;
-            this.zoomRectangle.Height = rectangle.Height;
-            Canvas.SetLeft(this.zoomRectangle, rectangle.Left);
-            Canvas.SetTop(this.zoomRectangle, rectangle.Top);
-            this.zoomRectangle.Template = this.ZoomRectangleTemplate;
-            this.zoomRectangle.Visibility = Visibility.Visible;
-        }
-
-        /// <summary>
-        /// Renders the PlotView to a bitmap.
-        /// </summary>
-        /// <returns>A bitmap.</returns>
-        public WriteableBitmap ToBitmap()
-        {
-            throw new NotImplementedException();
-
-            // var bmp = new RenderTargetBitmap(
-            // (int)this.ActualWidth, (int)this.ActualHeight, 96, 96, PixelFormats.Pbgra32);
-            // bmp.Render(this);
-            // return bmp;
-        }
-
-        /// <summary>
-        /// Stores text on the clipboard.
-        /// </summary>
-        /// <param name="text">The text.</param>
-        public void SetClipboardText(string text)
-        {
-            var pkg = new DataPackage();
-            pkg.SetText(text);
-
-            // TODO: Clipboard.SetContent(pkg);
-        }
-
-        /// <summary>
-        /// Invoked whenever application code or internal processes (such as a rebuilding layout pass) call ApplyTemplate. In simplest terms, this means the method is called just before a UI element displays in your app. Override this method to influence the default post-template logic of a class.
-        /// </summary>
-        protected override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-
-            this.grid = this.GetTemplateChild(PartGrid) as Grid;
-            if (this.grid == null)
-            {
-                return;
-            }
-
-            this.canvas = new Canvas { IsHitTestVisible = false };
-            this.grid.Children.Add(this.canvas);
-            this.canvas.UpdateLayout();
-
-            this.renderContext = new RenderContext(this.canvas);
-
-            this.overlays = new Canvas();
-            this.grid.Children.Add(this.overlays);
-
-            this.zoomRectangle = new ContentControl();
-            this.overlays.Children.Add(this.zoomRectangle);
-        }
-
+#if !HAS_WPF
         /// <summary>
         /// Called before the KeyDown event occurs.
         /// </summary>
@@ -827,32 +357,32 @@ namespace OxyPlot.Windows
 
             e.Handled = this.ActualController.HandleMouseLeave(this, e.ToMouseEventArgs(this));
         }
+        
+        /// <summary>
+        /// A one time condition for update visuals so it is called no matter the state of the control
+        /// Currently with out this, the plotview on Xamarin Forms UWP does not render until the app's window resizes
+        /// </summary>
+        private bool isUpdateVisualsCalledOnce;
 
-		/// <summary>
-		/// A one time condition for update visuals so it is called no matter the state of the control
-		/// Currently with out this, the plotview on Xamarin Forms UWP does not render until the app's window resizes
-		/// </summary>
-		private bool isUpdateVisualsCalledOnce;
-
-		/// <summary>
-		/// Provides the behavior for the Arrange pass of layout. Classes can override this method to define their own Arrange pass behavior.
-		/// </summary>
-		/// <param name="finalSize">The final area within the parent that this object should use to arrange itself and its children.</param>
-		/// <returns>The actual size that is used after the element is arranged in layout.</returns>
-		protected override Size ArrangeOverride(Size finalSize)
+        /// <summary>
+        /// Provides the behavior for the Arrange pass of layout. Classes can override this method to define their own Arrange pass behavior.
+        /// </summary>
+        /// <param name="finalSize">The final area within the parent that this object should use to arrange itself and its children.</param>
+        /// <returns>The actual size that is used after the element is arranged in layout.</returns>
+        protected override Size ArrangeOverride(Size finalSize)
 		{
 			if (this.ActualWidth > 0 && this.ActualHeight > 0)
 			{
 				if (Interlocked.CompareExchange(ref this.isPlotInvalidated, 0, 1) == 1)
 				{
-					this.UpdateVisuals();
+					this.Render();
 				}
 			}
 
 			//see summary for isUpdateVisualsCalledOnce
 			if (!isUpdateVisualsCalledOnce)
 			{
-				this.UpdateVisuals();
+				this.Render();
 
 				isUpdateVisualsCalledOnce = true;
 			}
@@ -883,29 +413,6 @@ namespace OxyPlot.Windows
         }
 
         /// <summary>
-        /// Called when the model is changed.
-        /// </summary>
-        private void OnModelChanged()
-        {
-            lock (this.modelLock)
-            {
-                if (this.currentModel != null)
-                {
-                    ((IPlotModel)this.currentModel).AttachPlotView(null);
-                    this.currentModel = null;
-                }
-
-                if (this.Model != null)
-                {
-                    ((IPlotModel)this.Model).AttachPlotView(this);
-                    this.currentModel = this.Model;
-                }
-            }
-
-            this.InvalidatePlot();
-        }
-
-        /// <summary>
         /// Called when the size of the control is changed.
         /// </summary>
         /// <param name="sender">The sender.</param>
@@ -914,73 +421,176 @@ namespace OxyPlot.Windows
         {
             this.InvalidatePlot(false);
         }
+#endif
 
         /// <summary>
-        /// Updates the model.
+        /// Identifies the <see cref="TextMeasurementMethod"/> dependency property.
         /// </summary>
-        /// <param name="update">if set to <c>true</c>, the data collections will be updated.</param>
-        private void UpdateModel(bool update)
+        public static readonly DependencyProperty TextMeasurementMethodProperty =
+            DependencyProperty.Register(
+                nameof(TextMeasurementMethod), typeof(TextMeasurementMethod), typeof(PlotViewBase), new PropertyMetadata(TextMeasurementMethod.TextBlock));
+
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to disconnect the canvas while updating.
+        /// </summary>
+        /// <value><c>true</c> if canvas should be disconnected while updating; otherwise, <c>false</c>.</value>
+        public bool DisconnectCanvasWhileUpdating { get; set; }
+
+        /// <summary>
+        /// Gets or sets the vertical zoom cursor.
+        /// </summary>
+        /// <value>The zoom vertical cursor.</value>
+        public TextMeasurementMethod TextMeasurementMethod
         {
-            if (this.ActualModel != null)
-            {
-                ((IPlotModel)this.ActualModel).Update(update);
-            }
+            get => (TextMeasurementMethod)this.GetValue(TextMeasurementMethodProperty);
+            set => this.SetValue(TextMeasurementMethodProperty, value);
         }
 
         /// <summary>
-        /// Updates the visuals.
+        /// Gets the Canvas.
         /// </summary>
-        private void UpdateVisuals()
+        protected Canvas? Canvas => this.plotPresenter as Canvas;
+
+        /// <summary>
+        /// Gets the CanvasRenderContext.
+        /// </summary>
+        private CanvasRenderContext? RenderContext => this.renderContext as CanvasRenderContext;
+
+        /// <inheritdoc/>
+        protected override void ClearBackground()
         {
-            if (this.canvas == null || this.renderContext == null)
+            if (Canvas == null)
             {
                 return;
             }
 
-            // Clear the canvas
-            this.canvas.Children.Clear();
+            this.Canvas.Children.Clear();
 
-            if (this.ActualModel != null && !this.ActualModel.Background.IsUndefined())
+            if (this.ActualModel != null && this.ActualModel.Background.IsVisible())
             {
-                this.canvas.Background = this.ActualModel.Background.ToBrush();
+                this.Canvas.Background = this.ActualModel.Background.ToBrush();
             }
             else
             {
-                this.canvas.Background = null;
+                this.Canvas.Background = null;
+            }
+        }
+
+        /// <inheritdoc/>
+        protected override FrameworkElement CreatePlotPresenter()
+        {
+            return new Canvas
+            {
+#if !HAS_WPF
+                IsHitTestVisible = false,
+#endif
+            };
+        }
+
+        /// <inheritdoc/>
+        protected override IRenderContext CreateRenderContext()
+        {
+            if (Canvas == null)
+            {
+                throw new InvalidOperationException("Canvas is null");
             }
 
-            if (this.ActualModel != null)
+            return new CanvasRenderContext(this.Canvas);
+        }
+
+#if HAS_WPF
+        /// <inheritdoc/>
+        protected override void OnRender(DrawingContext drawingContext)
+        {
+            this.Render();
+            base.OnRender(drawingContext);
+        }
+#endif
+
+        /// <inheritdoc/>
+        protected override void RenderOverride()
+        {
+            if (RenderContext == null)
             {
-                ((IPlotModel)this.ActualModel).Render(this.renderContext, new OxyRect(0, 0, this.canvas.ActualWidth, this.canvas.ActualHeight));
+                base.RenderOverride();
+                return;
             }
+
+            this.RenderContext.TextMeasurementMethod = this.TextMeasurementMethod;
+            if (this.DisconnectCanvasWhileUpdating && grid != null)
+            {
+                // TODO: profile... not sure if this makes any difference
+                var idx = this.grid.Children.IndexOf(this.plotPresenter);
+                if (idx != -1)
+                {
+                    this.grid.Children.RemoveAt(idx);
+                }
+
+                base.RenderOverride();
+
+                if (idx != -1)
+                {
+                    // reinsert the canvas again
+                    this.grid.Children.Insert(idx, this.plotPresenter);
+                }
+            }
+            else
+            {
+                base.RenderOverride();
+            }
+        }
+
+#if HAS_WPF
+        /// <inheritdoc/>
+        protected override double UpdateDpi()
+        {
+            if (RenderContext == null)
+            {
+                throw new InvalidOperationException("RenderContext is null");
+            }
+
+            var scale = base.UpdateDpi();
+            this.RenderContext.DpiScale = scale;
+            this.RenderContext.VisualOffset = this.TransformToAncestor(this.GetAncestorVisualFromVisualTree(this)).Transform(default);
+            return scale;
         }
 
         /// <summary>
-        /// Invokes the specified action on the UI Thread (without blocking the calling thread).
+        /// Performs the copy operation.
         /// </summary>
-        /// <param name="action">The action.</param>
-#pragma warning disable CA1822 // Mark members as static
-        private void BeginInvoke(Action action)
-#pragma warning restore CA1822 // Mark members as static
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="System.Windows.Input.ExecutedRoutedEventArgs" /> instance containing the event data.</param>
+        private void DoCopy(object sender, ExecutedRoutedEventArgs e)
         {
-#if HAS_WINUI || HAS_UNO
-            action();
-#else
-            if (!this.Dispatcher.HasThreadAccess)
+            if (ActualModel == null)
             {
-                // TODO: Fix warning?
-                // Because this call is not awaited, execution of the current method continues before the call is completed.
-                // Consider applying the 'await' operator to the result of the call.
-#pragma warning disable 4014
-                this.Dispatcher.RunAsync(CoreDispatcherPriority.Low, () => action());
-#pragma warning restore 4014
+                throw new InvalidOperationException("ActualModel is null");
             }
-            else
-            {
-                action();
-            }
-#endif
+
+            var exporter = new PngExporter() { Width = (int)this.ActualWidth, Height = (int)this.ActualHeight };
+            var bitmap = exporter.ExportToBitmap(this.ActualModel);
+            Clipboard.SetImage(bitmap);
         }
+
+
+        /// <summary>
+        /// Returns a reference to the visual object that hosts the dependency object in the visual tree.
+        /// </summary>
+        /// <returns> The host window from the visual tree.</returns>
+        private Visual GetAncestorVisualFromVisualTree(DependencyObject startElement)
+        {
+
+            DependencyObject child = startElement;
+            DependencyObject parent = VisualTreeHelper.GetParent(child);
+            while (parent != null)
+            {
+                child = parent;
+                parent = VisualTreeHelper.GetParent(child);
+            }
+
+            return child is Visual visualChild ? visualChild : Window.GetWindow(this);
+        }
+#endif
     }
 }
-#endif

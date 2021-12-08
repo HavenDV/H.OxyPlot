@@ -7,7 +7,7 @@
 using OxyPlot.Controls;
 using System.Collections.ObjectModel;
 
-namespace OxyPlot.Wpf
+namespace OxyPlot
 {
 
     /// <summary>
@@ -20,6 +20,13 @@ namespace OxyPlot.Wpf
         /// The Grid PART constant.
         /// </summary>
         protected const string PartGrid = "PART_Grid";
+
+#if !HAS_WPF
+        /// <summary>
+        /// The is PlotView invalidated.
+        /// </summary>
+        protected int isPlotInvalidated;
+#endif
 
         /// <summary>
         /// The grid.
@@ -99,10 +106,8 @@ namespace OxyPlot.Wpf
             Padding = new Thickness(8);
 #endif
 
-            this.TrackerDefinitions = new ObservableCollection<TrackerDefinition>();
-
 #if HAS_WPF
-            this.CommandBindings.Add(new CommandBinding(PlotCommands.ResetAxes, (s, e) => this.ResetAllAxes()));
+            this.CommandBindings.Add(new CommandBinding(PlotUICommands.ResetAxes, (s, e) => this.ResetAllAxes()));
             this.IsManipulationEnabled = true;
             this.LayoutUpdated += this.OnLayoutUpdated;
 #endif
@@ -135,7 +140,7 @@ namespace OxyPlot.Wpf
         /// Gets the tracker definitions.
         /// </summary>
         /// <value>The tracker definitions.</value>
-        public ObservableCollection<TrackerDefinition> TrackerDefinitions { get; }
+        public ObservableCollection<TrackerDefinition> TrackerDefinitions { get; } = new();
 
         /// <summary>
         /// Hides the tracker.
@@ -170,17 +175,35 @@ namespace OxyPlot.Wpf
         /// <param name="updateData">The update Data.</param>
         public void InvalidatePlot(bool updateData = true)
         {
-            if (this.ActualModel == null)
+#if HAS_WPF
+            if (DesignerProperties.GetIsInDesignMode(this))
+#else
+            if (DesignMode.DesignModeEnabled)
+#endif
             {
+                this.InvalidateArrange();
                 return;
             }
 
-            lock (this.ActualModel.SyncRoot)
+            if (this.ActualModel != null)
             {
-                ((IPlotModel)this.ActualModel).Update(updateData);
+                lock (this.ActualModel.SyncRoot)
+                {
+                    ((IPlotModel)this.ActualModel).Update(updateData);
+                }
             }
 
+#if HAS_WPF
             this.BeginInvoke(this.Render);
+#else
+            if (Interlocked.CompareExchange(ref this.isPlotInvalidated, 1, 0) == 0)
+            {
+                // Invalidate the arrange state for the element.
+                // After the invalidation, the element will have its layout updated,
+                // which will occur asynchronously unless subsequently forced by UpdateLayout.
+                this.BeginInvoke(this.InvalidateArrange);
+            }
+#endif
         }
 
         /// <inheritdoc/>
@@ -257,6 +280,11 @@ namespace OxyPlot.Wpf
         {
 #if HAS_WPF
             Clipboard.SetText(text);
+#else
+            var pkg = new DataPackage();
+            pkg.SetText(text);
+
+            // TODO: Clipboard.SetContent(pkg);
 #endif
         }
 
@@ -266,6 +294,53 @@ namespace OxyPlot.Wpf
         /// <param name="cursorType">The cursor type.</param>
         public void SetCursorType(CursorType cursorType)
         {
+#if false
+        /// <summary>
+        /// Flags if the cursor is not implemented (Windows Phone).
+        /// </summary>
+        private static bool cursorNotImplemented;
+
+            if (cursorNotImplemented)
+            {
+                // setting the cursor has failed in a previous attempt, see code below
+                return;
+            }
+
+            var type = CoreCursorType.Arrow;
+            switch (cursorType)
+            {
+                case CursorType.Default:
+                    type = CoreCursorType.Arrow;
+                    break;
+                case CursorType.Pan:
+                    type = CoreCursorType.Hand;
+                    break;
+                case CursorType.ZoomHorizontal:
+                    type = CoreCursorType.SizeWestEast;
+                    break;
+                case CursorType.ZoomVertical:
+                    type = CoreCursorType.SizeNorthSouth;
+                    break;
+                case CursorType.ZoomRectangle:
+                    type = CoreCursorType.SizeNorthwestSoutheast;
+                    break;
+            }
+
+            // TODO: determine if creating a CoreCursor is possible, do not use exception
+            try
+            {
+                var newCursor = new CoreCursor(type, 1); // this line throws an exception on Windows Phone
+#if HAS_WINUI
+                global::Microsoft.UI.Xaml.Window.Current.CoreWindow.PointerCursor = newCursor;
+#else
+                global::Windows.UI.Xaml.Window.Current.CoreWindow.PointerCursor = newCursor;
+#endif
+            }
+            catch (NotImplementedException)
+            {
+                cursorNotImplemented = true;
+            }
+#endif
             var cursor = cursorType switch
             {
                 CursorType.Pan => PanCursor,
@@ -406,7 +481,11 @@ namespace OxyPlot.Wpf
         /// </summary>
         protected void Render()
         {
-            if (this.plotPresenter == null || this.renderContext == null || !(this.isInVisualTree = this.IsInVisualTree()))
+            if (this.plotPresenter == null || this.renderContext == null
+#if HAS_WPF
+                || !(this.isInVisualTree = this.IsInVisualTree())
+#endif
+                )
             {
                 return;
             }
