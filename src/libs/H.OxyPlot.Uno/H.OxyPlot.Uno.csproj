@@ -17,5 +17,6 @@
   </ItemGroup>
 
   <Import Project="..\..\shared\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems" Label="Shared" />
+  <Import Project="..\..\shared\H.OxyPlot.Uno.Shared\H.OxyPlot.Uno.Shared.projitems" Label="Shared" />
 
 </Project>
