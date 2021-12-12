@@ -25,7 +25,7 @@
     <LinkerDescriptor Include="LinkerConfig.xml" />
     <EmbeddedResource Include="WasmCSS\Fonts.css" />
     <EmbeddedResource Include="WasmScripts\AppManifest.js" />
-    <UpToDateCheckInput Include="..\..\shared\H.ReactiveUI.Apps.Uno.Shared\**\*.xaml" />
+    <UpToDateCheckInput Include="..\..\..\shared\H.ReactiveUI.Apps.Uno.Shared\**\*.xaml" />
   </ItemGroup>
 
   <ItemGroup>
