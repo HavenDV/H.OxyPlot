@@ -889,6 +889,20 @@ namespace OxyPlot
                 return null;
             }
 
+#if !HAS_WPF
+#if HAS_WINUI
+            if (Microsoft.UI.Xaml.Application.Current != null &&
+                Microsoft.UI.Xaml.Application.Current.RequestedTheme == ApplicationTheme.Dark &&
+#else
+            if (Windows.UI.Xaml.Application.Current != null &&
+                Windows.UI.Xaml.Application.Current.RequestedTheme == ApplicationTheme.Dark &&
+#endif
+                color == OxyColors.Black)
+            {
+                color = OxyColors.White;
+            }
+#endif
+
             if (!this.brushCache.TryGetValue(color, out var brush))
             {
                 brush = new SolidColorBrush(color.ToColor());
