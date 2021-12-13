@@ -68,7 +68,6 @@ Global
 		src\shared\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{65786107-e646-452e-b899-edd26d09e401}*SharedItemsImports = 5
 		src\shared\H.OxyPlot.Wpf.Shared\H.OxyPlot.Wpf.Shared.projitems*{65786107-e646-452e-b899-edd26d09e401}*SharedItemsImports = 5
 		src\shared\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{682d6fb2-c18b-4522-8b33-567fcc8647fe}*SharedItemsImports = 5
-		src\shared\H.OxyPlot.Uno.Shared\H.OxyPlot.Uno.Shared.projitems*{682d6fb2-c18b-4522-8b33-567fcc8647fe}*SharedItemsImports = 5
 		src\shared\H.OxyPlot.Wpf.Shared\H.OxyPlot.Wpf.Shared.projitems*{774449f2-74cb-40fd-ae69-f10e9e7d4654}*SharedItemsImports = 13
 		src\shared\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{7b01963a-703c-458d-b3aa-6c47f94b4149}*SharedItemsImports = 5
 		src\shared\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems*{7b01963a-703c-458d-b3aa-6c47f94b4149}*SharedItemsImports = 5

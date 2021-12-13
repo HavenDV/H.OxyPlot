@@ -4,7 +4,6 @@
     <TargetFrameworks>net5.0-windows10.0.18362.0;net6.0-windows10.0.18362.0</TargetFrameworks>
     <UseWinUI>true</UseWinUI>
     <DefineConstants>$(DefineConstants);HAS_WINUI</DefineConstants>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,6 +16,14 @@
   </ItemGroup>
 
   <Import Project="..\..\shared\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems" Label="Shared" />
-  <Import Project="..\..\shared\H.OxyPlot.Uno.Shared\H.OxyPlot.Uno.Shared.projitems" Label="Shared" />
+  
+  <!-- Issue: https://github.com/microsoft/microsoft-ui-xaml/issues/6456 -->
+  <!--<Import Project="..\..\shared\H.OxyPlot.Uno.Shared\H.OxyPlot.Uno.Shared.projitems" Label="Shared" />-->
+  <ItemGroup>
+    <Page Include="..\..\shared\H.OxyPlot.Uno.Shared\Themes\Generic.xaml" Link="Themes\%(FileName).xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
 
 </Project>
