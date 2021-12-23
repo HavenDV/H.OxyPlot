@@ -24,7 +24,7 @@
     <LinkerDescriptor Include="LinkerConfig.xml" />
     <EmbeddedResource Include="WasmCSS\Fonts.css" />
     <EmbeddedResource Include="WasmScripts\AppManifest.js" />
-    <UpToDateCheckInput Include="..\..\..\shared\H.OxyPlot.Apps.Uno.Shared\**\*.xaml" />
+    <UpToDateCheckInput Include="..\..\H.OxyPlot.Apps.Uno.Shared\**\*.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,7 +41,7 @@
     <ProjectReference Include="..\..\..\libs\H.OxyPlot.Uno\H.OxyPlot.Uno.csproj" />
   </ItemGroup>
 
-  <Import Project="..\..\..\shared\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems" Label="Shared" />
-  <Import Project="..\..\..\shared\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems" Label="Shared" />
+  <Import Project="..\..\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems" Label="Shared" />
+  <Import Project="..\..\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems" Label="Shared" />
   
 </Project>

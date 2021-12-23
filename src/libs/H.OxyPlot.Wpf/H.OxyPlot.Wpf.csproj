@@ -40,7 +40,7 @@
     </PackageReference>
   </ItemGroup>-->
 
-  <Import Project="..\..\shared\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems" Label="Shared" />
-  <Import Project="..\..\shared\H.OxyPlot.Wpf.Shared\H.OxyPlot.Wpf.Shared.projitems" Label="Shared" />
+  <Import Project="..\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems" Label="Shared" />
+  <Import Project="..\H.OxyPlot.Wpf.Shared\H.OxyPlot.Wpf.Shared.projitems" Label="Shared" />
 
 </Project>

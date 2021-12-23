@@ -134,8 +134,8 @@
       <Name>H.OxyPlot.Uwp</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="..\..\shared\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems" Label="Shared" />
-  <Import Project="..\..\shared\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems" Label="Shared" />
+  <Import Project="..\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems" Label="Shared" />
+  <Import Project="..\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

@@ -8,8 +8,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{A81088C2-A
 		src\libs\Directory.Build.props = src\libs\Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{2CEE2766-3A6D-4891-9416-01E4FAC0B243}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "H.OxyPlot.Wpf", "src\libs\H.OxyPlot.Wpf\H.OxyPlot.Wpf.csproj", "{65786107-E646-452E-B899-EDD26D09E401}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9972D12E-4770-4883-AE5D-98412271DE83}"
@@ -30,17 +28,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apps", "apps", "{464A41EC-E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "H.OxyPlot.Apps.Wpf", "src\apps\H.OxyPlot.Apps.Wpf\H.OxyPlot.Apps.Wpf.csproj", "{8C2D2DDA-890B-4F6F-938F-9CFDF82AAC0F}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "H.OxyPlot.Shared", "src\shared\H.OxyPlot.Shared\H.OxyPlot.Shared.shproj", "{F497B163-E46E-4EA6-9E41-BB0C25CA6272}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "H.OxyPlot.Uno.WinUI", "src\libs\H.OxyPlot.Uno.WinUI\H.OxyPlot.Uno.WinUI.csproj", "{AB635967-D2FF-4A55-A319-109099DE8FF4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "H.OxyPlot.Apps.WinUI", "src\apps\H.OxyPlot.Apps.WinUI\H.OxyPlot.Apps.WinUI.csproj", "{FCFCA672-7669-4AAC-A76D-6A12E40F2EAB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "H.OxyPlot.WinUI", "src\libs\H.OxyPlot.WinUI\H.OxyPlot.WinUI.csproj", "{682D6FB2-C18B-4522-8B33-567FCC8647FE}"
-EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "H.OxyPlot.Apps.Shared", "src\shared\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.shproj", "{B2C9A032-9670-421E-A413-7C7F504F5B55}"
-EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "H.OxyPlot.Apps.Uno.Shared", "src\shared\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.shproj", "{418D1399-62C8-481B-A954-517B189ECA70}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H.OxyPlot.Apps.Uwp", "src\apps\H.OxyPlot.Apps.Uwp\H.OxyPlot.Apps.Uwp.csproj", "{2B65E186-B9E6-4CEF-9AE6-478C6DE59BC4}"
 EndProject
@@ -54,37 +46,43 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "H.OxyPlot.Apps.Uno.Skia.Wpf
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "H.OxyPlot.Apps.Uno.WinUI.WebAssembly", "src\apps\Uno\H.OxyPlot.Apps.Uno.WinUI.WebAssembly\H.OxyPlot.Apps.Uno.WinUI.WebAssembly.csproj", "{7B01963A-703C-458D-B3AA-6C47F94B4149}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "H.OxyPlot.Wpf.Shared", "src\shared\H.OxyPlot.Wpf.Shared\H.OxyPlot.Wpf.Shared.shproj", "{774449F2-74CB-40FD-AE69-F10E9E7D4654}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "H.OxyPlot.Shared", "src\libs\H.OxyPlot.Shared\H.OxyPlot.Shared.shproj", "{F497B163-E46E-4EA6-9E41-BB0C25CA6272}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "H.OxyPlot.Uno.Shared", "src\shared\H.OxyPlot.Uno.Shared\H.OxyPlot.Uno.Shared.shproj", "{94F69FED-CBB6-4085-9798-8AAEED049BAC}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "H.OxyPlot.Uno.Shared", "src\libs\H.OxyPlot.Uno.Shared\H.OxyPlot.Uno.Shared.shproj", "{94F69FED-CBB6-4085-9798-8AAEED049BAC}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "H.OxyPlot.Wpf.Shared", "src\libs\H.OxyPlot.Wpf.Shared\H.OxyPlot.Wpf.Shared.shproj", "{774449F2-74CB-40FD-AE69-F10E9E7D4654}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "H.OxyPlot.Apps.Shared", "src\apps\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.shproj", "{B2C9A032-9670-421E-A413-7C7F504F5B55}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "H.OxyPlot.Apps.Uno.Shared", "src\apps\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.shproj", "{418D1399-62C8-481B-A954-517B189ECA70}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		src\shared\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{16a17957-6de3-4874-b0b6-08404c23fbbe}*SharedItemsImports = 5
-		src\shared\H.OxyPlot.Uno.Shared\H.OxyPlot.Uno.Shared.projitems*{16a17957-6de3-4874-b0b6-08404c23fbbe}*SharedItemsImports = 5
-		src\shared\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{2b65e186-b9e6-4cef-9ae6-478c6de59bc4}*SharedItemsImports = 4
-		src\shared\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems*{2b65e186-b9e6-4cef-9ae6-478c6de59bc4}*SharedItemsImports = 4
-		src\shared\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems*{418d1399-62c8-481b-a954-517b189eca70}*SharedItemsImports = 13
-		src\shared\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{65786107-e646-452e-b899-edd26d09e401}*SharedItemsImports = 5
-		src\shared\H.OxyPlot.Wpf.Shared\H.OxyPlot.Wpf.Shared.projitems*{65786107-e646-452e-b899-edd26d09e401}*SharedItemsImports = 5
-		src\shared\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{682d6fb2-c18b-4522-8b33-567fcc8647fe}*SharedItemsImports = 5
-		src\shared\H.OxyPlot.Wpf.Shared\H.OxyPlot.Wpf.Shared.projitems*{774449f2-74cb-40fd-ae69-f10e9e7d4654}*SharedItemsImports = 13
-		src\shared\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{7b01963a-703c-458d-b3aa-6c47f94b4149}*SharedItemsImports = 5
-		src\shared\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems*{7b01963a-703c-458d-b3aa-6c47f94b4149}*SharedItemsImports = 5
-		src\shared\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{8c2d2dda-890b-4f6f-938f-9cfdf82aac0f}*SharedItemsImports = 5
-		src\shared\H.OxyPlot.Uno.Shared\H.OxyPlot.Uno.Shared.projitems*{94f69fed-cbb6-4085-9798-8aaeed049bac}*SharedItemsImports = 13
-		src\shared\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{ab635967-d2ff-4a55-a319-109099de8ff4}*SharedItemsImports = 5
-		src\shared\H.OxyPlot.Uno.Shared\H.OxyPlot.Uno.Shared.projitems*{ab635967-d2ff-4a55-a319-109099de8ff4}*SharedItemsImports = 5
-		src\shared\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{b2c9a032-9670-421e-a413-7c7f504f5b55}*SharedItemsImports = 13
-		src\shared\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{c66983ae-41c4-4765-bb2f-371cd7e60812}*SharedItemsImports = 5
-		src\shared\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems*{c66983ae-41c4-4765-bb2f-371cd7e60812}*SharedItemsImports = 5
-		src\shared\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{e1d3d9c7-de26-4ff5-ac1f-136a2820e59b}*SharedItemsImports = 5
-		src\shared\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems*{e1d3d9c7-de26-4ff5-ac1f-136a2820e59b}*SharedItemsImports = 5
-		src\shared\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{f497b163-e46e-4ea6-9e41-bb0c25ca6272}*SharedItemsImports = 13
-		src\shared\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{f5eb3a73-1d93-42f7-9757-26b486d74592}*SharedItemsImports = 5
-		src\shared\H.OxyPlot.Uno.Shared\H.OxyPlot.Uno.Shared.projitems*{f5eb3a73-1d93-42f7-9757-26b486d74592}*SharedItemsImports = 5
-		src\shared\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{fcfca672-7669-4aac-a76d-6a12e40f2eab}*SharedItemsImports = 5
-		src\shared\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems*{fcfca672-7669-4aac-a76d-6a12e40f2eab}*SharedItemsImports = 5
+		src\libs\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{16a17957-6de3-4874-b0b6-08404c23fbbe}*SharedItemsImports = 5
+		src\libs\H.OxyPlot.Uno.Shared\H.OxyPlot.Uno.Shared.projitems*{16a17957-6de3-4874-b0b6-08404c23fbbe}*SharedItemsImports = 5
+		src\apps\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{2b65e186-b9e6-4cef-9ae6-478c6de59bc4}*SharedItemsImports = 4
+		src\apps\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems*{2b65e186-b9e6-4cef-9ae6-478c6de59bc4}*SharedItemsImports = 4
+		src\apps\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems*{418d1399-62c8-481b-a954-517b189eca70}*SharedItemsImports = 13
+		src\libs\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{65786107-e646-452e-b899-edd26d09e401}*SharedItemsImports = 5
+		src\libs\H.OxyPlot.Wpf.Shared\H.OxyPlot.Wpf.Shared.projitems*{65786107-e646-452e-b899-edd26d09e401}*SharedItemsImports = 5
+		src\libs\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{682d6fb2-c18b-4522-8b33-567fcc8647fe}*SharedItemsImports = 5
+		src\libs\H.OxyPlot.Wpf.Shared\H.OxyPlot.Wpf.Shared.projitems*{774449f2-74cb-40fd-ae69-f10e9e7d4654}*SharedItemsImports = 13
+		src\apps\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{7b01963a-703c-458d-b3aa-6c47f94b4149}*SharedItemsImports = 5
+		src\apps\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems*{7b01963a-703c-458d-b3aa-6c47f94b4149}*SharedItemsImports = 5
+		src\apps\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{8c2d2dda-890b-4f6f-938f-9cfdf82aac0f}*SharedItemsImports = 5
+		src\libs\H.OxyPlot.Uno.Shared\H.OxyPlot.Uno.Shared.projitems*{94f69fed-cbb6-4085-9798-8aaeed049bac}*SharedItemsImports = 13
+		src\libs\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{ab635967-d2ff-4a55-a319-109099de8ff4}*SharedItemsImports = 5
+		src\libs\H.OxyPlot.Uno.Shared\H.OxyPlot.Uno.Shared.projitems*{ab635967-d2ff-4a55-a319-109099de8ff4}*SharedItemsImports = 5
+		src\apps\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{b2c9a032-9670-421e-a413-7c7f504f5b55}*SharedItemsImports = 13
+		src\apps\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{c66983ae-41c4-4765-bb2f-371cd7e60812}*SharedItemsImports = 5
+		src\apps\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems*{c66983ae-41c4-4765-bb2f-371cd7e60812}*SharedItemsImports = 5
+		src\apps\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{e1d3d9c7-de26-4ff5-ac1f-136a2820e59b}*SharedItemsImports = 5
+		src\apps\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems*{e1d3d9c7-de26-4ff5-ac1f-136a2820e59b}*SharedItemsImports = 5
+		src\libs\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{f497b163-e46e-4ea6-9e41-bb0c25ca6272}*SharedItemsImports = 13
+		src\libs\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{f5eb3a73-1d93-42f7-9757-26b486d74592}*SharedItemsImports = 5
+		src\libs\H.OxyPlot.Uno.Shared\H.OxyPlot.Uno.Shared.projitems*{f5eb3a73-1d93-42f7-9757-26b486d74592}*SharedItemsImports = 5
+		src\apps\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{fcfca672-7669-4aac-a76d-6a12e40f2eab}*SharedItemsImports = 5
+		src\apps\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems*{fcfca672-7669-4aac-a76d-6a12e40f2eab}*SharedItemsImports = 5
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -354,20 +352,20 @@ Global
 		{16A17957-6DE3-4874-B0B6-08404C23FBBE} = {A81088C2-A6AF-4CB6-8F36-DF8C0E6D45B3}
 		{F5EB3A73-1D93-42F7-9757-26B486D74592} = {A81088C2-A6AF-4CB6-8F36-DF8C0E6D45B3}
 		{8C2D2DDA-890B-4F6F-938F-9CFDF82AAC0F} = {464A41EC-E4D1-4BC3-93BD-A48E3449A4BD}
-		{F497B163-E46E-4EA6-9E41-BB0C25CA6272} = {2CEE2766-3A6D-4891-9416-01E4FAC0B243}
 		{AB635967-D2FF-4A55-A319-109099DE8FF4} = {A81088C2-A6AF-4CB6-8F36-DF8C0E6D45B3}
 		{FCFCA672-7669-4AAC-A76D-6A12E40F2EAB} = {464A41EC-E4D1-4BC3-93BD-A48E3449A4BD}
 		{682D6FB2-C18B-4522-8B33-567FCC8647FE} = {A81088C2-A6AF-4CB6-8F36-DF8C0E6D45B3}
-		{B2C9A032-9670-421E-A413-7C7F504F5B55} = {2CEE2766-3A6D-4891-9416-01E4FAC0B243}
-		{418D1399-62C8-481B-A954-517B189ECA70} = {2CEE2766-3A6D-4891-9416-01E4FAC0B243}
 		{2B65E186-B9E6-4CEF-9AE6-478C6DE59BC4} = {464A41EC-E4D1-4BC3-93BD-A48E3449A4BD}
 		{D4368B3C-9F13-405D-8F38-E18644BDD329} = {464A41EC-E4D1-4BC3-93BD-A48E3449A4BD}
 		{E1D3D9C7-DE26-4FF5-AC1F-136A2820E59B} = {D4368B3C-9F13-405D-8F38-E18644BDD329}
 		{C66983AE-41C4-4765-BB2F-371CD7E60812} = {D4368B3C-9F13-405D-8F38-E18644BDD329}
 		{A57FBA46-1EE2-4798-875D-CB43CAE012ED} = {D4368B3C-9F13-405D-8F38-E18644BDD329}
 		{7B01963A-703C-458D-B3AA-6C47F94B4149} = {D4368B3C-9F13-405D-8F38-E18644BDD329}
-		{774449F2-74CB-40FD-AE69-F10E9E7D4654} = {2CEE2766-3A6D-4891-9416-01E4FAC0B243}
-		{94F69FED-CBB6-4085-9798-8AAEED049BAC} = {2CEE2766-3A6D-4891-9416-01E4FAC0B243}
+		{F497B163-E46E-4EA6-9E41-BB0C25CA6272} = {A81088C2-A6AF-4CB6-8F36-DF8C0E6D45B3}
+		{94F69FED-CBB6-4085-9798-8AAEED049BAC} = {A81088C2-A6AF-4CB6-8F36-DF8C0E6D45B3}
+		{774449F2-74CB-40FD-AE69-F10E9E7D4654} = {A81088C2-A6AF-4CB6-8F36-DF8C0E6D45B3}
+		{B2C9A032-9670-421E-A413-7C7F504F5B55} = {464A41EC-E4D1-4BC3-93BD-A48E3449A4BD}
+		{418D1399-62C8-481B-A954-517B189ECA70} = {464A41EC-E4D1-4BC3-93BD-A48E3449A4BD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6AF160D8-AC25-4835-84D4-A42A72264F88}

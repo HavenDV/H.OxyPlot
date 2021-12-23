@@ -18,7 +18,7 @@
   
   <PropertyGroup Label="Signing">
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>$(SolutionDir)src\key.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>$(SolutionDir)src\libs\key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   
   <PropertyGroup Label="NuGet">

@@ -16,7 +16,7 @@
     <PackageReference Include="Uno.UI" Version="4.0.9" />
   </ItemGroup>
 
-  <Import Project="..\..\shared\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems" Label="Shared" />
-  <Import Project="..\..\shared\H.OxyPlot.Uno.Shared\H.OxyPlot.Uno.Shared.projitems" Label="Shared" />
+  <Import Project="..\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems" Label="Shared" />
+  <Import Project="..\H.OxyPlot.Uno.Shared\H.OxyPlot.Uno.Shared.projitems" Label="Shared" />
 
 </Project>

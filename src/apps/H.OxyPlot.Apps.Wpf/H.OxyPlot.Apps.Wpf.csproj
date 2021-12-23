@@ -15,6 +15,6 @@
     <ProjectReference Include="..\..\libs\H.OxyPlot.Wpf\H.OxyPlot.Wpf.csproj" />
   </ItemGroup>
 
-  <Import Project="..\..\shared\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems" Label="Shared" />
+  <Import Project="..\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems" Label="Shared" />
 
 </Project>
