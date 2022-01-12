@@ -12,3 +12,11 @@ jobs:
       windows-sdk-version: 18362
     secrets:
       nuget-key: ${{ secrets.NUGET_KEY }}
+
+  WebAssembly:
+    uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
+    with:
+      project-path: src/apps/Uno/H.OxyPlot.Apps.Uno.WebAssembly
+      additional-dotnet-version: 5.0.x
+      deploy-web-assembly-path: src/apps/Uno/H.OxyPlot.Apps.Uno.WebAssembly/bin/Release/net6.0/dist
+      generate-build-number: false
