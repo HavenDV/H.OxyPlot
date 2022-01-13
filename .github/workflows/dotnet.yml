@@ -20,3 +20,4 @@ jobs:
       additional-dotnet-version: 5.0.x
       deploy-web-assembly-path: src/apps/Uno/H.OxyPlot.Apps.Uno.WebAssembly/bin/Release/net6.0/dist
       generate-build-number: false
+      workloads: android ios maccatalyst macos
