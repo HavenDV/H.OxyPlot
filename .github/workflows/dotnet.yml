@@ -16,6 +16,7 @@ jobs:
   WebAssembly:
     uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
     with:
+      os: windows-2022
       project-path: src/apps/Uno/H.OxyPlot.Apps.Uno.WebAssembly
       additional-dotnet-version: 5.0.x
       deploy-web-assembly-path: src/apps/Uno/H.OxyPlot.Apps.Uno.WebAssembly/bin/Release/net6.0/dist
