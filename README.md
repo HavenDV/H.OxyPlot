@@ -27,5 +27,13 @@ xmlns:oxy="using:OxyPlot"
 <oxy:PlotView Model="{Binding Model}"/>
 ```
 
+### Preview
+There's a simple test application there:
+https://havendv.github.io/H.OxyPlot/
+![image](https://user-images.githubusercontent.com/3002068/149247810-7563c479-bda4-49b3-9381-faa2b5bd4a41.png)
+
+You can also test this using this app https://havendv.github.io/ratbuddyssey/ with this example file: 
+https://github.com/HavenDV/ratbuddyssey/blob/master/docs/tv36ipal.ady
+
 ## Contacts
 * [mail](mailto:havendv@gmail.com)
