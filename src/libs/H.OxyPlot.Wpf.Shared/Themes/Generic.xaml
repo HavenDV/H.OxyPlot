@@ -15,6 +15,7 @@
         <Setter Property="LineStroke" Value="#80000000" />
         <Setter Property="HorizontalLineVisibility" Value="Visible" />
         <Setter Property="VerticalLineVisibility" Value="Visible" />
+        <Setter Property="LineThickness" Value="1" />
         <Setter Property="Distance" Value="7" />
         <Setter Property="CornerRadius" Value="0" />
         <Setter Property="ShowPointer" Value="true" />
@@ -34,6 +35,7 @@
                             Stroke="{TemplateBinding LineStroke}"
                             RenderOptions.EdgeMode="Aliased"
                             StrokeDashArray="{TemplateBinding LineDashArray}"
+                            StrokeThickness="{TemplateBinding LineThickness}"
                             />
                         <Line
                             x:Name="PART_VerticalLine"
@@ -41,12 +43,15 @@
                             Stroke="{TemplateBinding LineStroke}"
                             RenderOptions.EdgeMode="Aliased"
                             StrokeDashArray="{TemplateBinding LineDashArray}"
+                            StrokeThickness="{TemplateBinding LineThickness}"
                             />
                         <Grid x:Name="PART_ContentContainer">
                             <Path
-                                x:Name="PART_Path" Fill="{TemplateBinding Background}"
+                                x:Name="PART_Path"
+                                Fill="{TemplateBinding Background}"
                                 Stroke="{TemplateBinding BorderBrush}"
-                                StrokeThickness="{TemplateBinding BorderThickness, Converter={StaticResource ThicknessConverter}}"
+                                StrokeThickness="{TemplateBinding BorderThickness,
+                                                                  Converter={StaticResource ThicknessConverter}}"
                                 RenderOptions.EdgeMode="{TemplateBinding BorderEdgeMode}"
                                 />
                             <ContentPresenter

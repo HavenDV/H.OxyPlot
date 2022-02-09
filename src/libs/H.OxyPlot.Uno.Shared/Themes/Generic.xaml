@@ -1,5 +1,5 @@
-<ResourceDictionary 
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:OxyPlot"
     xmlns:converters="using:OxyPlot.Converters"
@@ -16,6 +16,7 @@
         <Setter Property="LineStroke" Value="#80000000" />
         <Setter Property="HorizontalLineVisibility" Value="Visible" />
         <Setter Property="VerticalLineVisibility" Value="Visible" />
+        <Setter Property="LineThickness" Value="1" />
         <Setter Property="Distance" Value="7" />
         <Setter Property="CornerRadius" Value="0" />
         <Setter Property="ShowPointer" Value="true" />
@@ -34,12 +35,14 @@
                             Visibility="{TemplateBinding HorizontalLineVisibility}"
                             Stroke="{TemplateBinding LineStroke}"
                             StrokeDashArray="{TemplateBinding LineDashArray}"
+                            StrokeThickness="{TemplateBinding LineThickness}"
                             />
                         <Line
                             x:Name="PART_VerticalLine"
                             Visibility="{TemplateBinding VerticalLineVisibility}"
                             Stroke="{TemplateBinding LineStroke}"
                             StrokeDashArray="{TemplateBinding LineDashArray}"
+                            StrokeThickness="{TemplateBinding LineThickness}"
                             />
                         <Grid x:Name="PART_ContentContainer">
                             <Path
@@ -99,7 +102,7 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         >
-                        <!-- Don't set CacheMode="BitmapCache" as this makes the text look ugly -->
+                        <!--  Don't set CacheMode="BitmapCache" as this makes the text look ugly  -->
                         <Grid x:Name="PART_Grid" />
                     </Border>
                 </ControlTemplate>
