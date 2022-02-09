@@ -6,6 +6,9 @@
 
 using OxyPlot.Controls;
 using System.Collections.ObjectModel;
+#if HAS_WPF
+using System.Windows.Documents;
+#endif
 
 namespace OxyPlot
 {
@@ -581,6 +584,12 @@ namespace OxyPlot
             {
 #if HAS_WPF
                 if (dpObject is Window)
+                {
+                    return true;
+                }
+
+                //Check if the parent is an AdornerDecorator like in an ElementHost
+                if (dpObject is AdornerDecorator)
                 {
                     return true;
                 }
