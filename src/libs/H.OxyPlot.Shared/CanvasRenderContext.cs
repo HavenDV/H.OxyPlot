@@ -496,7 +496,7 @@ namespace OxyPlot
             }
 #if HAS_WPF
             TextOptions.SetTextFormattingMode(tb, this.TextFormattingMode);
-
+#endif
             double dx = 0;
             double dy = 0;
 
@@ -542,69 +542,21 @@ namespace OxyPlot
             }
 
             var transform = new TransformGroup();
-            transform.Children.Add(new TranslateTransform(dx, dy));
-            if (Math.Abs(rotate) > double.Epsilon)
-            {
-                transform.Children.Add(new RotateTransform(rotate));
-            }
-
-            transform.Children.Add(new TranslateTransform(p.X, p.Y));
-            tb.RenderTransform = transform;
-            if (tb.Clip != null)
-            {
-                tb.Clip.Transform = tb.RenderTransform.Inverse as Transform;
-            }
-
-            tb.SetValue(RenderOptions.ClearTypeHintProperty, ClearTypeHint.Enabled);
-#else
-            tb.Measure(new Size(1000, 1000));
-            var size = new Size(tb.ActualWidth, tb.ActualHeight);
-            if (maxSize != null)
-            {
-                if (size.Width > maxSize.Value.Width)
-                {
-                    size.Width = maxSize.Value.Width;
-                }
-
-                if (size.Height > maxSize.Value.Height)
-                {
-                    size.Height = maxSize.Value.Height;
-                }
-
-                tb.Clip = new RectangleGeometry { Rect = new Rect(0, 0, size.Width, size.Height) };
-            }
-
-            double dx = 0;
-            if (halign == OxyPlot.HorizontalAlignment.Center)
-            {
-                dx = -size.Width / 2;
-            }
-
-            if (halign == OxyPlot.HorizontalAlignment.Right)
-            {
-                dx = -size.Width;
-            }
-
-            double dy = 0;
-            if (valign == OxyPlot.VerticalAlignment.Middle)
-            {
-                dy = -size.Height / 2;
-            }
-
-            if (valign == OxyPlot.VerticalAlignment.Bottom)
-            {
-                dy = -size.Height;
-            }
-
-            var transform = new TransformGroup();
             transform.Children.Add(new TranslateTransform { X = (int)dx, Y = (int)dy });
-            if (!rotate.Equals(0))
+            if (Math.Abs(rotate) > double.Epsilon)
             {
                 transform.Children.Add(new RotateTransform { Angle = rotate });
             }
 
             transform.Children.Add(new TranslateTransform { X = (int)p.X, Y = (int)p.Y });
             tb.RenderTransform = transform;
+            if (tb.Clip != null)
+            {
+                tb.Clip.Transform = tb.RenderTransform.Inverse as Transform;
+            }
+
+#if HAS_WPF
+            tb.SetValue(RenderOptions.ClearTypeHintProperty, ClearTypeHint.Enabled);
 #endif
         }
 
