@@ -3,7 +3,7 @@
   <PropertyGroup>
     <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
     <HasSharedItems>true</HasSharedItems>
-    <SharedGUID>f497b163-e46e-4ea6-9e41-bb0c25ca6272</SharedGUID>
+    <SharedGUID>774449F2-74CB-40FD-AE69-F10E9E7D4654</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
     <Import_RootNamespace>H.OxyPlot.Wpf.Shared</Import_RootNamespace>
