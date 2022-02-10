@@ -15,11 +15,11 @@
       <_Parameter2_IsLiteral>true</_Parameter2_IsLiteral>
     </AssemblyAttribute>
     <AssemblyAttribute Include="System.Windows.Markup.XmlnsPrefix">
-      <_Parameter1>http://oxyplot.org/</_Parameter1>
+      <_Parameter1>http://oxyplot.org/wpf</_Parameter1>
       <_Parameter2>oxy</_Parameter2>
     </AssemblyAttribute>
     <AssemblyAttribute Include="System.Windows.Markup.XmlnsDefinition">
-      <_Parameter1>http://oxyplot.org/</_Parameter1>
+      <_Parameter1>http://oxyplot.org/wpf</_Parameter1>
       <_Parameter2>OxyPlot</_Parameter2>
     </AssemblyAttribute>
   </ItemGroup>
