@@ -36,15 +36,15 @@ public class MainViewModel
             new PointAnnotation
             {
                 Shape = MarkerType.Circle,
-                Text = "S",
-                TextColor = OxyColors.Red,
+                Text = "H",
+                TextColor = OxyColors.LightBlue,
                 TextHorizontalAlignment = global::OxyPlot.HorizontalAlignment.Center,
                 TextVerticalAlignment = global::OxyPlot.VerticalAlignment.Middle,
                 TextMargin = 0,
                 TextPosition = new DataPoint(40,0.2),
                 FontWeight = global::OxyPlot.FontWeights.Bold,
                 Fill = OxyColors.Transparent,
-                Stroke = OxyColor.FromArgb(128, 255, 0, 0),
+                Stroke = OxyColors.LightBlue,
                 StrokeThickness = 2,
                 Size = 8.0,
                 X = 40,
