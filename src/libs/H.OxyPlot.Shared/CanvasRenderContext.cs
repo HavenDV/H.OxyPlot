@@ -367,11 +367,20 @@ namespace OxyPlot
                         IsFilled = !fill.IsUndefined(),
                         IsClosed = true,
                     };
-                    figure.StartPoint = firstPoint;
-                    foreach (var point in otherPoints)
+                    // https://github.com/oxyplot/oxyplot/issues/1848
+                    //figure.StartPoint = firstPoint;
+                    //foreach (var point in otherPoints)
+                    //{
+                    //    figure.Segments.Add(new LineSegment { Point = point });
+                    //}
+                    var collection = new PointCollection();
+                    foreach (var p in points)
                     {
-                        figure.Segments.Add(new LineSegment { Point = point });
+                        collection.Add(p);
                     }
+                    collection.Add(firstPoint);
+
+                    figure.Segments.Add(new PolyLineSegment { Points = collection });
 
                     streamGeometry.Figures.Add(figure);
 #endif
