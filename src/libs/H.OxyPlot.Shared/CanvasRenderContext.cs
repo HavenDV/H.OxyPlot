@@ -297,27 +297,26 @@ namespace OxyPlot
         {
             points = points ?? throw new ArgumentNullException(nameof(points));
 
-#if HAS_WPF
             this.DrawPolygons(new[] { points }, fill, stroke, thickness, edgeRenderingMode, dashArray, lineJoin);
-#else
-            var po = this.CreateAndAdd<Polygon>();
-            var aliased = edgeRenderingMode == EdgeRenderingMode.PreferSpeed;
 
-            this.SetStroke(po, stroke, thickness, edgeRenderingMode, lineJoin, dashArray);
+            // Old UWP code:
+            //var po = this.CreateAndAdd<Polygon>();
+            //var aliased = edgeRenderingMode == EdgeRenderingMode.PreferSpeed;
 
-            if (fill.IsVisible())
-            {
-                po.Fill = this.GetCachedBrush(fill);
-            }
+            //this.SetStroke(po, stroke, thickness, edgeRenderingMode, lineJoin, dashArray);
 
-            var pc = new PointCollection();
-            foreach (var p in points)
-            {
-                pc.Add(p.ToPoint(aliased));
-            }
+            //if (fill.IsVisible())
+            //{
+            //    po.Fill = this.GetCachedBrush(fill);
+            //}
 
-            po.Points = pc;
-#endif
+            //var pc = new PointCollection();
+            //foreach (var p in points)
+            //{
+            //    pc.Add(p.ToPoint(aliased));
+            //}
+
+            //po.Points = pc;
         }
 
         ///<inheritdoc/>
@@ -339,60 +338,51 @@ namespace OxyPlot
 
             var path = this.CreateAndAdd<Path>();
             this.SetStroke(path, stroke, thickness, edgeRenderingMode, lineJoin, dashArray, 0);
-#if HAS_WPF
             if (!fill.IsUndefined())
             {
                 path.Fill = this.GetCachedBrush(fill);
             }
 
+#if HAS_WPF
             var streamGeometry = new StreamGeometry { FillRule = FillRule.Nonzero };
             using (var sgc = streamGeometry.Open())
+#else
+            var streamGeometry = new PathGeometry { FillRule = FillRule.Nonzero };
+#endif
             {
                 foreach (var polygon in polygons)
                 {
                     var points = this.GetActualPoints(polygon, path.StrokeThickness, edgeRenderingMode);
                     var firstPoint = GetFirstAndRest(points, out var otherPoints);
 
+#if HAS_WPF
                     sgc.BeginFigure(firstPoint, !fill.IsUndefined(), true);
                     foreach (var point in otherPoints)
                     {
                         sgc.LineTo(point, !stroke.IsUndefined(), false);
                     }
-                }
-            }
-
-            streamGeometry.Freeze();
-            path.Data = streamGeometry;
 #else
-            var aliased = edgeRenderingMode == EdgeRenderingMode.PreferSpeed;
-            if (fill.IsVisible())
-            {
-                path.Fill = this.GetCachedBrush(fill);
-            }
-
-            var pg = new PathGeometry { FillRule = FillRule.Nonzero };
-            foreach (var polygon in polygons)
-            {
-                var figure = new PathFigure { IsClosed = true };
-                bool first = true;
-                foreach (var p in polygon)
-                {
-                    if (first)
+                    var figure = new PathFigure
+                    { 
+                        IsFilled = !fill.IsUndefined(),
+                        IsClosed = true,
+                    };
+                    figure.StartPoint = firstPoint;
+                    foreach (var point in otherPoints)
                     {
-                        figure.StartPoint = p.ToPoint(aliased);
-                        first = false;
+                        figure.Segments.Add(new LineSegment { Point = point });
                     }
-                    else
-                    {
-                        figure.Segments.Add(new LineSegment { Point = p.ToPoint(aliased) });
-                    }
-                }
 
-                pg.Figures.Add(figure);
-            }
-
-            path.Data = pg;
+                    streamGeometry.Figures.Add(figure);
 #endif
+                }
+            }
+
+#if HAS_WPF
+            streamGeometry.Freeze();
+#endif
+
+            path.Data = streamGeometry;
         }
 
         ///<inheritdoc/>
