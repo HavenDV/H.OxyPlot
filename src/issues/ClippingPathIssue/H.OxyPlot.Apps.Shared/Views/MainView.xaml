@@ -1,0 +1,35 @@
+﻿<Page
+    x:Class="H.OxyPlot.Apps.Views.MainView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    >
+    <ScrollViewer ZoomMode="Enabled">
+        <Canvas Background="Black">
+            <Path
+                Stroke="White"
+                Fill="Red"
+                StrokeThickness="1"
+                >
+                <Path.Data>
+                    <PathGeometry FillRule="Nonzero">
+                        <PathGeometry.Figures>
+                            <PathFigure
+                                StartPoint="5000,5000"
+                                IsFilled="True"
+                                IsClosed="True"
+                                >
+                                <PathFigure.Segments>
+                                    <LineSegment Point="100,5000" />
+                                    <LineSegment Point="200,100" />
+                                </PathFigure.Segments>
+                            </PathFigure>
+                        </PathGeometry.Figures>
+                    </PathGeometry>
+                </Path.Data>
+            </Path>
+        </Canvas>
+    </ScrollViewer>
+</Page>
