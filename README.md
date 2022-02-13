@@ -9,6 +9,9 @@ It combines [the abandoned OxyPlot UWP code](https://github.com/oxyplot/oxyplot-
 with [the current WPF code](https://github.com/oxyplot/oxyplot/tree/develop/Source/OxyPlot.Wpf), 
 trying to match the latter as closely as possible in behavior.
 
+Additional features:
+- Dark Theme support
+
 ### NuGet
 
 [![NuGet](https://img.shields.io/nuget/dt/H.OxyPlot.Uno.svg?style=flat-square&label=H.OxyPlot.Uno)](https://www.nuget.org/packages/H.OxyPlot.Uno/)  
