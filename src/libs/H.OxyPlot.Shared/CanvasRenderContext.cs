@@ -546,7 +546,7 @@ namespace OxyPlot
             {
                 transform.Children.Add(new RotateTransform { Angle = rotate });
             }
-
+            
             transform.Children.Add(new TranslateTransform { X = (int)p.X, Y = (int)p.Y });
             tb.RenderTransform = transform;
             if (tb.Clip != null)
@@ -843,14 +843,20 @@ namespace OxyPlot
 #if !HAS_WPF
 #if HAS_WINUI
             if (Microsoft.UI.Xaml.Application.Current != null &&
-                Microsoft.UI.Xaml.Application.Current.RequestedTheme == ApplicationTheme.Dark &&
+                Microsoft.UI.Xaml.Application.Current.RequestedTheme == ApplicationTheme.Dark)
 #else
             if (Windows.UI.Xaml.Application.Current != null &&
-                Windows.UI.Xaml.Application.Current.RequestedTheme == ApplicationTheme.Dark &&
+                Windows.UI.Xaml.Application.Current.RequestedTheme == ApplicationTheme.Dark)
 #endif
-                color == OxyColors.Black)
             {
-                color = OxyColors.White;
+                if (color == OxyColors.Black)
+                {
+                    color = OxyColors.White;
+                }
+                else if (color == OxyColors.White)
+                {
+                    color = OxyColor.FromArgb(255, 32, 32, 32);
+                }
             }
 #endif
 

@@ -9,10 +9,10 @@
     mc:Ignorable="d"
     >
     <Page.DataContext>
-        <viewModels:MainViewModel/>
+        <viewModels:MainViewModel />
     </Page.DataContext>
-    
+
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <oxy:PlotView Model="{Binding Model}"/>
+        <oxy:PlotView Model="{Binding Model}" />
     </Grid>
 </Page>
