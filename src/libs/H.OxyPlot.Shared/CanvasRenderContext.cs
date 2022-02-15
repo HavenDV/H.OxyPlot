@@ -368,19 +368,20 @@ namespace OxyPlot
                         IsClosed = true,
                     };
                     // https://github.com/oxyplot/oxyplot/issues/1848
-                    //figure.StartPoint = firstPoint;
-                    //foreach (var point in otherPoints)
-                    //{
-                    //    figure.Segments.Add(new LineSegment { Point = point });
-                    //}
-                    var collection = new PointCollection();
-                    foreach (var p in points)
+                    figure.StartPoint = firstPoint;
+                    foreach (var point in otherPoints)
                     {
-                        collection.Add(p);
+                        figure.Segments.Add(new LineSegment { Point = point });
                     }
-                    collection.Add(firstPoint);
+                    // https://github.com/HavenDV/H.OxyPlot/issues/5
+                    //var collection = new PointCollection();
+                    //foreach (var p in points)
+                    //{
+                    //    collection.Add(p);
+                    //}
+                    //collection.Add(firstPoint);
 
-                    figure.Segments.Add(new PolyLineSegment { Points = collection });
+                    //figure.Segments.Add(new PolyLineSegment { Points = collection });
 
                     streamGeometry.Figures.Add(figure);
 #endif
