@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.1" />
   </ItemGroup>
 
   <Import Project="..\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems" Label="Shared" />
