@@ -1,7 +1,8 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net6.0-ios;net6.0-android;net6.0-macos;net6.0-maccatalyst;MonoAndroid10.0;xamarinios10;xamarinmac20</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>$(TargetFrameworks);MonoAndroid11.0;xamarinios10;xamarinmac20</TargetFrameworks>
     <SignAssembly>false</SignAssembly>
     <DefineConstants>$(DefineConstants);HAS_UNO;HAS_WINUI</DefineConstants>
     <NoWarn>$(NoWarn);Uno0001;CA1010;CA1725;CA2000;CA1012;NU1703;NU5104</NoWarn>
