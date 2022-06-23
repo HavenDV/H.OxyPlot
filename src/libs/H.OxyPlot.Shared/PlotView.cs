@@ -11,15 +11,10 @@ using OxyPlot.Utilities;
 
 namespace OxyPlot
 {
+    [DependencyProperty<bool>("HandleRightClicks", DefaultValue = true)]
+    [DependencyProperty<TextMeasurementMethod>("TextMeasurementMethod", DefaultValue = TextMeasurementMethod.TextBlock)]
     public partial class PlotView : PlotViewBase
     {
-        /// <summary>
-        /// Identifies the <see cref="HandleRightClicks"/> dependency property.
-        /// </summary>
-        public static readonly DependencyProperty HandleRightClicksProperty =
-            DependencyProperty.Register("HandleRightClicks", typeof(bool), typeof(PlotView), new PropertyMetadata(true));
-
-
         /// <summary>
         /// Initializes a new instance of the <see cref="PlotView" /> class.
         /// </summary>
@@ -36,22 +31,6 @@ namespace OxyPlot
             this.ManipulationMode = ManipulationModes.Scale | ManipulationModes.TranslateX
                                     | ManipulationModes.TranslateY;
 #endif
-        }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether to handle right clicks.
-        /// </summary>
-        public bool HandleRightClicks
-        {
-            get
-            {
-                return (bool)this.GetValue(HandleRightClicksProperty);
-            }
-
-            set
-            {
-                this.SetValue(HandleRightClicksProperty, value);
-            }
         }
 
 #if !HAS_WPF
@@ -87,16 +66,6 @@ namespace OxyPlot
 			return base.ArrangeOverride(finalSize);
 		}
 
-		/// <summary>
-		/// Called when the <see cref="Model" /> property is changed.
-		/// </summary>
-		/// <param name="sender">The sender.</param>
-		/// <param name="e">The <see cref="DependencyPropertyChangedEventArgs" /> instance containing the event data.</param>
-		private static void ModelChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
-        {
-            ((PlotView)sender).OnModelChanged();
-        }
-
         /// <summary>
         /// Called when the control is loaded.
         /// </summary>
@@ -121,28 +90,10 @@ namespace OxyPlot
 #endif
 
         /// <summary>
-        /// Identifies the <see cref="TextMeasurementMethod"/> dependency property.
-        /// </summary>
-        public static readonly DependencyProperty TextMeasurementMethodProperty =
-            DependencyProperty.Register(
-                nameof(TextMeasurementMethod), typeof(TextMeasurementMethod), typeof(PlotViewBase), new PropertyMetadata(TextMeasurementMethod.TextBlock));
-
-
-        /// <summary>
         /// Gets or sets a value indicating whether to disconnect the canvas while updating.
         /// </summary>
         /// <value><c>true</c> if canvas should be disconnected while updating; otherwise, <c>false</c>.</value>
         public bool DisconnectCanvasWhileUpdating { get; set; }
-
-        /// <summary>
-        /// Gets or sets the vertical zoom cursor.
-        /// </summary>
-        /// <value>The zoom vertical cursor.</value>
-        public TextMeasurementMethod TextMeasurementMethod
-        {
-            get => (TextMeasurementMethod)this.GetValue(TextMeasurementMethodProperty);
-            set => this.SetValue(TextMeasurementMethodProperty, value);
-        }
 
         /// <summary>
         /// Gets the Canvas.

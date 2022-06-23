@@ -1,4 +1,5 @@
-﻿#if HAS_WPF
+﻿global using DependencyPropertyGenerator;
+#if HAS_WPF
 global using System.Globalization;
 global using System.Windows.Data;
 global using System.Windows.Media;

@@ -9,6 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DependencyPropertyGenerator" Version="0.27.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="DependencyPropertyGenerator.Core" Version="0.27.4" />
     <PackageReference Include="OxyPlot.Core" Version="2.1.0" />
     <PackageReference Include="Uno.CommunityToolkit.WinUI.UI" Version="7.1.100-dev.7.g758154cb81" />
   </ItemGroup>

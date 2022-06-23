@@ -461,7 +461,7 @@ namespace OxyPlot
         /// <summary>
         /// Called when the model is changed.
         /// </summary>
-        protected void OnModelChanged()
+        partial void OnModelChanged(PlotModel? oldValue, PlotModel? newValue)
         {
             lock (this.modelLock)
             {
@@ -530,16 +530,6 @@ namespace OxyPlot
 #else
             return 1.0;
 #endif
-        }
-
-        /// <summary>
-        /// Called when the model is changed.
-        /// </summary>
-        /// <param name="d">The sender.</param>
-        /// <param name="e">The <see cref="DependencyPropertyChangedEventArgs" /> instance containing the event data.</param>
-        private static void ModelChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            ((PlotViewBase)d).OnModelChanged();
         }
 
         /// <summary>
