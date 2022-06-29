@@ -6,6 +6,7 @@
     <TargetFrameworks>net6.0-windows;net4.7.2</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <NoWarn>$(NoWarn);UXAML0002</NoWarn>
+    <DefineConstants>$(DefineConstants);HAS_WINUI</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup Label="AssemblyInfo">
@@ -22,14 +23,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Uno.UI.Skia.Wpf" Version="4.4.5" />
-    <PackageReference Include="Uno.UI.RemoteControl" Version="4.4.5" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.WinUI.Skia.Wpf" Version="4.4.5" />
+    <PackageReference Include="Uno.WinUI.RemoteControl" Version="4.4.5" Condition="'$(Configuration)'=='Debug'" />
     <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.4.5" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\libs\H.OxyPlot.Uno\H.OxyPlot.Uno.csproj" />
+    <ProjectReference Include="..\..\..\libs\H.OxyPlot.Uno.WinUI\H.OxyPlot.Uno.WinUI.csproj" />
   </ItemGroup>
 
   <Import Project="..\..\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems" Label="Shared" />
