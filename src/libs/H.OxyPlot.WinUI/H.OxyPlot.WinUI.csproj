@@ -8,16 +8,16 @@
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.WinUI.UI" Version="7.1.2" />
-    <PackageReference Include="DependencyPropertyGenerator" Version="0.27.4">
+    <PackageReference Include="DependencyPropertyGenerator" Version="0.32.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="DependencyPropertyGenerator.Core" Version="0.27.4" />
+    <PackageReference Include="DependencyPropertyGenerator.Core" Version="0.32.1" />
     <PackageReference Include="OxyPlot.Core" Version="2.1.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.1" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.1.1" />
   </ItemGroup>
 
   <Import Project="..\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems" Label="Shared" />

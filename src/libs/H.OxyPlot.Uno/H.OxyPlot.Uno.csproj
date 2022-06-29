@@ -9,17 +9,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DependencyPropertyGenerator" Version="0.27.4">
+    <PackageReference Include="DependencyPropertyGenerator" Version="0.32.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="DependencyPropertyGenerator.Core" Version="0.27.4" />
+    <PackageReference Include="DependencyPropertyGenerator.Core" Version="0.32.1" />
     <PackageReference Include="OxyPlot.Core" Version="2.1.0" />
     <PackageReference Include="Uno.Microsoft.Toolkit.Uwp.UI" Version="7.1.11" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Uno.UI" Version="4.1.9" />
+    <PackageReference Include="Uno.UI" Version="4.4.5" />
   </ItemGroup>
 
   <Import Project="..\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems" Label="Shared" />
