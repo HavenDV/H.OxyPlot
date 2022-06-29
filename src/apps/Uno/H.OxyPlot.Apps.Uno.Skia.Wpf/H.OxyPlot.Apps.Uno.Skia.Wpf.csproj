@@ -1,14 +1,30 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <OutputType>WinExe</OutputType>
+    <OutputType Condition="'$(Configuration)'=='Debug'">Exe</OutputType>
+    <TargetFrameworks>net6.0-windows;net4.7.2</TargetFrameworks>
+    <UseWPF>true</UseWPF>
     <NoWarn>$(NoWarn);UXAML0002</NoWarn>
   </PropertyGroup>
 
+  <ItemGroup Label="AssemblyInfo">
+    <AssemblyAttribute Include="System.Windows.ThemeInfo">
+      <_Parameter1>System.Windows.ResourceDictionaryLocation.None</_Parameter1>
+      <_Parameter1_IsLiteral>true</_Parameter1_IsLiteral>
+      <_Parameter2>System.Windows.ResourceDictionaryLocation.SourceAssembly</_Parameter2>
+      <_Parameter2_IsLiteral>true</_Parameter2_IsLiteral>
+    </AssemblyAttribute>
+  </ItemGroup>
+
   <ItemGroup>
-    <PackageReference Include="Uno.UI.Skia.Wpf" Version="4.1.0-dev.68" />
-    <PackageReference Include="Uno.UI.RemoteControl" Version="4.1.0-dev.68" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.1.0-dev.32" />
+    <Content Include="Assets\Fonts\uno-fluentui-assets.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Uno.UI.Skia.Wpf" Version="4.4.5" />
+    <PackageReference Include="Uno.UI.RemoteControl" Version="4.4.5" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.4.5" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
   </ItemGroup>
 

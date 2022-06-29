@@ -40,10 +40,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Uno", "Uno", "{D4368B3C-9F1
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "H.OxyPlot.Apps.Uno.WebAssembly", "src\apps\Uno\H.OxyPlot.Apps.Uno.WebAssembly\H.OxyPlot.Apps.Uno.WebAssembly.csproj", "{E1D3D9C7-DE26-4FF5-AC1F-136A2820E59B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "H.OxyPlot.Apps.Uno.Skia.Wpf", "src\apps\Uno\H.OxyPlot.Apps.Uno.Skia.Wpf\H.OxyPlot.Apps.Uno.Skia.Wpf.csproj", "{C66983AE-41C4-4765-BB2F-371CD7E60812}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "H.OxyPlot.Apps.Uno.Skia.Wpf.Host", "src\apps\Uno\H.OxyPlot.Apps.Uno.Skia.Wpf.Host\H.OxyPlot.Apps.Uno.Skia.Wpf.Host.csproj", "{A57FBA46-1EE2-4798-875D-CB43CAE012ED}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "H.OxyPlot.Apps.Uno.WinUI.WebAssembly", "src\apps\Uno\H.OxyPlot.Apps.Uno.WinUI.WebAssembly\H.OxyPlot.Apps.Uno.WinUI.WebAssembly.csproj", "{7B01963A-703C-458D-B3AA-6C47F94B4149}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "H.OxyPlot.Shared", "src\libs\H.OxyPlot.Shared\H.OxyPlot.Shared.shproj", "{F497B163-E46E-4EA6-9E41-BB0C25CA6272}"
@@ -56,34 +52,9 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "H.OxyPlot.Apps.Shared", "sr
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "H.OxyPlot.Apps.Uno.Shared", "src\apps\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.shproj", "{418D1399-62C8-481B-A954-517B189ECA70}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "H.OxyPlot.Apps.Uno.Skia.Wpf", "src\apps\Uno\H.OxyPlot.Apps.Uno.Skia.Wpf\H.OxyPlot.Apps.Uno.Skia.Wpf.csproj", "{C84E3439-BAF9-4FD6-BB91-AE3EE5F83D6A}"
+EndProject
 Global
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		src\libs\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{16a17957-6de3-4874-b0b6-08404c23fbbe}*SharedItemsImports = 5
-		src\libs\H.OxyPlot.Uno.Shared\H.OxyPlot.Uno.Shared.projitems*{16a17957-6de3-4874-b0b6-08404c23fbbe}*SharedItemsImports = 5
-		src\apps\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{2b65e186-b9e6-4cef-9ae6-478c6de59bc4}*SharedItemsImports = 4
-		src\apps\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems*{2b65e186-b9e6-4cef-9ae6-478c6de59bc4}*SharedItemsImports = 4
-		src\apps\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems*{418d1399-62c8-481b-a954-517b189eca70}*SharedItemsImports = 13
-		src\libs\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{65786107-e646-452e-b899-edd26d09e401}*SharedItemsImports = 5
-		src\libs\H.OxyPlot.Wpf.Shared\H.OxyPlot.Wpf.Shared.projitems*{65786107-e646-452e-b899-edd26d09e401}*SharedItemsImports = 5
-		src\libs\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{682d6fb2-c18b-4522-8b33-567fcc8647fe}*SharedItemsImports = 5
-		src\libs\H.OxyPlot.Wpf.Shared\H.OxyPlot.Wpf.Shared.projitems*{774449f2-74cb-40fd-ae69-f10e9e7d4654}*SharedItemsImports = 13
-		src\apps\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{7b01963a-703c-458d-b3aa-6c47f94b4149}*SharedItemsImports = 5
-		src\apps\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems*{7b01963a-703c-458d-b3aa-6c47f94b4149}*SharedItemsImports = 5
-		src\apps\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{8c2d2dda-890b-4f6f-938f-9cfdf82aac0f}*SharedItemsImports = 5
-		src\libs\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{ab635967-d2ff-4a55-a319-109099de8ff4}*SharedItemsImports = 5
-		src\libs\H.OxyPlot.Uno.Shared\H.OxyPlot.Uno.Shared.projitems*{ab635967-d2ff-4a55-a319-109099de8ff4}*SharedItemsImports = 5
-		src\apps\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{b2c9a032-9670-421e-a413-7c7f504f5b55}*SharedItemsImports = 13
-		src\apps\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{c66983ae-41c4-4765-bb2f-371cd7e60812}*SharedItemsImports = 5
-		src\apps\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems*{c66983ae-41c4-4765-bb2f-371cd7e60812}*SharedItemsImports = 5
-		src\apps\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{e1d3d9c7-de26-4ff5-ac1f-136a2820e59b}*SharedItemsImports = 5
-		src\apps\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems*{e1d3d9c7-de26-4ff5-ac1f-136a2820e59b}*SharedItemsImports = 5
-		src\libs\H.OxyPlot.Uno.Shared\H.OxyPlot.Uno.Shared.projitems*{e40c8d6c-31fd-43a8-ac2c-0f3ea465eee7}*SharedItemsImports = 13
-		src\libs\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{f497b163-e46e-4ea6-9e41-bb0c25ca6272}*SharedItemsImports = 13
-		src\libs\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{f5eb3a73-1d93-42f7-9757-26b486d74592}*SharedItemsImports = 5
-		src\libs\H.OxyPlot.Uno.Shared\H.OxyPlot.Uno.Shared.projitems*{f5eb3a73-1d93-42f7-9757-26b486d74592}*SharedItemsImports = 5
-		src\apps\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{fcfca672-7669-4aac-a76d-6a12e40f2eab}*SharedItemsImports = 5
-		src\apps\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems*{fcfca672-7669-4aac-a76d-6a12e40f2eab}*SharedItemsImports = 5
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM
@@ -283,46 +254,6 @@ Global
 		{E1D3D9C7-DE26-4FF5-AC1F-136A2820E59B}.Release|x64.Build.0 = Release|Any CPU
 		{E1D3D9C7-DE26-4FF5-AC1F-136A2820E59B}.Release|x86.ActiveCfg = Release|Any CPU
 		{E1D3D9C7-DE26-4FF5-AC1F-136A2820E59B}.Release|x86.Build.0 = Release|Any CPU
-		{C66983AE-41C4-4765-BB2F-371CD7E60812}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C66983AE-41C4-4765-BB2F-371CD7E60812}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C66983AE-41C4-4765-BB2F-371CD7E60812}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{C66983AE-41C4-4765-BB2F-371CD7E60812}.Debug|ARM.Build.0 = Debug|Any CPU
-		{C66983AE-41C4-4765-BB2F-371CD7E60812}.Debug|arm64.ActiveCfg = Debug|Any CPU
-		{C66983AE-41C4-4765-BB2F-371CD7E60812}.Debug|arm64.Build.0 = Debug|Any CPU
-		{C66983AE-41C4-4765-BB2F-371CD7E60812}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{C66983AE-41C4-4765-BB2F-371CD7E60812}.Debug|x64.Build.0 = Debug|Any CPU
-		{C66983AE-41C4-4765-BB2F-371CD7E60812}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{C66983AE-41C4-4765-BB2F-371CD7E60812}.Debug|x86.Build.0 = Debug|Any CPU
-		{C66983AE-41C4-4765-BB2F-371CD7E60812}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C66983AE-41C4-4765-BB2F-371CD7E60812}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C66983AE-41C4-4765-BB2F-371CD7E60812}.Release|ARM.ActiveCfg = Release|Any CPU
-		{C66983AE-41C4-4765-BB2F-371CD7E60812}.Release|ARM.Build.0 = Release|Any CPU
-		{C66983AE-41C4-4765-BB2F-371CD7E60812}.Release|arm64.ActiveCfg = Release|Any CPU
-		{C66983AE-41C4-4765-BB2F-371CD7E60812}.Release|arm64.Build.0 = Release|Any CPU
-		{C66983AE-41C4-4765-BB2F-371CD7E60812}.Release|x64.ActiveCfg = Release|Any CPU
-		{C66983AE-41C4-4765-BB2F-371CD7E60812}.Release|x64.Build.0 = Release|Any CPU
-		{C66983AE-41C4-4765-BB2F-371CD7E60812}.Release|x86.ActiveCfg = Release|Any CPU
-		{C66983AE-41C4-4765-BB2F-371CD7E60812}.Release|x86.Build.0 = Release|Any CPU
-		{A57FBA46-1EE2-4798-875D-CB43CAE012ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A57FBA46-1EE2-4798-875D-CB43CAE012ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A57FBA46-1EE2-4798-875D-CB43CAE012ED}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{A57FBA46-1EE2-4798-875D-CB43CAE012ED}.Debug|ARM.Build.0 = Debug|Any CPU
-		{A57FBA46-1EE2-4798-875D-CB43CAE012ED}.Debug|arm64.ActiveCfg = Debug|Any CPU
-		{A57FBA46-1EE2-4798-875D-CB43CAE012ED}.Debug|arm64.Build.0 = Debug|Any CPU
-		{A57FBA46-1EE2-4798-875D-CB43CAE012ED}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{A57FBA46-1EE2-4798-875D-CB43CAE012ED}.Debug|x64.Build.0 = Debug|Any CPU
-		{A57FBA46-1EE2-4798-875D-CB43CAE012ED}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{A57FBA46-1EE2-4798-875D-CB43CAE012ED}.Debug|x86.Build.0 = Debug|Any CPU
-		{A57FBA46-1EE2-4798-875D-CB43CAE012ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A57FBA46-1EE2-4798-875D-CB43CAE012ED}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A57FBA46-1EE2-4798-875D-CB43CAE012ED}.Release|ARM.ActiveCfg = Release|Any CPU
-		{A57FBA46-1EE2-4798-875D-CB43CAE012ED}.Release|ARM.Build.0 = Release|Any CPU
-		{A57FBA46-1EE2-4798-875D-CB43CAE012ED}.Release|arm64.ActiveCfg = Release|Any CPU
-		{A57FBA46-1EE2-4798-875D-CB43CAE012ED}.Release|arm64.Build.0 = Release|Any CPU
-		{A57FBA46-1EE2-4798-875D-CB43CAE012ED}.Release|x64.ActiveCfg = Release|Any CPU
-		{A57FBA46-1EE2-4798-875D-CB43CAE012ED}.Release|x64.Build.0 = Release|Any CPU
-		{A57FBA46-1EE2-4798-875D-CB43CAE012ED}.Release|x86.ActiveCfg = Release|Any CPU
-		{A57FBA46-1EE2-4798-875D-CB43CAE012ED}.Release|x86.Build.0 = Release|Any CPU
 		{7B01963A-703C-458D-B3AA-6C47F94B4149}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7B01963A-703C-458D-B3AA-6C47F94B4149}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B01963A-703C-458D-B3AA-6C47F94B4149}.Debug|ARM.ActiveCfg = Debug|Any CPU
@@ -343,6 +274,26 @@ Global
 		{7B01963A-703C-458D-B3AA-6C47F94B4149}.Release|x64.Build.0 = Release|Any CPU
 		{7B01963A-703C-458D-B3AA-6C47F94B4149}.Release|x86.ActiveCfg = Release|Any CPU
 		{7B01963A-703C-458D-B3AA-6C47F94B4149}.Release|x86.Build.0 = Release|Any CPU
+		{C84E3439-BAF9-4FD6-BB91-AE3EE5F83D6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C84E3439-BAF9-4FD6-BB91-AE3EE5F83D6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C84E3439-BAF9-4FD6-BB91-AE3EE5F83D6A}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{C84E3439-BAF9-4FD6-BB91-AE3EE5F83D6A}.Debug|ARM.Build.0 = Debug|Any CPU
+		{C84E3439-BAF9-4FD6-BB91-AE3EE5F83D6A}.Debug|arm64.ActiveCfg = Debug|Any CPU
+		{C84E3439-BAF9-4FD6-BB91-AE3EE5F83D6A}.Debug|arm64.Build.0 = Debug|Any CPU
+		{C84E3439-BAF9-4FD6-BB91-AE3EE5F83D6A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C84E3439-BAF9-4FD6-BB91-AE3EE5F83D6A}.Debug|x64.Build.0 = Debug|Any CPU
+		{C84E3439-BAF9-4FD6-BB91-AE3EE5F83D6A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C84E3439-BAF9-4FD6-BB91-AE3EE5F83D6A}.Debug|x86.Build.0 = Debug|Any CPU
+		{C84E3439-BAF9-4FD6-BB91-AE3EE5F83D6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C84E3439-BAF9-4FD6-BB91-AE3EE5F83D6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C84E3439-BAF9-4FD6-BB91-AE3EE5F83D6A}.Release|ARM.ActiveCfg = Release|Any CPU
+		{C84E3439-BAF9-4FD6-BB91-AE3EE5F83D6A}.Release|ARM.Build.0 = Release|Any CPU
+		{C84E3439-BAF9-4FD6-BB91-AE3EE5F83D6A}.Release|arm64.ActiveCfg = Release|Any CPU
+		{C84E3439-BAF9-4FD6-BB91-AE3EE5F83D6A}.Release|arm64.Build.0 = Release|Any CPU
+		{C84E3439-BAF9-4FD6-BB91-AE3EE5F83D6A}.Release|x64.ActiveCfg = Release|Any CPU
+		{C84E3439-BAF9-4FD6-BB91-AE3EE5F83D6A}.Release|x64.Build.0 = Release|Any CPU
+		{C84E3439-BAF9-4FD6-BB91-AE3EE5F83D6A}.Release|x86.ActiveCfg = Release|Any CPU
+		{C84E3439-BAF9-4FD6-BB91-AE3EE5F83D6A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -358,16 +309,42 @@ Global
 		{2B65E186-B9E6-4CEF-9AE6-478C6DE59BC4} = {464A41EC-E4D1-4BC3-93BD-A48E3449A4BD}
 		{D4368B3C-9F13-405D-8F38-E18644BDD329} = {464A41EC-E4D1-4BC3-93BD-A48E3449A4BD}
 		{E1D3D9C7-DE26-4FF5-AC1F-136A2820E59B} = {D4368B3C-9F13-405D-8F38-E18644BDD329}
-		{C66983AE-41C4-4765-BB2F-371CD7E60812} = {D4368B3C-9F13-405D-8F38-E18644BDD329}
-		{A57FBA46-1EE2-4798-875D-CB43CAE012ED} = {D4368B3C-9F13-405D-8F38-E18644BDD329}
 		{7B01963A-703C-458D-B3AA-6C47F94B4149} = {D4368B3C-9F13-405D-8F38-E18644BDD329}
 		{F497B163-E46E-4EA6-9E41-BB0C25CA6272} = {A81088C2-A6AF-4CB6-8F36-DF8C0E6D45B3}
 		{E40C8D6C-31FD-43A8-AC2C-0F3EA465EEE7} = {A81088C2-A6AF-4CB6-8F36-DF8C0E6D45B3}
 		{774449F2-74CB-40FD-AE69-F10E9E7D4654} = {A81088C2-A6AF-4CB6-8F36-DF8C0E6D45B3}
 		{B2C9A032-9670-421E-A413-7C7F504F5B55} = {464A41EC-E4D1-4BC3-93BD-A48E3449A4BD}
 		{418D1399-62C8-481B-A954-517B189ECA70} = {464A41EC-E4D1-4BC3-93BD-A48E3449A4BD}
+		{C84E3439-BAF9-4FD6-BB91-AE3EE5F83D6A} = {D4368B3C-9F13-405D-8F38-E18644BDD329}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6AF160D8-AC25-4835-84D4-A42A72264F88}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		src\libs\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{16a17957-6de3-4874-b0b6-08404c23fbbe}*SharedItemsImports = 5
+		src\libs\H.OxyPlot.Uno.Shared\H.OxyPlot.Uno.Shared.projitems*{16a17957-6de3-4874-b0b6-08404c23fbbe}*SharedItemsImports = 5
+		src\apps\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{2b65e186-b9e6-4cef-9ae6-478c6de59bc4}*SharedItemsImports = 4
+		src\apps\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems*{2b65e186-b9e6-4cef-9ae6-478c6de59bc4}*SharedItemsImports = 4
+		src\apps\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems*{418d1399-62c8-481b-a954-517b189eca70}*SharedItemsImports = 13
+		src\libs\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{65786107-e646-452e-b899-edd26d09e401}*SharedItemsImports = 5
+		src\libs\H.OxyPlot.Wpf.Shared\H.OxyPlot.Wpf.Shared.projitems*{65786107-e646-452e-b899-edd26d09e401}*SharedItemsImports = 5
+		src\libs\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{682d6fb2-c18b-4522-8b33-567fcc8647fe}*SharedItemsImports = 5
+		src\libs\H.OxyPlot.Wpf.Shared\H.OxyPlot.Wpf.Shared.projitems*{774449f2-74cb-40fd-ae69-f10e9e7d4654}*SharedItemsImports = 13
+		src\apps\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{7b01963a-703c-458d-b3aa-6c47f94b4149}*SharedItemsImports = 5
+		src\apps\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems*{7b01963a-703c-458d-b3aa-6c47f94b4149}*SharedItemsImports = 5
+		src\apps\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{8c2d2dda-890b-4f6f-938f-9cfdf82aac0f}*SharedItemsImports = 5
+		src\libs\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{ab635967-d2ff-4a55-a319-109099de8ff4}*SharedItemsImports = 5
+		src\libs\H.OxyPlot.Uno.Shared\H.OxyPlot.Uno.Shared.projitems*{ab635967-d2ff-4a55-a319-109099de8ff4}*SharedItemsImports = 5
+		src\apps\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{b2c9a032-9670-421e-a413-7c7f504f5b55}*SharedItemsImports = 13
+		src\apps\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{c84e3439-baf9-4fd6-bb91-ae3ee5f83d6a}*SharedItemsImports = 5
+		src\apps\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems*{c84e3439-baf9-4fd6-bb91-ae3ee5f83d6a}*SharedItemsImports = 5
+		src\apps\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{e1d3d9c7-de26-4ff5-ac1f-136a2820e59b}*SharedItemsImports = 5
+		src\apps\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems*{e1d3d9c7-de26-4ff5-ac1f-136a2820e59b}*SharedItemsImports = 5
+		src\libs\H.OxyPlot.Uno.Shared\H.OxyPlot.Uno.Shared.projitems*{e40c8d6c-31fd-43a8-ac2c-0f3ea465eee7}*SharedItemsImports = 13
+		src\libs\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{f497b163-e46e-4ea6-9e41-bb0c25ca6272}*SharedItemsImports = 13
+		src\libs\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems*{f5eb3a73-1d93-42f7-9757-26b486d74592}*SharedItemsImports = 5
+		src\libs\H.OxyPlot.Uno.Shared\H.OxyPlot.Uno.Shared.projitems*{f5eb3a73-1d93-42f7-9757-26b486d74592}*SharedItemsImports = 5
+		src\apps\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems*{fcfca672-7669-4aac-a76d-6a12e40f2eab}*SharedItemsImports = 5
+		src\apps\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems*{fcfca672-7669-4aac-a76d-6a12e40f2eab}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal
