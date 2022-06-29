@@ -7,7 +7,7 @@
     <DefineConstants>$(DefineConstants);HAS_WINUI</DefineConstants>
     <ImplicitUsings>disable</ImplicitUsings>
     <WasmShellILLinkerEnabled>false</WasmShellILLinkerEnabled>
-    <WasmShellEnableThreads>true</WasmShellEnableThreads>
+    <!--<WasmShellEnableThreads>true</WasmShellEnableThreads>-->
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
