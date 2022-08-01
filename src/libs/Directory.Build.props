@@ -2,14 +2,6 @@
 
   <Import Project="..\Directory.Build.props" />
 
-  <PropertyGroup Label="Common">
-    <InvariantGlobalization>true</InvariantGlobalization>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
-    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-  </PropertyGroup>
-
   <ItemGroup Label="CLSCompliant">
     <AssemblyAttribute Include="System.CLSCompliantAttribute">
       <_Parameter1>false</_Parameter1>
@@ -35,7 +27,6 @@
     <Authors>havendv, OxyPlot contributors, Oystein Bjorke</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/oxyplot/oxyplot</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/HavenDV/H.OxyPlot</RepositoryUrl>
     <PackageIcon>nuget_icon.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
@@ -45,15 +36,8 @@
     <None Include="$(SolutionDir)README.md" Pack="true" PackagePath="\"/>
   </ItemGroup>
   
-  <PropertyGroup Label="Source Link">
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-  </PropertyGroup>
-  
   <ItemGroup Label="Source Link">
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
+    <PackageReference Include="DotNet.ReproducibleBuilds" Version="1.1.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -62,7 +46,7 @@
   <PropertyGroup Label="Analyzers">
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <AnalysisLevel>latest</AnalysisLevel>
-    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+    <AnalysisMode>All</AnalysisMode>
   </PropertyGroup>
 
 </Project>
