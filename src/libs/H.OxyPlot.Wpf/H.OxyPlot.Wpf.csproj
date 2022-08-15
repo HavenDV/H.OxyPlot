@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup Label="Nuget">
-    <None Include="VisualStudioToolsManifest.xml" Pack="true" PackagePath="tools" Visible="false" />
+    <None Include="VisualStudioToolsManifest.xml" Pack="true" PackagePath="tools" Visible="true" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net4.5.1' ">

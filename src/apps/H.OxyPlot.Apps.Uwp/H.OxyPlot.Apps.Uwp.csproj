@@ -130,6 +130,10 @@
       <Project>{16a17957-6de3-4874-b0b6-08404c23fbbe}</Project>
       <Name>H.OxyPlot.Uwp</Name>
     </ProjectReference>
+    <ProjectReference Include="..\H.OxyPlot.Apps.Core\H.OxyPlot.Apps.Core.csproj">
+      <Project>{3ffd0124-e824-4b44-ad44-606a67c4f5d8}</Project>
+      <Name>H.OxyPlot.Apps.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="..\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems" Label="Shared" />
   <Import Project="..\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems" Label="Shared" />

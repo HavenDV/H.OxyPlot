@@ -4,18 +4,227 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewModels="clr-namespace:H.OxyPlot.Apps.ViewModels"
-    xmlns:oxy="http://oxyplot.org/wpf"
+    xmlns:oxyWpf="clr-namespace:OxyPlot.Wpf;assembly=OxyPlot.Wpf"
+    xmlns:oxySkia="clr-namespace:OxyPlot.SkiaSharp.Wpf;assembly=OxyPlot.SkiaSharp.Wpf"
+    xmlns:viewModels="clr-namespace:H.OxyPlot.Apps.ViewModels;assembly=H.OxyPlot.Apps.Core"
+    xmlns:converters="clr-namespace:H.OxyPlot.Apps.Converters"
+    xmlns:local="clr-namespace:H.OxyPlot.Apps"
+    Title="OxyPlot.WPF Example Browser"
+    Height="720"
+    Width="1280"
     mc:Ignorable="d"
-    Title="MainWindow"
-    Width="800"
-    Height="600"
+    x:Name="Root"
     >
-    <Window.DataContext>
-        <viewModels:MainViewModel />
-    </Window.DataContext>
+    <Window.Resources>
+        <SolidColorBrush
+            x:Key="HotItemBackground"
+            Color="#e6f3f7"
+            />
+        <SolidColorBrush
+            x:Key="SelectedItemBorder"
+            Color="#6dbdd1"
+            />
+        <SolidColorBrush
+            x:Key="SelectedItemBackground"
+            Color="#cbe6ef"
+            />
+        <SolidColorBrush
+            x:Key="NormalItemBackground"
+            Color="White"
+            />
+
+        <DrawingBrush
+            x:Key="CheckerBoard"
+            TileMode="Tile"
+            ViewboxUnits="Absolute"
+            Viewbox="0,0,2,2"
+            Viewport="0,0,10,10"
+            ViewportUnits="Absolute"
+            >
+            <DrawingBrush.Drawing>
+                <DrawingGroup>
+                    <GeometryDrawing Brush="White">
+                        <GeometryDrawing.Geometry>
+                            <RectangleGeometry Rect="0,0,2,2" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="LightGray">
+                        <GeometryDrawing.Geometry>
+                            <GeometryGroup>
+                                <RectangleGeometry Rect="0,0,1,1" />
+                                <RectangleGeometry Rect="1,1,1,1" />
+                            </GeometryGroup>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                </DrawingGroup>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
+
+        <Style
+            x:Key="ListboxItemStyle"
+            TargetType="{x:Type ListBoxItem}"
+            >
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="Background" Value="{StaticResource NormalItemBackground}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Grid>
+                            <Rectangle
+                                Fill="{TemplateBinding Background}"
+                                Stroke="{TemplateBinding BorderBrush}"
+                                StrokeThickness="{TemplateBinding BorderThickness}"
+                                RadiusX="3"
+                                RadiusY="3"
+                                SnapsToDevicePixels="True"
+                                />
+                            <ContentPresenter Margin="8,5" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True" />
+                                    <Condition Property="IsSelected" Value="False" />
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" Value="{StaticResource HotItemBackground}" />
+                            </MultiTrigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="{StaticResource SelectedItemBackground}" />
+                                <Setter Property="BorderBrush" Value="{StaticResource SelectedItemBorder}" />
+                                <Setter Property="BorderThickness" Value="1" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <CollectionViewSource
+            x:Key="ExamplesCollectionViewSource"
+            Source="{Binding ViewModel.Examples, ElementName=Root}"
+            >
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="Category" />
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+    </Window.Resources>
 
     <Grid>
-        <oxy:PlotView Model="{Binding Model}" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+        <Grid Background="#20000000">
+            <ListBox
+                ItemsSource="{Binding Source={StaticResource ExamplesCollectionViewSource}}"
+                ItemContainerStyle="{DynamicResource ListboxItemStyle}"
+                SelectedItem="{Binding ViewModel.SelectedExample, ElementName=Root}"
+                BorderThickness="0,0,0,1"
+                >
+                <ListBox.GroupStyle>
+                    <GroupStyle>
+                        <GroupStyle.ContainerStyle>
+                            <Style TargetType="{x:Type GroupItem}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <Expander
+                                                IsExpanded="False"
+                                                d:IsExpanded="True"
+                                                ExpandDirection="Down"
+                                                >
+                                                <Expander.Header>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock
+                                                            FontWeight="Bold"
+                                                            Text="{Binding Name}"
+                                                            Padding="0,0,8,0"
+                                                            />
+                                                        <TextBlock Text="{Binding ItemCount, StringFormat='({0})'}" />
+                                                    </StackPanel>
+                                                </Expander.Header>
+                                                <ItemsPresenter />
+                                            </Expander>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </GroupStyle.ContainerStyle>
+                    </GroupStyle>
+                </ListBox.GroupStyle>
+            </ListBox>
+        </Grid>
+        <Grid Grid.Column="1">
+            <TabControl TabStripPlacement="Bottom">
+                <TabControl.Resources>
+                    <Style
+                        TargetType="{x:Type TextBox}"
+                        x:Key="CodeTextBox"
+                        >
+                        <Setter Property="AcceptsReturn" Value="True" />
+                        <Setter Property="FontFamily" Value="Consolas" />
+                        <Setter Property="BorderThickness" Value="0" />
+                        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+                    </Style>
+                </TabControl.Resources>
+                <TabItem Header="Plot">
+                    <Grid>
+                        <Grid.Resources>
+                            <converters:NotNullVisibilityConverter x:Key="NotNullVisibilityConverter" />
+                        </Grid.Resources>
+                        <oxySkia:PlotView
+                            Model="{Binding ViewModel.SkiaModel, ElementName=Root}"
+                            Controller="{Binding ViewModel.SelectedExample.PlotController, ElementName=Root}"
+                            Visibility="{Binding ViewModel.SkiaModel, Converter={StaticResource NotNullVisibilityConverter}, ElementName=Root}"
+                            />
+                        <oxyWpf:PlotView
+                            Model="{Binding ViewModel.CanvasModel, ElementName=Root}"
+                            Controller="{Binding ViewModel.SelectedExample.PlotController, ElementName=Root}"
+                            Visibility="{Binding ViewModel.CanvasModel, Converter={StaticResource NotNullVisibilityConverter}, ElementName=Root}"
+                            />
+                        <local:XamlPlotView
+                            Model="{Binding ViewModel.CanvasXamlModel, ElementName=Root}"
+                            Controller="{Binding ViewModel.SelectedExample.PlotController, ElementName=Root}"
+                            Visibility="{Binding ViewModel.CanvasXamlModel, Converter={StaticResource NotNullVisibilityConverter}, ElementName=Root}"
+                            />
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Code">
+                    <TextBox
+                        Text="{Binding ViewModel.Code, Mode=OneWay, ElementName=Root}"
+                        Style="{StaticResource CodeTextBox}"
+                        />
+                </TabItem>
+            </TabControl>
+            <StackPanel
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Right"
+                Orientation="Horizontal"
+                >
+                <TextBlock
+                    Text="Renderer:"
+                    VerticalAlignment="Center"
+                    />
+                <ComboBox
+                    SelectedItem="{Binding ViewModel.SelectedRenderer, ElementName=Root}"
+                    ItemsSource="{Binding ViewModel.Renderers, ElementName=Root}"
+                    Margin="3,0,0,0"
+                    Width="80"
+                    />
+                <CheckBox
+                    IsChecked="{Binding ViewModel.Transposed, ElementName=Root}"
+                    Content="Transposed"
+                    VerticalAlignment="Center"
+                    Margin="10,0,5,0"
+                    IsEnabled="{Binding ViewModel.CanTranspose, ElementName=Root}"
+                    />
+                <CheckBox
+                    IsChecked="{Binding ViewModel.Reversed, ElementName=Root}"
+                    Content="Reversed"
+                    VerticalAlignment="Center"
+                    Margin="10,0,5,0"
+                    IsEnabled="{Binding ViewModel.CanReverse, ElementName=Root}"
+                    />
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

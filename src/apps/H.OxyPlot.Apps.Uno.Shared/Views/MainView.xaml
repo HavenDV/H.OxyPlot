@@ -6,13 +6,85 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:oxy="using:OxyPlot"
+    xmlns:converters="using:H.OxyPlot.Apps.Converters"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    RequestedTheme="Dark"
     mc:Ignorable="d"
     >
-    <Page.DataContext>
-        <viewModels:MainViewModel />
-    </Page.DataContext>
+    <Page.Resources>
+        <converters:NotNullVisibilityConverter x:Key="NotNullVisibilityConverter" />
+        <!--<CollectionViewSource
+            x:Name="ExamplesCollectionViewSource"
+            Source="{x:Bind ViewModel.Examples}"
+            IsSourceGrouped="True"
+            />-->
+    </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <oxy:PlotView Model="{Binding Model}" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <ListView
+                ItemsSource="{x:Bind ViewModel.Examples, Mode=OneWay}"
+                SelectedItem="{x:Bind ViewModel.SelectedExample, Mode=TwoWay}"
+                />
+        </Grid>
+        <Grid Grid.Column="1">
+            <muxc:TabView
+                IsAddTabButtonVisible="False"
+                d:SelectedIndex="0"
+                >
+                <muxc:TabViewItem
+                    Header="Plot"
+                    IsClosable="False"
+                    >
+                    <oxy:PlotView
+                        x:Name="PlotView"
+                        Model="{x:Bind ViewModel.PlotModel, Mode=OneWay}"
+                        Width="1000"
+                        Height="1000"
+                        />
+                </muxc:TabViewItem>
+                <muxc:TabViewItem
+                    Header="Code"
+                    IsClosable="False"
+                    >
+                    <TextBox
+                        Text="{x:Bind ViewModel.Code, Mode=OneWay}"
+                        AcceptsReturn="True"
+                        FontFamily="Consolas"
+                        BorderThickness="0"
+                        ScrollViewer.VerticalScrollBarVisibility="Auto"
+                        />
+                </muxc:TabViewItem>
+            </muxc:TabView>
+            <StackPanel
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Right"
+                Orientation="Horizontal"
+                Spacing="3"
+                >
+                <TextBlock
+                    Text="Renderer:"
+                    VerticalAlignment="Center"
+                    />
+                <ComboBox
+                    ItemsSource="{x:Bind ViewModel.Renderers}"
+                    SelectedItem="{x:Bind ViewModel.SelectedRenderer, Mode=TwoWay}"
+                    />
+                <CheckBox
+                    IsChecked="{x:Bind ViewModel.Transposed, Mode=TwoWay}"
+                    Content="Transposed"
+                    IsEnabled="{x:Bind ViewModel.CanTranspose, Mode=OneWay}"
+                    />
+                <CheckBox
+                    IsChecked="{x:Bind ViewModel.Reversed, Mode=TwoWay}"
+                    Content="Reversed"
+                    IsEnabled="{x:Bind ViewModel.CanReverse, Mode=OneWay}"
+                    />
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

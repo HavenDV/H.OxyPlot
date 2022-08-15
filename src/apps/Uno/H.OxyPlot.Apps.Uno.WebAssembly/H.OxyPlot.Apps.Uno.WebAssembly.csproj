@@ -39,6 +39,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\libs\H.OxyPlot.Uno.WinUI\H.OxyPlot.Uno.WinUI.csproj" />
+    <ProjectReference Include="..\..\H.OxyPlot.Apps.Core\H.OxyPlot.Apps.Core.csproj" />
   </ItemGroup>
 
   <Import Project="..\..\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems" Label="Shared" />
