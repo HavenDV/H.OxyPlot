@@ -12,7 +12,8 @@ using OxyPlot.Utilities;
 namespace OxyPlot
 {
     [DependencyProperty<bool>("HandleRightClicks", DefaultValue = true)]
-    [DependencyProperty<TextMeasurementMethod>("TextMeasurementMethod", DefaultValue = TextMeasurementMethod.TextBlock)]
+    [DependencyProperty<TextMeasurementMethod>("TextMeasurementMethod", DefaultValue = TextMeasurementMethod.TextBlock,
+        Description = "Gets or sets the vertical zoom cursor.")]
     public partial class PlotView : PlotViewBase
     {
         /// <summary>
