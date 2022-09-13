@@ -86,6 +86,8 @@ namespace OxyPlot
         /// <param name="e">The <see cref="SizeChangedEventArgs" /> instance containing the event data.</param>
         private void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
+            // Make sure InvalidateArrange is called when the PlotView is invalidated
+            Interlocked.Exchange(ref this.isPlotInvalidated, 0);
             this.InvalidatePlot(false);
         }
 #endif
@@ -156,7 +158,7 @@ namespace OxyPlot
             base.OnRender(drawingContext);
         }
 #endif
-
+        
         /// <inheritdoc/>
         protected override void RenderOverride()
         {
