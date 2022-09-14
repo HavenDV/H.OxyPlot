@@ -5,7 +5,6 @@
     <OutputType Condition="'$(Configuration)'=='Debug'">Exe</OutputType>
     <TargetFrameworks>net6.0-windows;net4.7.2</TargetFrameworks>
     <UseWPF>true</UseWPF>
-    <NoWarn>$(NoWarn);UXAML0002</NoWarn>
     <DefineConstants>$(DefineConstants);HAS_WINUI</DefineConstants>
   </PropertyGroup>
 

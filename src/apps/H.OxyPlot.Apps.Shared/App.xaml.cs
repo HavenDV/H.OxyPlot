@@ -9,6 +9,9 @@ using Windows.ApplicationModel.Activation;
 namespace H.OxyPlot.Apps;
 
 public sealed partial class App
+#if HAS_UNO
+    : Microsoft.UI.Xaml.Application
+#endif
 {
     #region Constructors
 

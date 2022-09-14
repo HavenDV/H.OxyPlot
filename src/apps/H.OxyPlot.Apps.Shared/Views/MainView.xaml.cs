@@ -8,6 +8,9 @@ using Microsoft.Win32;
 namespace H.OxyPlot.Apps.Views;
 
 public sealed partial class MainView
+#if HAS_UNO
+    : Page
+#endif
 {
     public MainViewModel ViewModel { get; } = new();
 

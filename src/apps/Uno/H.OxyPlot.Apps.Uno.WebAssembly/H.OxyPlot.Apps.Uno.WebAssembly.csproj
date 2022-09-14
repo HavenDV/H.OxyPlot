@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
-    <NoWarn>$(NoWarn);NU1701;CS8669;UXAML0002;CS1030;Uno0001</NoWarn>
+    <NoWarn>$(NoWarn);NU1701;CS8669;CS1030</NoWarn>
     <DefineConstants>$(DefineConstants);HAS_WINUI</DefineConstants>
     <ImplicitUsings>disable</ImplicitUsings>
     <WasmShellILLinkerEnabled>false</WasmShellILLinkerEnabled>
