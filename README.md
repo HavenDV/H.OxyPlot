@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/github/license/HavenDV/H.OxyPlot.svg?label=License&maxAge=86400)](LICENSE.md) 
 [![Build Status](https://github.com/HavenDV/H.OxyPlot/actions/workflows/dotnet.yml/badge.svg)](https://github.com/HavenDV/H.OxyPlot/actions/workflows/dotnet.yml)
 
-UWP/WinUI/Uno support for latest OxyPlot core library.  
+UWP/WinUI/Uno support for [latest OxyPlot core library](https://github.com/oxyplot/oxyplot).  
 It combines [the abandoned OxyPlot UWP code](https://github.com/oxyplot/oxyplot-uwp) 
 with [the current WPF code](https://github.com/oxyplot/oxyplot/tree/develop/Source/OxyPlot.Wpf), 
 trying to match the latter as closely as possible in behavior.
