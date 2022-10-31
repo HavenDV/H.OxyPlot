@@ -36,12 +36,9 @@ xmlns:oxy="using:OxyPlot"
 ```
 
 ### Preview
-There's a simple test application there:
+There's a test application there:
 https://havendv.github.io/H.OxyPlot/
-![image](https://user-images.githubusercontent.com/3002068/149247810-7563c479-bda4-49b3-9381-faa2b5bd4a41.png)
-
-You can also test this using this app https://havendv.github.io/ratbuddyssey/ with this example file: 
-https://github.com/HavenDV/ratbuddyssey/blob/master/docs/tv36ipal.ady
+<img width="1717" alt="image" src="https://user-images.githubusercontent.com/3002068/199105117-46f43272-d85c-4f5b-bfb3-7bd49a88fec1.png">
 
 ## Contacts
 * [mail](mailto:havendv@gmail.com)
