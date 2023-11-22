@@ -18,6 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		global.json = global.json
 		LICENSE = LICENSE
 		README.md = README.md
+		src\Directory.Packages.props = src\Directory.Packages.props
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "H.OxyPlot.Uwp", "src\libs\H.OxyPlot.Uwp\H.OxyPlot.Uwp.csproj", "{16A17957-6DE3-4874-B0B6-08404C23FBBE}"
