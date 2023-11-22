@@ -1,24 +1,23 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <TargetFrameworks>$(TargetFrameworks);MonoAndroid11.0;xamarinios10;xamarinmac20</TargetFrameworks>
+    <TargetFrameworks>net8.0;net8.0-android;net8.0-ios;net8.0-maccatalyst</TargetFrameworks>
     <SignAssembly>false</SignAssembly>
     <DefineConstants>$(DefineConstants);HAS_UNO;HAS_WINUI</DefineConstants>
     <NoWarn>$(NoWarn);CA1010;CA1725;CA2000;CA1012;NU1703;NU5104</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DependencyPropertyGenerator" Version="0.53.0">
+    <PackageReference Include="DependencyPropertyGenerator">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="OxyPlot.Core" Version="2.1.0" />
-    <PackageReference Include="Uno.CommunityToolkit.WinUI.UI" Version="7.1.100-dev.15.g12261e2626" />
+    <PackageReference Include="OxyPlot.Core" />
+    <PackageReference Include="Uno.CommunityToolkit.WinUI.UI" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Uno.WinUI" Version="4.4.13" />
+    <PackageReference Include="Uno.WinUI" />
   </ItemGroup>
 
   <Import Project="..\H.OxyPlot.Shared\H.OxyPlot.Shared.projitems" Label="Shared" />

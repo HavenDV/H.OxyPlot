@@ -1,8 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net4.5.1;net5.0-windows;net6.0-windows</TargetFrameworks>
+    <TargetFrameworks>net4.6.2;net6.0-windows;net8.0-windows</TargetFrameworks>
     <UseWPF>true</UseWPF>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <DefineConstants>$(DefineConstants);HAS_WPF</DefineConstants>
   </PropertyGroup>
 
@@ -27,31 +28,21 @@
     <None Include="VisualStudioToolsManifest.xml" Pack="true" PackagePath="tools" Visible="true" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net4.5.1' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net4.6.2' ">
     <Reference Include="ReachFramework" />
     <Reference Include="System.Printing" />
   </ItemGroup>
 
-  <Target Name="RemoveDuplicateAnalyzers" BeforeTargets="CoreCompile">
-    <!-- Work around https://github.com/dotnet/wpf/issues/6792 -->
-
-    <ItemGroup>
-      <FilteredAnalyzer Include="@(Analyzer-&gt;Distinct())" />
-      <Analyzer Remove="@(Analyzer)" />
-      <Analyzer Include="@(FilteredAnalyzer)" />
-    </ItemGroup>
-  </Target>
-
   <ItemGroup>
-    <PackageReference Include="DependencyPropertyGenerator" Version="0.53.0">
+    <PackageReference Include="DependencyPropertyGenerator">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="OxyPlot.Core" Version="2.1.0" />
+    <PackageReference Include="OxyPlot.Core" />
   </ItemGroup>
 
   <!--<ItemGroup>
-    <PackageReference Include="WpfAnalyzers" Version="3.5.4">
+    <PackageReference Include="WpfAnalyzers">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
