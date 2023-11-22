@@ -1,0 +1,17 @@
+﻿name: Build and test
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-test:
+    name: Build abd test
+    uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
+    with:
+      os: windows-latest
+      generate-build-number: false
+      conventional-commits-publish-conditions: false
+      use-msbuild: true
+      workloads: maui
+      windows-sdk-version: 18362
