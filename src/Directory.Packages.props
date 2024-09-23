@@ -35,7 +35,7 @@
     <PackageVersion Include="OxyPlot.SkiaSharp.Wpf" Version="2.2.0" />
     <PackageVersion Include="OxyPlot.Wpf" Version="2.2.0" />
     <PackageVersion Include="Microsoft.Win32.SystemEvents" Version="8.0.0" />
-    <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.3.1" />
+    <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.3.2" />
     <PackageVersion Include="OxyPlot.ExampleLibrary" Version="2.2.0" />
     <PackageVersion Include="Uno.WinUI.Skia.Wpf" Version="5.0.48" />
   </ItemGroup>
