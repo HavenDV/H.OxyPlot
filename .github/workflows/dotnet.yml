@@ -13,8 +13,6 @@ jobs:
       use-msbuild: true
       workloads: maui
       windows-sdk-version: 18362
-    secrets:
-      nuget-key: ${{ secrets.NUGET_KEY }}
 
   WebAssembly:
     uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
@@ -25,3 +23,17 @@ jobs:
       deploy-web-assembly-path: src/apps/Uno/H.OxyPlot.Apps.Uno.WebAssembly/bin/Release/net6.0/dist
       generate-build-number: false
       workloads: android ios maccatalyst macos
+
+  nuget-trusted-publish:
+    name: NuGet trusted publishing
+    needs: build-test-publish
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: tryAGI/workflows/.github/actions/nuget-publish@main
+        with:
+          user: havendv
+          artifact-pattern: nuget-packages-windows-latest
