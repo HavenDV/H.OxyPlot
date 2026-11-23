@@ -969,10 +969,7 @@ namespace OxyPlot
         {
             image = image ?? throw new ArgumentNullException(nameof(image));
 
-            if (!this.imagesInUse.Contains(image))
-            {
-                this.imagesInUse.Add(image);
-            }
+            this.imagesInUse.Add(image);
 
             if (this.imageCache.TryGetValue(image, out var src))
             {

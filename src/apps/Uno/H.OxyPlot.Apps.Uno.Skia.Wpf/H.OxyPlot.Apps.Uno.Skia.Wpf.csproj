@@ -3,9 +3,12 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <OutputType Condition="'$(Configuration)'=='Debug'">Exe</OutputType>
-    <TargetFrameworks>net6.0-windows;net4.7.2</TargetFrameworks>
+    <TargetFrameworks>net10.0-windows</TargetFrameworks>
     <UseWPF>true</UseWPF>
-    <DefineConstants>$(DefineConstants);HAS_WINUI</DefineConstants>
+    <IsUnoHead>true</IsUnoHead>
+    <ShouldRunGenerator>true</ShouldRunGenerator>
+    <RuntimeIdentifiers>win-x86;win-x64;win-arm64</RuntimeIdentifiers>
+    <DefineConstants>$(DefineConstants);HAS_UNO;HAS_WINUI;HAS_UNO_WINUI</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup Label="AssemblyInfo">
@@ -22,10 +25,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Uno.WinUI.Skia.Wpf" Version="5.0.48" />
-    <PackageReference Include="Uno.WinUI.RemoteControl" Version="5.0.48" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="5.0.48" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
+    <PackageReference Include="Uno.WinUI" />
+    <PackageReference Include="Uno.WinUI.Skia.Wpf" />
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,5 +38,12 @@
 
   <Import Project="..\..\H.OxyPlot.Apps.Shared\H.OxyPlot.Apps.Shared.projitems" Label="Shared" />
   <Import Project="..\..\H.OxyPlot.Apps.Uno.Shared\H.OxyPlot.Apps.Uno.Shared.projitems" Label="Shared" />
+
+  <ItemGroup>
+    <UnoApplicationDefinition Include="$(MSBuildProjectDirectory)\..\..\H.OxyPlot.Apps.Uno.Shared\App.xaml" XamlRuntime="WinUI" />
+    <UnoPage Include="$(MSBuildProjectDirectory)\..\..\H.OxyPlot.Apps.Uno.Shared\Views\MainView.xaml" XamlRuntime="WinUI" />
+    <ApplicationDefinition Remove="$(MSBuildProjectDirectory)\..\..\H.OxyPlot.Apps.Uno.Shared\App.xaml" />
+    <Page Remove="$(MSBuildProjectDirectory)\..\..\H.OxyPlot.Apps.Uno.Shared\Views\MainView.xaml" />
+  </ItemGroup>
 
 </Project>

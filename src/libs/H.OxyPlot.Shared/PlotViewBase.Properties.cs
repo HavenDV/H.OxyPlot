@@ -11,8 +11,13 @@ namespace OxyPlot
     /// </summary>
     [DependencyProperty<IPlotController>("Controller",
         Description = "Gets or sets the Plot controller.")]
+#if HAS_UNO
+    [DependencyProperty<object>("DefaultTrackerTemplate",
+        Description = "Gets or sets the default tracker template.")]
+#else
     [DependencyProperty<ControlTemplate>("DefaultTrackerTemplate",
         Description = "Gets or sets the default tracker template.")]
+#endif
     [DependencyProperty<bool>("IsMouseWheelEnabled", DefaultValue = true,
         Description = "Gets or sets a value indicating whether IsMouseWheelEnabled.")]
     [DependencyProperty<PlotModel>("Model",
@@ -34,8 +39,13 @@ namespace OxyPlot
         DefaultValueExpression = "Cursors.SizeNorthwestSoutheast",
 #endif
         Description = "Gets or sets the rectangle zoom cursor.")]
+#if HAS_UNO
+    [DependencyProperty<object>("ZoomRectangleTemplate",
+        Description = "Gets or sets the zoom rectangle template.")]
+#else
     [DependencyProperty<ControlTemplate>("ZoomRectangleTemplate",
         Description = "Gets or sets the zoom rectangle template.")]
+#endif
     [DependencyProperty<Cursor>("ZoomVerticalCursor",
 #if HAS_WPF
         DefaultValueExpression = "Cursors.SizeNS",

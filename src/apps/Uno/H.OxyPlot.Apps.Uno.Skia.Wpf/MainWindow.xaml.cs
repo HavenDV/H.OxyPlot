@@ -6,6 +6,6 @@ public partial class MainWindow : System.Windows.Window
     {
         InitializeComponent();
 
-        Root.Content = new global::Uno.UI.Skia.Platform.WpfHost(Dispatcher, () => new global::H.OxyPlot.Apps.App());
+        Root.Content = new global::Uno.UI.Runtime.Skia.Wpf.WpfHost(Dispatcher, () => new global::H.OxyPlot.Apps.App());
     }
 }

@@ -34,7 +34,6 @@ global using Windows.ApplicationModel.DataTransfer;
 global using Path = Microsoft.UI.Xaml.Shapes.Path;
 global using Cursor = Microsoft.UI.Input.InputSystemCursorShape;
 global using Cursors = Microsoft.UI.Input.InputSystemCursorShape;
-global using CommunityToolkit.WinUI.UI;
 #else
 global using Windows.Foundation;
 global using Windows.System;
@@ -56,5 +55,5 @@ global using Windows.ApplicationModel.DataTransfer;
 global using Path = Windows.UI.Xaml.Shapes.Path;
 global using Cursor = Windows.UI.Core.CoreCursorType;
 global using Cursors = Windows.UI.Core.CoreCursorType;
-global using Microsoft.Toolkit.Uwp.UI;
+global using CommunityToolkit.WinUI;
 #endif
