@@ -356,6 +356,8 @@ namespace OxyPlot
             };
 #if HAS_WPF
             this.Cursor = cursor;
+#elif HAS_WINUI && !HAS_UNO
+            this.ProtectedCursor = InputSystemCursor.Create(cursor);
 #elif !HAS_UNO || !HAS_WINUI
             FrameworkElementExtensions.SetCursor(this, cursor);
 #endif
@@ -373,7 +375,11 @@ namespace OxyPlot
                 return;
             }
 
+#if HAS_UNO
+            var trackerTemplate = this.DefaultTrackerTemplate as ControlTemplate;
+#else
             var trackerTemplate = this.DefaultTrackerTemplate;
+#endif
             if (trackerHitResult.Series != null && !string.IsNullOrEmpty(trackerHitResult.Series.TrackerKey))
             {
                 var match = this.TrackerDefinitions.FirstOrDefault(t => t.TrackerKey == trackerHitResult.Series.TrackerKey);
@@ -423,7 +429,11 @@ namespace OxyPlot
             this.zoomControl.Height = rectangle.Height;
             Canvas.SetLeft(this.zoomControl, rectangle.Left);
             Canvas.SetTop(this.zoomControl, rectangle.Top);
+#if HAS_UNO
+            this.zoomControl.Template = this.ZoomRectangleTemplate as ControlTemplate;
+#else
             this.zoomControl.Template = this.ZoomRectangleTemplate;
+#endif
             this.zoomControl.Visibility = Visibility.Visible;
         }
 
