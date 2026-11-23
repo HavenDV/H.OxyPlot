@@ -19,8 +19,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Nuget">
-    <BUILD_NUMBER Condition="'$(BUILD_NUMBER)' == ''">1</BUILD_NUMBER>
-    <Version>0.9.$(BUILD_NUMBER)</Version>
+    <Version>0.9.31</Version>
     <PackageReleaseNotes>$(PACKAGE_RELEASE_NOTES)</PackageReleaseNotes>
     <GeneratePackageOnBuild Condition=" '$(Configuration)' == 'Release' ">true</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>

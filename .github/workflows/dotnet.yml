@@ -14,15 +14,6 @@ jobs:
       workloads: maui
       windows-sdk-version: 18362
 
-  WebAssembly:
-    uses: HavenDV/workflows/.github/workflows/dotnet_build-test-publish.yml@main
-    with:
-      os: windows-latest
-      project-path: src/apps/Uno/H.OxyPlot.Apps.Uno.WebAssembly
-      deploy-web-assembly-path: src/apps/Uno/H.OxyPlot.Apps.Uno.WebAssembly/bin/Release/net10.0/dist
-      generate-build-number: false
-      workloads: android ios maccatalyst macos
-
   nuget-trusted-publish:
     name: NuGet trusted publishing
     needs: build-test-publish
