@@ -318,7 +318,7 @@ namespace OxyPlot.Controls
         /// <param name="height">The height.</param>
         /// <param name="margin">The margin.</param>
         /// <returns>The border geometry.</returns>
-        private Geometry CreateBorderGeometry(
+        private RectangleGeometry CreateBorderGeometry(
             HorizontalAlignment ha, VerticalAlignment va, double width, double height, out Thickness margin)
         {
             double m = this.Distance;
@@ -348,7 +348,7 @@ namespace OxyPlot.Controls
         /// <param name="height">The height.</param>
         /// <param name="margin">The margin.</param>
         /// <returns>The border geometry.</returns>
-        private Geometry? CreatePointerBorderGeometry(
+        private PathGeometry? CreatePointerBorderGeometry(
             HorizontalAlignment ha, VerticalAlignment va, double width, double height, out Thickness margin)
         {
             Point[]? points = null;
