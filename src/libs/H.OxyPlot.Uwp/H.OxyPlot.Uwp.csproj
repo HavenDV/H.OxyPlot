@@ -6,6 +6,8 @@
     <SignAssembly>false</SignAssembly>
     <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
+    <!-- CommunityToolkit 8 brings the Microsoft.VCLibs.Desktop SDK, which rejects an Any CPU library (MSB3779). -->
+    <LogSDKReferenceResolutionErrorsAsWarnings>true</LogSDKReferenceResolutionErrorsAsWarnings>
   </PropertyGroup>
 
   <ItemGroup>
